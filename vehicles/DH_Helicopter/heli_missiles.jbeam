@@ -1,0 +1,1170 @@
+{
+	"heli_missiles":{
+		"information":{
+			"name":"Unguided Missile",
+			"authors":"Darren9"},
+		
+		"slotType" : "heli_missiles",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_missile_sight","heli_missile_sight", "Missile Sight", {"coreSlot":true}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_missilebox_l", ["missile_box_l"]],
+			["heli_missilebox_r", ["missile_box_r"]],
+		],
+		
+		"props": [
+			["func"      , "mesh"   , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			["rpm", "heli_missile_1",   "ma0","ma1","mbl17",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_1"}],
+			["rpm", "heli_missile_2",   "mb0","mb1","mbl16",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_2"}],
+			["rpm", "heli_missile_3",   "mc0","mc1","mbl19",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_3"}],
+			["rpm", "heli_missile_4",   "md0","md1","mbl18",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_4"}],
+			["rpm", "heli_missile_5",   "me0","me1","mbl15",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_5"}],
+			["rpm", "heli_missile_6",   "mf0","mf1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_6"}],
+			["rpm", "heli_missile_7",   "mg0","mg1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_7"}],
+			["rpm", "heli_missile_8",   "mh0","mh1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_8"}],
+			["rpm", "heli_missile_9",   "mi0","mi1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_9"}],
+			["rpm", "heli_missile_10",  "mj0","mj1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_10"}],
+			["rpm", "heli_missile_11",  "mk0","mk1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_11"}],
+			["rpm", "heli_missile_12",  "ml0","ml1","mbl14",     {"x":0,"y":0, "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}, "breakGroup":"missile_12"}],
+			
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.75},
+			{"group":"missile_box_l"},
+			//left missile box
+			
+			["mbl6", 0.65,-0.132,0.85],
+			["mbl7", 0.65,-0.132,1.05],
+			["mbl8", 0.35,-0.132,0.85],
+			["mbl9", 0.35,-0.132,1.05],
+			["mbl10",0.65, 0.132,0.85],
+			["mbl11",0.65, 0.132,1.05],
+			["mbl12",0.35, 0.132,0.85],
+			["mbl13",0.35, 0.132,1.05],
+			
+			{"group":""},
+			{"selfCollision":false}
+			{"collision":false}
+			//left missile rails
+			
+			["mbl0", 0.6,-0.3,0.9],
+			["mbl1", 0.6,-0.3,1.0],
+			["mbl2", 0.5,-0.3,0.9],
+			["mbl3", 0.5,-0.3,1.0],
+			["mbl4", 0.4,-0.3,0.9],
+			["mbl5", 0.4,-0.3,1.0],
+			["mbl14",0.6, 0.2,0.9],
+			["mbl15",0.6, 0.2,1.0],
+			["mbl16",0.5, 0.2,0.9],
+			["mbl17",0.5, 0.2,1.0],
+			["mbl18",0.4, 0.2,0.9],
+			["mbl19",0.4, 0.2,1.0],
+			
+			{"group":"missile_box_r"},
+			//right missile box
+			
+			["mbr6", -0.65,-0.132,0.85],
+			["mbr7", -0.65,-0.132,1.05],
+			["mbr8", -0.35,-0.132,0.85],
+			["mbr9", -0.35,-0.132,1.05],
+			["mbr10",-0.65, 0.132,0.85],
+			["mbr11",-0.65, 0.132,1.05],
+			["mbr12",-0.35, 0.132,0.85],
+			["mbr13",-0.35, 0.132,1.05],
+			
+			{"group":""},
+			{"selfCollision":false}
+			{"collision":false}
+			//left missile rails
+			
+			["mbr0", -0.6,-0.3,0.9],
+			["mbr1", -0.6,-0.3,1.0],
+			["mbr2", -0.5,-0.3,0.9],
+			["mbr3", -0.5,-0.3,1.0],
+			["mbr4", -0.4,-0.3,0.9],
+			["mbr5", -0.4,-0.3,1.0],
+			["mbr14",-0.6, 0.2,0.9],
+			["mbr15",-0.6, 0.2,1.0],
+			["mbr16",-0.5, 0.2,0.9],
+			["mbr17",-0.5, 0.2,1.0],
+			["mbr18",-0.4, 0.2,0.9],
+			["mbr19",-0.4, 0.2,1.0],
+			
+			
+			
+			{"selfCollision":false}
+			{"collision":true}
+			{"nodeWeight":0.5},
+			{"frictionCoef":10.7},
+			
+			//missile a
+			{"selfCollision":true}
+			["ma0",0.60,-0.172,1.0],
+			["ma1",0.60, 0.077,1.0],
+			{"selfCollision":false}
+			["ma2",0.64, 0.123,1.0],
+			["ma3",0.60, 0.123,0.96],
+			["ma4",0.60, 0.123,1.04],
+			["ma5",0.56, 0.123,1.0],
+			
+			//missile b
+			{"selfCollision":true}
+			["mb0",-0.60,-0.172,1.0],
+			["mb1",-0.60, 0.077,1.0],
+			{"selfCollision":false}
+			["mb2",-0.64, 0.123,1.0],
+			["mb3",-0.60, 0.123,0.96],
+			["mb4",-0.60, 0.123,1.04],
+			["mb5",-0.56, 0.123,1.0],
+			
+			//missile c
+			{"selfCollision":true}
+			["mc0",0.60,-0.172,0.9],
+			["mc1",0.60, 0.077,0.9],
+			{"selfCollision":false}
+			["mc2",0.64, 0.123,0.9],
+			["mc3",0.60, 0.123,0.86],
+			["mc4",0.60, 0.123,0.94],
+			["mc5",0.56, 0.123,0.9],
+			
+			//missile d
+			{"selfCollision":true}
+			["md0",-0.60,-0.172,0.9],
+			["md1",-0.60, 0.077,0.9],
+			{"selfCollision":false}
+			["md2",-0.64, 0.123,0.9],
+			["md3",-0.60, 0.123,0.86],
+			["md4",-0.60, 0.123,0.94],
+			["md5",-0.56, 0.123,0.9],
+			
+			//missile e
+			{"selfCollision":true}
+			["me0",0.50,-0.172,1.0],
+			["me1",0.50, 0.077,1.0],
+			{"selfCollision":false}
+			["me2",0.54, 0.123,1.0],
+			["me3",0.50, 0.123,0.96],
+			["me4",0.50, 0.123,1.04],
+			["me5",0.46, 0.123,1.0],
+			
+			//missile f
+			{"selfCollision":true}
+			["mf0",-0.50,-0.172,1.0],
+			["mf1",-0.50, 0.077,1.0],
+			{"selfCollision":false}
+			["mf2",-0.54, 0.123,1.0],
+			["mf3",-0.50, 0.123,0.96],
+			["mf4",-0.50, 0.123,1.04],
+			["mf5",-0.46, 0.123,1.0],
+			
+			//missile g
+			{"selfCollision":true}
+			["mg0",0.50,-0.172,0.9],
+			["mg1",0.50, 0.077,0.9],
+			{"selfCollision":false}
+			["mg2",0.54, 0.123,0.9],
+			["mg3",0.50, 0.123,0.86],
+			["mg4",0.50, 0.123,0.94],
+			["mg5",0.46, 0.123,0.9],
+			
+			//missile h
+			{"selfCollision":true}
+			["mh0",-0.50,-0.172,0.9],
+			["mh1",-0.50, 0.077,0.9],
+			{"selfCollision":false}
+			["mh2",-0.54, 0.123,0.9],
+			["mh3",-0.50, 0.123,0.86],
+			["mh4",-0.50, 0.123,0.94],
+			["mh5",-0.46, 0.123,0.9],
+			
+			//missile i
+			{"selfCollision":true}
+			["mi0",0.40,-0.172,1.0],
+			["mi1",0.40, 0.077,1.0],
+			{"selfCollision":false}
+			["mi2",0.44, 0.123,1.0],
+			["mi3",0.40, 0.123,0.96],
+			["mi4",0.40, 0.123,1.04],
+			["mi5",0.36, 0.123,1.0],
+			
+			//missile j
+			{"selfCollision":true}
+			["mj0",-0.40,-0.172,1.0],
+			["mj1",-0.40, 0.077,1.0],
+			{"selfCollision":false}
+			["mj2",-0.44, 0.123,1.0],
+			["mj3",-0.40, 0.123,0.96],
+			["mj4",-0.40, 0.123,1.04],
+			["mj5",-0.36, 0.123,1.0],
+			
+			//missile k
+			{"selfCollision":true}
+			["mk0",0.40,-0.172,0.9],
+			["mk1",0.40, 0.077,0.9],
+			{"selfCollision":false}
+			["mk2",0.44, 0.123,0.9],
+			["mk3",0.40, 0.123,0.86],
+			["mk4",0.40, 0.123,0.94],
+			["mk5",0.36, 0.123,0.9],
+			
+			//missile l
+			{"selfCollision":true}
+			["ml0",-0.40,-0.172,0.9],
+			["ml1",-0.40, 0.077,0.9],
+			{"selfCollision":false}
+			["ml2",-0.44, 0.123,0.9],
+			["ml3",-0.40, 0.123,0.86],
+			["ml4",-0.40, 0.123,0.94],
+			["ml5",-0.36, 0.123,0.9],
+			
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":750000,"beamDamp":30},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			//left side missile box
+			
+			["mbl4","mbl9"],
+			["mbl8","mbl9"],
+			["mbl17","mbl11"],
+			["mbl18","mbl2"],
+			["mbl16","mbl18"],
+			["mbl18","mbl13"],
+			["mbl16","mbl11"],
+			["mbl13","mbl12"],
+			["mbl19","mbl13"],
+			["mbl4","mbl2"],
+			["mbl15","mbl16"],
+			["mbl0","mbl15"],
+			["mbl5","mbl2"],
+			["mbl14","mbl2"],
+			["mbl15","mbl1"],
+			["mbl4","mbl16"],
+			["mbl14","mbl16"],
+			["mbl19","mbl10"],
+			["mbl13","mbl10"],
+			["mbl1","mbl9"],
+			["mbl1","mbl0"],
+			["mbl16","mbl12"],
+			["mbl18","mbl10"],
+			["mbl10","mbl12"],
+			["mbl2","mbl0"],
+			["mbl17","mbl12"],
+			["mbl4","mbl15"],
+			["mbl1","mbl2"],
+			["mbl15","mbl14"],
+			["mbl0","mbl9"],
+			["mbl3","mbl8"],
+			["mbl11","mbl10"],
+			["mbl3","mbl6"],
+			["mbl0","mbl16"],
+			["mbl9","mbl10"],
+			["mbl14","mbl13"],
+			["mbl2","mbl8"],
+			["mbl6","mbl11"],
+			["mbl15","mbl13"],
+			["mbl8","mbl10"],
+			["mbl19","mbl18"],
+			["mbl2","mbl6"],
+			["mbl11","mbl7"],
+			["mbl16","mbl3"],
+			["mbl18","mbl1"],
+			["mbl7","mbl6"],
+			["mbl4","mbl19"],
+			["mbl17","mbl3"],
+			["mbl4","mbl6"],
+			["mbl8","mbl6"],
+			["mbl5","mbl19"],
+			["mbl9","mbl12"],
+			["mbl5","mbl6"],
+			["mbl9","mbl6"],
+			["mbl4","mbl5"],
+			["mbl12","mbl8"],
+			["mbl19","mbl3"],
+			["mbl14","mbl11"],
+			["mbl19","mbl12"],
+			["mbl15","mbl11"],
+			["mbl12","mbl6"],
+			["mbl18","mbl12"],
+			["mbl16","mbl10"],
+			["mbl4","mbl8"],
+			["mbl17","mbl10"],
+			["mbl1","mbl7"],
+			["mbl13","mbl6"],
+			["mbl15","mbl3"],
+			["mbl3","mbl5"],
+			["mbl5","mbl8"],
+			["mbl0","mbl7"],
+			["mbl1","mbl14"],
+			["mbl4","mbl3"],
+			["mbl0","mbl6"],
+			["mbl1","mbl17"],
+			["mbl0","mbl14"],
+			["mbl0","mbl8"],
+			["mbl13","mbl7"],
+			["mbl17","mbl13"],
+			["mbl1","mbl6"],
+			["mbl14","mbl17"],
+			["mbl1","mbl3"],
+			["mbl16","mbl13"],
+			["mbl18","mbl11"],
+			["mbl1","mbl8"],
+			["mbl12","mbl11"],
+			["mbl12","mbl7"],
+			["mbl15","mbl12"],
+			["mbl5","mbl14"],
+			["mbl0","mbl3"],
+			["mbl19","mbl11"],
+			["mbl13","mbl11"],
+			["mbl5","mbl17"],
+			["mbl17","mbl15"],
+			["mbl14","mbl12"],
+			["mbl2","mbl9"],
+			["mbl8","mbl11"],
+			["mbl3","mbl2"],
+			["mbl5","mbl7"],
+			["mbl7","mbl9"],
+			["mbl7","mbl10"],
+			["mbl9","mbl11"],
+			["mbl18","mbl17"],
+			["mbl3","mbl9"],
+			["mbl6","mbl10"],
+			["mbl19","mbl0"],
+			["mbl17","mbl2"],
+			["mbl4","mbl7"],
+			["mbl8","mbl7"],
+			["mbl16","mbl2"],
+			["mbl19","mbl17"],
+			["mbl5","mbl18"],
+			["mbl2","mbl7"],
+			["mbl17","mbl16"],
+			["mbl18","mbl4"],
+			["mbl15","mbl10"],
+			["mbl8","mbl13"],
+			["mbl5","mbl9"],
+			["mbl14","mbl10"],
+			["mbl9","mbl13"],
+			["mbl3","mbl7"],
+			["mbl19","mbl16"],
+			
+			//right side missile box
+			
+			["mbr4","mbr9"],
+			["mbr8","mbr9"],
+			["mbr17","mbr11"],
+			["mbr18","mbr2"],
+			["mbr16","mbr18"],
+			["mbr18","mbr13"],
+			["mbr16","mbr11"],
+			["mbr13","mbr12"],
+			["mbr19","mbr13"],
+			["mbr4","mbr2"],
+			["mbr15","mbr16"],
+			["mbr0","mbr15"],
+			["mbr5","mbr2"],
+			["mbr14","mbr2"],
+			["mbr15","mbr1"],
+			["mbr4","mbr16"],
+			["mbr14","mbr16"],
+			["mbr19","mbr10"],
+			["mbr13","mbr10"],
+			["mbr1","mbr9"],
+			["mbr1","mbr0"],
+			["mbr16","mbr12"],
+			["mbr18","mbr10"],
+			["mbr10","mbr12"],
+			["mbr2","mbr0"],
+			["mbr17","mbr12"],
+			["mbr4","mbr15"],
+			["mbr1","mbr2"],
+			["mbr15","mbr14"],
+			["mbr0","mbr9"],
+			["mbr3","mbr8"],
+			["mbr11","mbr10"],
+			["mbr3","mbr6"],
+			["mbr0","mbr16"],
+			["mbr9","mbr10"],
+			["mbr14","mbr13"],
+			["mbr2","mbr8"],
+			["mbr6","mbr11"],
+			["mbr15","mbr13"],
+			["mbr8","mbr10"],
+			["mbr19","mbr18"],
+			["mbr2","mbr6"],
+			["mbr11","mbr7"],
+			["mbr16","mbr3"],
+			["mbr18","mbr1"],
+			["mbr7","mbr6"],
+			["mbr4","mbr19"],
+			["mbr17","mbr3"],
+			["mbr4","mbr6"],
+			["mbr8","mbr6"],
+			["mbr5","mbr19"],
+			["mbr9","mbr12"],
+			["mbr5","mbr6"],
+			["mbr9","mbr6"],
+			["mbr4","mbr5"],
+			["mbr12","mbr8"],
+			["mbr19","mbr3"],
+			["mbr14","mbr11"],
+			["mbr19","mbr12"],
+			["mbr15","mbr11"],
+			["mbr12","mbr6"],
+			["mbr18","mbr12"],
+			["mbr16","mbr10"],
+			["mbr4","mbr8"],
+			["mbr17","mbr10"],
+			["mbr1","mbr7"],
+			["mbr13","mbr6"],
+			["mbr15","mbr3"],
+			["mbr3","mbr5"],
+			["mbr5","mbr8"],
+			["mbr0","mbr7"],
+			["mbr1","mbr14"],
+			["mbr4","mbr3"],
+			["mbr0","mbr6"],
+			["mbr1","mbr17"],
+			["mbr0","mbr14"],
+			["mbr0","mbr8"],
+			["mbr13","mbr7"],
+			["mbr17","mbr13"],
+			["mbr1","mbr6"],
+			["mbr14","mbr17"],
+			["mbr1","mbr3"],
+			["mbr16","mbr13"],
+			["mbr18","mbr11"],
+			["mbr1","mbr8"],
+			["mbr12","mbr11"],
+			["mbr12","mbr7"],
+			["mbr15","mbr12"],
+			["mbr5","mbr14"],
+			["mbr0","mbr3"],
+			["mbr19","mbr11"],
+			["mbr13","mbr11"],
+			["mbr5","mbr17"],
+			["mbr17","mbr15"],
+			["mbr14","mbr12"],
+			["mbr2","mbr9"],
+			["mbr8","mbr11"],
+			["mbr3","mbr2"],
+			["mbr5","mbr7"],
+			["mbr7","mbr9"],
+			["mbr7","mbr10"],
+			["mbr9","mbr11"],
+			["mbr18","mbr17"],
+			["mbr3","mbr9"],
+			["mbr6","mbr10"],
+			["mbr19","mbr0"],
+			["mbr17","mbr2"],
+			["mbr4","mbr7"],
+			["mbr8","mbr7"],
+			["mbr16","mbr2"],
+			["mbr19","mbr17"],
+			["mbr5","mbr18"],
+			["mbr2","mbr7"],
+			["mbr17","mbr16"],
+			["mbr18","mbr4"],
+			["mbr15","mbr10"],
+			["mbr8","mbr13"],
+			["mbr5","mbr9"],
+			["mbr14","mbr10"],
+			["mbr9","mbr13"],
+			["mbr3","mbr7"],
+			["mbr19","mbr16"],
+			
+			//left side missiles to frame
+			{"beamDeform":9000,"beamStrength":15000},
+			{"breakGroup":"left_pod"},
+			
+			["mbl8","helimidl6"],
+			["mbl9","helimidl6"],
+			["mbl12","helimidl6"],
+			["mbl13","helimidl6"],
+			
+			["mbl8","helimidl7"],
+			["mbl9","helimidl7"],
+			["mbl12","helimidl7"],
+			["mbl13","helimidl7"],
+			
+			["mbl8","helimidl1"],
+			["mbl9","helimidl1"],
+			["mbl12","helimidl1"],
+			["mbl13","helimidl1"],
+			
+			["mbl8","helimidl0"],
+			["mbl9","helimidl0"],
+			["mbl12","helimidl0"],
+			["mbl13","helimidl0"],
+			
+			["mbl11","helimidl1"],
+			["mbl11","helimidl7"],
+			["mbl7","helimidl1"],
+			["mbl7","helimidl7"],
+			
+			{"breakGroup":""},
+			
+			//right side missiles to frame
+			{"beamDeform":9000,"beamStrength":15000},
+			{"breakGroup":"left_pod"},
+			
+			["mbr8","helimidr8"],
+			["mbr9","helimidr8"],
+			["mbr12","helimidr8"],
+			["mbr13","helimidr8"],
+			
+			["mbr8","helimidr9"],
+			["mbr9","helimidr9"],
+			["mbr12","helimidr9"],
+			["mbr13","helimidr9"],
+			
+			["mbr8","helimidr3"],
+			["mbr9","helimidr3"],
+			["mbr12","helimidr3"],
+			["mbr13","helimidr3"],
+			
+			["mbr8","helimidr2"],
+			["mbr9","helimidr2"],
+			["mbr12","helimidr2"],
+			["mbr13","helimidr2"],
+			
+			["mbr11","helimidr3"],
+			["mbr11","helimidr9"],
+			["mbr7","helimidr3"],
+			["mbr7","helimidr9"],
+			
+			{"breakGroup":""},
+			
+			//missile a
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_1"}
+			["ma3","ma0"],
+			["ma4","ma0"],
+			["ma1","ma0",{"name":"missile1","beamStrength":24000}],
+			["ma5","ma1"],
+			["ma2","ma1"],
+			["ma2","ma3"],
+			["ma3","ma4"],
+			["ma2","ma4"],
+			["ma5","ma0"],
+			["ma2","ma0"],
+			["ma2","ma5"],
+			["ma4","ma5"],
+			["ma5","ma3"],
+			["ma3","ma1"],
+			["ma4","ma1"],
+			{"breakGroup":""}
+			//missile a latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["ma1","mbl15"{"name":"missile1la"}],
+			["ma3","mbl16"{"name":"missile1lb"}],
+			
+			
+			//missile b
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_2"}
+			["mb3","mb0"],
+			["mb4","mb0"],
+			["mb1","mb0",{"name":"missile2","beamStrength":24000}],
+			["mb5","mb1"],
+			["mb2","mb1"],
+			["mb2","mb3"],
+			["mb3","mb4"],
+			["mb2","mb4"],
+			["mb5","mb0"],
+			["mb2","mb0"],
+			["mb2","mb5"],
+			["mb4","mb5"],
+			["mb5","mb3"],
+			["mb3","mb1"],
+			["mb4","mb1"],
+			{"breakGroup":""}
+			//missile b latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mb1","mbr15"{"name":"missile2la"}],
+			["mb3","mbr16"{"name":"missile2lb"}],
+			
+			//missile c
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_3"}
+			["mc3","mc0"],
+			["mc4","mc0"],
+			["mc1","mc0",{"name":"missile3","beamStrength":24000}],
+			["mc5","mc1"],
+			["mc2","mc1"],
+			["mc2","mc3"],
+			["mc3","mc4"],
+			["mc2","mc4"],
+			["mc5","mc0"],
+			["mc2","mc0"],
+			["mc2","mc5"],
+			["mc4","mc5"],
+			["mc5","mc3"],
+			["mc3","mc1"],
+			["mc4","mc1"],
+			{"breakGroup":""}
+			//missile c latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mc1","mbl14"{"name":"missile3la"}],
+			["mc4","mbl17"{"name":"missile3lb"}],
+			
+			//missile d
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_4"}
+			["md3","md0"],
+			["md4","md0"],
+			["md1","md0",{"name":"missile4","beamStrength":24000}],
+			["md5","md1"],
+			["md2","md1"],
+			["md2","md3"],
+			["md3","md4"],
+			["md2","md4"],
+			["md5","md0"],
+			["md2","md0"],
+			["md2","md5"],
+			["md4","md5"],
+			["md5","md3"],
+			["md3","md1"],
+			["md4","md1"],
+			{"breakGroup":""}
+			//missile d latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["md1","mbr14"{"name":"missile4la"}],
+			["md4","mbr17"{"name":"missile4lb"}],
+			
+			//missile e
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_5"}
+			["me3","me0"],
+			["me4","me0"],
+			["me1","me0",{"name":"missile5","beamStrength":24000}],
+			["me5","me1"],
+			["me2","me1"],
+			["me2","me3"],
+			["me3","me4"],
+			["me2","me4"],
+			["me5","me0"],
+			["me2","me0"],
+			["me2","me5"],
+			["me4","me5"],
+			["me5","me3"],
+			["me3","me1"],
+			["me4","me1"],
+			{"breakGroup":""}
+			//missile e latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["me1","mbl17"{"name":"missile5la"}],
+			["me3","mbl18"{"name":"missile5lb"}],
+			
+			//missile f
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_6"}
+			["mf3","mf0"],
+			["mf4","mf0"],
+			["mf1","mf0",{"name":"missile6","beamStrength":24000}],
+			["mf5","mf1"],
+			["mf2","mf1"],
+			["mf2","mf3"],
+			["mf3","mf4"],
+			["mf2","mf4"],
+			["mf5","mf0"],
+			["mf2","mf0"],
+			["mf2","mf5"],
+			["mf4","mf5"],
+			["mf5","mf3"],
+			["mf3","mf1"],
+			["mf4","mf1"],
+			{"breakGroup":""}
+			//missile f latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mf1","mbr17"{"name":"missile6la"}],
+			["mf3","mbr18"{"name":"missile6lb"}],
+			
+			//missile g
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_7"}
+			["mg3","mg0"],
+			["mg4","mg0"],
+			["mg1","mg0",{"name":"missile7","beamStrength":24000}],
+			["mg5","mg1"],
+			["mg2","mg1"],
+			["mg2","mg3"],
+			["mg3","mg4"],
+			["mg2","mg4"],
+			["mg5","mg0"],
+			["mg2","mg0"],
+			["mg2","mg5"],
+			["mg4","mg5"],
+			["mg5","mg3"],
+			["mg3","mg1"],
+			["mg4","mg1"],
+			{"breakGroup":""}
+			//missile g latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mg1","mbl16"{"name":"missile7la"}],
+			["mg4","mbl19"{"name":"missile7lb"}],
+			
+			//missile h
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_8"}
+			["mh3","mh0"],
+			["mh4","mh0"],
+			["mh1","mh0",{"name":"missile8","beamStrength":24000}],
+			["mh5","mh1"],
+			["mh2","mh1"],
+			["mh2","mh3"],
+			["mh3","mh4"],
+			["mh2","mh4"],
+			["mh5","mh0"],
+			["mh2","mh0"],
+			["mh2","mh5"],
+			["mh4","mh5"],
+			["mh5","mh3"],
+			["mh3","mh1"],
+			["mh4","mh1"],
+			{"breakGroup":""}
+			//missile h latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mh1","mbr16"{"name":"missile8la"}],
+			["mh4","mbr19"{"name":"missile8lb"}],
+			
+			//missile i
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_9"}
+			["mi3","mi0"],
+			["mi4","mi0"],
+			["mi1","mi0",{"name":"missile9","beamStrength":24000}],
+			["mi5","mi1"],
+			["mi2","mi1"],
+			["mi2","mi3"],
+			["mi3","mi4"],
+			["mi2","mi4"],
+			["mi5","mi0"],
+			["mi2","mi0"],
+			["mi2","mi5"],
+			["mi4","mi5"],
+			["mi5","mi3"],
+			["mi3","mi1"],
+			["mi4","mi1"],
+			{"breakGroup":""}
+			//missile i latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mi1","mbl19"{"name":"missile9la"}],
+			["mi3","mbl16"{"name":"missile9lb"}],
+			
+			//missile j
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_10"}
+			["mj3","mj0"],
+			["mj4","mj0"],
+			["mj1","mj0",{"name":"missile10","beamStrength":24000}],
+			["mj5","mj1"],
+			["mj2","mj1"],
+			["mj2","mj3"],
+			["mj3","mj4"],
+			["mj2","mj4"],
+			["mj5","mj0"],
+			["mj2","mj0"],
+			["mj2","mj5"],
+			["mj4","mj5"],
+			["mj5","mj3"],
+			["mj3","mj1"],
+			["mj4","mj1"],
+			{"breakGroup":""}
+			//missile j latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mj1","mbr19"{"name":"missile10la"}],
+			["mj3","mbr16"{"name":"missile10lb"}],
+			
+			//missile k
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_11"}
+			["mk3","mk0"],
+			["mk4","mk0"],
+			["mk1","mk0",{"name":"missile11","beamStrength":24000}],
+			["mk5","mk1"],
+			["mk2","mk1"],
+			["mk2","mk3"],
+			["mk3","mk4"],
+			["mk2","mk4"],
+			["mk5","mk0"],
+			["mk2","mk0"],
+			["mk2","mk5"],
+			["mk4","mk5"],
+			["mk5","mk3"],
+			["mk3","mk1"],
+			["mk4","mk1"],
+			{"breakGroup":""}
+			//missile k latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["mk1","mbl18"{"name":"missile11la"}],
+			["mk4","mbl17"{"name":"missile11lb"}],
+			
+			//missile l
+			{"beamSpring":500000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":20000},
+			{"breakGroup":"missile_12"}
+			["ml3","ml0"],
+			["ml4","ml0"],
+			["ml1","ml0",{"name":"missile12","beamStrength":24000}],
+			["ml5","ml1"],
+			["ml2","ml1"],
+			["ml2","ml3"],
+			["ml3","ml4"],
+			["ml2","ml4"],
+			["ml5","ml0"],
+			["ml2","ml0"],
+			["ml2","ml5"],
+			["ml4","ml5"],
+			["ml5","ml3"],
+			["ml3","ml1"],
+			["ml4","ml1"],
+			{"breakGroup":""}
+			//missile l latch
+			{"beamDeform":16000,"beamStrength":18000},
+			["ml1","mbr18"{"name":"missile12la"}],
+			["ml4","mbr17"{"name":"missile12lb"}],
+			
+		],
+		
+		"rails": {
+			//left missiles
+			"m1l":{"links:":["mbl1", "mbl15"], "looped":false, "capped":false}
+			"m2l":{"links:":["mbl0", "mbl14"], "looped":false, "capped":false}
+			"m3l":{"links:":["mbl3", "mbl17"], "looped":false, "capped":false}
+			"m4l":{"links:":["mbl2", "mbl16"], "looped":false, "capped":false}
+			"m5l":{"links:":["mbl5", "mbl19"], "looped":false, "capped":false}
+			"m6l":{"links:":["mbl4", "mbl18"], "looped":false, "capped":false}
+			//right missiles
+			"m1r":{"links:":["mbr1", "mbr15"], "looped":false, "capped":false}
+			"m2r":{"links:":["mbr0", "mbr14"], "looped":false, "capped":false}
+			"m3r":{"links:":["mbr3", "mbr17"], "looped":false, "capped":false}
+			"m4r":{"links:":["mbr2", "mbr16"], "looped":false, "capped":false}
+			"m5r":{"links:":["mbr5", "mbr19"], "looped":false, "capped":false}
+			"m6r":{"links:":["mbr4", "mbr18"], "looped":false, "capped":false}
+			
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			//missile a
+			["ma0", "m1l",true, true, 0, 1000000, 1000000, 345435],
+			["ma1", "m1l",true, true, 0, 1000000, 1000000, 345435],
+			//missile b
+			["mb0", "m1r",true, true, 0, 1000000, 1000000, 345435],
+			["mb1", "m1r",true, true, 0, 1000000, 1000000, 345435],
+			//missile c
+			["mc0", "m2l",true, true, 0, 1000000, 1000000, 345435],
+			["mc1", "m2l",true, true, 0, 1000000, 1000000, 345435],
+			//missile d
+			["md0", "m2r",true, true, 0, 1000000, 1000000, 345435],
+			["md1", "m2r",true, true, 0, 1000000, 1000000, 345435],
+			//missile e
+			["me0", "m3l",true, true, 0, 1000000, 1000000, 345435],
+			["me1", "m3l",true, true, 0, 1000000, 1000000, 345435],
+			//missile f
+			["mf0", "m3r",true, true, 0, 1000000, 1000000, 345435],
+			["mf1", "m3r",true, true, 0, 1000000, 1000000, 345435],
+			//missile g
+			["mg0", "m4l",true, true, 0, 1000000, 1000000, 345435],
+			["mg1", "m4l",true, true, 0, 1000000, 1000000, 345435],
+			//missile h
+			["mh0", "m4r",true, true, 0, 1000000, 1000000, 345435],
+			["mh1", "m4r",true, true, 0, 1000000, 1000000, 345435],
+			//missile i
+			["mi0", "m5l",true, true, 0, 1000000, 1000000, 345435],
+			["mi1", "m5l",true, true, 0, 1000000, 1000000, 345435],
+			//missile j
+			["mj0", "m5r",true, true, 0, 1000000, 1000000, 345435],
+			["mj1", "m5r",true, true, 0, 1000000, 1000000, 345435],
+			//missile k
+			["mk0", "m6l",true, true, 0, 1000000, 1000000, 345435],
+			["mk1", "m6l",true, true, 0, 1000000, 1000000, 345435],
+			//missile l
+			["ml0", "m6r",true, true, 0, 1000000, 1000000, 345435],
+			["ml1", "m6r",true, true, 0, 1000000, 1000000, 345435],
+		],
+		
+		"thrusters": [
+			["id1:", "id2:"],
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrusta"},
+			["ma1","ma0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["ma4","ma3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustb"},
+			["mb1","mb0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mb4","mb3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustc"},
+			["mc1","mc0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mc4","mc3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustd"},
+			["md1","md0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["md4","md3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thruste"},
+			["me1","me0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["me4","me3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustf"},
+			["mf1","mf0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mf4","mf3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustg"},
+			["mg1","mg0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mg4","mg3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrusth"},
+			["mh1","mh0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mh4","mh3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrusti"},
+			["mi1","mi0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mi4","mi3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustj"},
+			["mj1","mj0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mj4","mj3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustk"},
+			["mk1","mk0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["mk4","mk3"],
+			
+			{"factor": -3400},
+			{"thrustLimit": -3400},
+			{"control": "dh_thrustl"},
+			["ml1","ml0"],
+			{"factor": -14},
+			{"thrustLimit": -14},
+			["ml4","ml3"],
+			
+		],
+		
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			//left box
+			["mbl11", "mbl7", "mbl6", "mbl10"],
+			["mbl11", "mbl13", "mbl9", "mbl7"],
+			["mbl8", "mbl12", "mbl10", "mbl6"],
+			["mbl9", "mbl13", "mbl12", "mbl8"],
+			["mbl13", "mbl11", "mbl10", "mbl12"],
+			//right box
+			["mbr11", "mbr10", "mbr6", "mbr7"],
+			["mbr11", "mbr7", "mbr9", "mbr13"],
+			["mbr8", "mbr6", "mbr10", "mbr12"],
+			["mbr9", "mbr8", "mbr12", "mbr13"],
+			["mbr13", "mbr12", "mbr10", "mbr11"],
+		],
+		
+	},
+	
+	"heli_missile_sight":{
+		"information":{
+			"name":"Missile Sight",
+			"authors":"Darren9"},
+		
+		"slotType" : "heli_missile_sight",
+		
+		"props": [
+			["func"      , "mesh"   ,         "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			["rpm", "heli_missile_sight_g", "msight4","msight1","msight0", {"x":0,"y":-90, "z":0  },{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_gauges_screen",   "msight4","msight1","msight0", {"x":0,"y":-90, "z":0  },{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_missile_sight_h", "msight1","msight4","msight0", {"x":0,"y": 90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_missile_sight_f", ["heli_missile_sight_f"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.5},
+			{"group":"heli_missile_sight_f"},
+			["msight0", 0.077,-0.682,1.305],
+			["msight1", 0.0,  -0.682,1.305],
+			["msight2",-0.077,-0.682,1.305],
+			["msight3", 0.0,  -0.561,1.409],
+			["msight5", 0.124,-0.344,1.401],
+			["msight6",-0.124,-0.344,1.401],
+			["msight7", 0.12,  -0.147,1.335],
+			["msight8", -0.12,  -0.147,1.335],
+			{"group":""},
+			{"collision":false}
+			["msight4", 0.0,  -0.575,1.321],
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":300000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["msight5","msight3"],
+			["msight2","msight3"],
+			["msight6","msight1"],
+			["msight6","msight3"],
+			["msight2","msight1"],
+			["msight5","msight6"],
+			["msight5","msight1"],
+			["msight2","msight5"],
+			["msight0","msight1"],
+			["msight0","msight6"],
+			["msight0","msight5"],
+			["msight6","msight2"],
+			["msight1","msight3"],
+			["msight0","msight4"],
+			["msight0","msight3"],
+			["msight2","msight0"],
+			["msight2","msight4"],
+			
+			["msight7","msight5"],
+			["msight7","msight6"],
+			["msight7","msight3"],
+			["msight7","msight0"],
+			["msight7","msight2"],
+			["msight8","msight5"],
+			["msight8","msight6"],
+			["msight8","msight3"],
+			["msight8","msight0"],
+			["msight8","msight2"],
+			["msight8","msight7"],
+			
+			//sight to frame
+			{"beamDeform":8000,"beamStrength":12000},
+			{"breakGroup":"missile_frame"},
+			
+			["msight5","flowr7"],
+			["msight6","flowr7"],
+			["msight5","flowl6"],
+			["msight6","flowl6"],
+			
+			["msight5","flowr3"],
+			["msight6","flowr3"],
+			["msight5","flowl2"],
+			["msight6","flowl2"],
+			
+			["msight0","flowr7"],
+			["msight2","flowr7"],
+			["msight0","flowl6"],
+			["msight2","flowl6"],
+			
+			["msight0","flowr3"],
+			["msight2","flowr3"],
+			["msight0","flowl2"],
+			["msight2","flowl2"],
+			
+			["msight7","flowr7"],
+			["msight8","flowr7"],
+			["msight7","flowl6"],
+			["msight8","flowl6"],
+			
+			{"breakGroup":""},
+		],
+		
+		"rails": {
+			"sight1":{"links:":["msight2", "msight0"], "looped":false, "capped":false}
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			["msight1", "sight1",true, true, 0, 1000000, 1000000, 345435],
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":250000,"beamDamp":100},
+			{"beamDeform":10000,"beamStrength":20000},
+			//fold down
+			["msight3","msight4",{"inputSource":"msight",   "inputFactor":1.0,"inRate":1.0,"outRate":1.0,"inLimit":1.0,"outLimit":2.95}],
+			
+			["msight0","msight4",{"inputSource":"msight",   "inputFactor":1.0,"inRate":0.3,"outRate":0.15,"inLimit":1.0,"outLimit":1.25}],
+			["msight2","msight4",{"inputSource":"msight",   "inputFactor":1.0,"inRate":0.3,"outRate":0.15,"inLimit":1.0,"outLimit":1.25}],
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			//missiles
+			{"dragCoef":5.5},
+			["msight2", "msight0", "msight5"],
+			["msight2", "msight5", "msight6"],
+			["msight6", "msight5", "msight7"],
+			["msight0", "msight2", "msight4"],
+			["msight6", "msight7", "msight8"],
+		],
+	},
+}

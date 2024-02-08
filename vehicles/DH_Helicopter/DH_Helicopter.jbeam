@@ -1,0 +1,61 @@
+{
+	"DH_Helicopter":{
+		"information":{
+			"name":"DH Super Gnat",
+			"authors":"Darren9"
+		},
+			
+		"slotType":"main",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_frame_low","heli_frame_low", "Frame",{"coreSlot":true}],
+		],
+		
+		"refNodes":[
+			["ref:", "back:", "left:", "up:", "leftCorner:", "rightCorner:"]
+			["ref", "back", "left", "up", "flowl0", "flowr1"],
+		],
+		
+		"cameraChase":{
+			"distance":4.9,
+			"distanceMin":1,
+			"defaultRotation":{"x":0,"y":-5,"z":0},
+			"offset":{"x":0.0, "y":0.0, "z":0.55},
+			"fov":65,
+		},
+		
+		"cameraExternal":{
+			"distance":6.5,
+			"distanceMin":1,
+			"offset":{"x":0.0, "y":0.0, "z":0.15},
+			"fov":65,
+		},
+		
+		"camerasInternal":[
+			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
+			{"nodeWeight":0.3},
+			{"selfCollision":false}
+			{"collision":false}
+			{"beamSpring":37930,"beamDamp":50},
+			["Rear",   0.0, 2.99, 1.43, 65, "helimidr9","helimidl7","helimidr8","helimidl6","helimid10","helimid5"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":12}],
+			{"beamSpring":930,"beamDamp":50},
+			["Driver", 0.0, -0.46, 1.20, 70, "flowl6","flowr7","flowl4","flowr5","flowl2","flowr3"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":11}],
+		],
+		
+		"controller": [
+			["fileName"],
+			["vehicleController", {}],
+			["heliGauges", {"materialName": "@heli_gauges_screen", "htmlPath": "local://local/vehicles/DH_Helicopter/heli_gauges_screen.html"}],
+			["heli_trim", {"rudderTrimmingStart": 0, "aileronTrimmingStart": 0, "elevatorTrimmingStart": 0, "trimSpeed": 0.05}],
+		],
+		
+		"glowMap":{
+			//warning lights
+			"heli_fuelwarn": {"simpleFunction":"heli_fuelwarn", "off":"invis", "on":"decals_heligauges"},
+            "heli_engwarn":  {"simpleFunction":"heli_engwarn",  "off":"invis", "on":"decals_heligauges"},
+		},
+		
+	},
+		
+}

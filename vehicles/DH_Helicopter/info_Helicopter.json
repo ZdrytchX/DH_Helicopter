@@ -1,0 +1,14 @@
+{
+    "Configuration":"Fun",
+    "Transmission":"Belt Drive",
+    "Description":"Quad-blade, high lift, high sensitivity controls, negative blade pitch, engine thermals.",
+    "Drivetrain":"Shaft",
+    "Value":59950,
+    "Performance Class":"Payload 500kg, Speed 130mph",
+	"Torque":165,
+	"TorquePeakRPM":"3600",
+	"Power":150,
+	"PowerPeakRPM":"3900",
+	"Weight":350,
+    "Config Type":"Factory",
+}

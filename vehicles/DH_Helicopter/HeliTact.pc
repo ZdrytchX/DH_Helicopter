@@ -1,0 +1,47 @@
+{
+"vars":{
+  "$colltune":2.156,
+  "$fuel":14.98
+},
+"format":2,
+"model":"DH_Helicopter",
+"colors":[
+  [
+    0.413716,
+    0.32697,
+    0.214284,
+    1.233
+  ],
+  [
+    0.25256,
+    0.396568,
+    0.187432,
+    1.314
+  ],
+  [
+    0.273104,
+    0.402162,
+    0.217838,
+    1.233
+  ]
+],
+"parts":{
+  "heli_rotor":"heli_rotor",
+  "heli_tail":"heli_tail",
+  "heli_dummy":"heli_dummy",
+  "heli_frame_mid":"heli_frame_mid",
+  "heli_swash":"heli_swash",
+  "heli_console":"heli_console",
+  "heli_towhtich":"none",
+  "heli_frame_low":"heli_frame_low",
+  "heli_engine":"heli_engine_easy",
+  "heli_rad":"heli_rad",
+  "heli_exhaust":"heli_exhaust",
+  "heli_tailrotor1":"heli_tailrotor1",
+  "heli_driveshaft":"heli_driveshaft",
+  "heli_intake":"heli_turbo_stage3",
+  "heli_fueltank":"heli_fueltank",
+  "heli_transmission":"heli_transmission",
+  "heli_seat":"heli_seat"
+}
+}

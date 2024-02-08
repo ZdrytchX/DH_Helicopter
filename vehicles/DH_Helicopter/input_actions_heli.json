@@ -1,0 +1,44 @@
+// this file holds all the actions that only this specific vehicle can perform
+// ===========================================================================
+// the non self-descriptive fields are:
+// "onChange":   code to run when the controller position changes     (applies to: buttons, keys, pov hat, axes)
+// "onDown":     code to run when the controller becomes pressed down (applies to: buttons, keys, pov hat)
+// "onUp":       code to run when the controller is lifted up         (applies to: buttons, keys, pov hat)
+// "onRelative": code to run when the controller position changes     (applies to: mouse axis when holding right mouse button)
+// "ctx" (defaults to 'vlua'): where the code above ^ must be run. it can be:
+//    - vlua for vehicle lua async
+//    - elua for engine  lua async
+//    - tlua for engine  lua  sync
+//    - slua for physics lua async
+//    - ui for javascript    async
+//    - ts for torquescript   sync
+// "isBasic" (defaults to true): whether the binding must show always (true), or only when 'advanced bindings' checkbox is marked (false)
+// "isCentered" (defaults to false): whether the axis values will be reported from -1 to +1 (true) or from 0 to +1 (false)
+// "order":      helps set the display order in the Controls menu
+{
+"elevator"           :{"order": 1, "onChange":"input.event('elevator', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Pitch (axis)", "desc": "Control the pitch." },
+"aileron"            :{"order": 2, "onChange":"input.event('aileron', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Roll (axis)", "desc": "Control the roll." },
+"collective"         :{"order": 3, "onChange":"electrics.values.collective = VALUE", "title": "Collective (axis)", "desc": "Control the height.", "isCentered": false },
+
+"collective_increase":{"order": 4, "onChange":"electrics.values.collective_change = VALUE", "title": "Collective Increase", "desc": "" },
+"collective_decrease":{"order": 5, "onChange":"electrics.values.collective_change = -VALUE","title": "Collective Decrease", "desc": "" },
+
+"rudder"             :{"order": 6, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "isCentered":true, "title": "Rudder (axis)", "desc": "Control the tail rotor." },
+
+"rudder_left"        :{"order": 7, "onChange":"input.event('rudder', -VALUE, FILTERTYPE)", "title": "Rudder Left", "desc": "Yaw left." },
+"rudder_right"       :{"order": 8, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "title": "Rudder Right", "desc": "Yaw right." },
+
+"trim_up"            :{"order": 9, "onChange":"input.event('trimChange', VALUE, FILTERTYPE)", "title": "Rudder Trim +", "desc": "add trim to tail rotor." },
+"trim_down"          :{"order": 10,"onChange":"input.event('trimChange', -VALUE, FILTERTYPE)", "title": "Rudder Trim -", "desc": "subtract trim from tail rotor." },
+
+"throttle_increase"  :{"order": 11,"onChange":"electrics.values.throttle_change = VALUE", "title": "Throttle Increase", "desc": "" },
+"throttle_decrease"  :{"order": 12,"onChange":"electrics.values.throttle_change = -VALUE","title": "Throttle Decrease", "desc": "" },
+
+"release_rope"       :{"order": 13,"onChange":"electrics.values.rope = VALUE", "title": "Release Rope", "desc": "" },
+
+"toggle_sight"       :{"order": 14, "onUp":"electrics.values.msight = 1-(electrics.values.msight or 0)", "title": "Activate Weapons", "desc": "Toggle the weapon system" },
+
+"fire"             :{"order": 15, "onChange":"electrics.values.dh_trigger = VALUE", "title": "Trigger", "desc": "" },
+
+
+}

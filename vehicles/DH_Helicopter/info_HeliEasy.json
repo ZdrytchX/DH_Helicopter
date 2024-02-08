@@ -1,0 +1,14 @@
+{
+    "Configuration":"Easy",
+    "Transmission":"Belt Drive",
+    "Description":"Quad-blade, Medium lift, Low sensitivity controls, engine thermals.",
+    "Drivetrain":"Shaft",
+    "Value":59950,
+    "Performance Class":"Payload 200kg, Speed 100mph",
+	"Torque":110,
+	"TorquePeakRPM":"3600",
+	"Power":70,
+	"PowerPeakRPM":"3900",
+	"Weight":350,
+    "Config Type":"Factory",
+}

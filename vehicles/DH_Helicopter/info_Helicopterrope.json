@@ -1,0 +1,14 @@
+{
+    "Configuration":"With lifting rope",
+    "Transmission":"Belt Drive",
+    "Description":"Quad-blade, very high lift, high sensitivity controls, negative blade pitch, engine thermals, lifting rope.",
+    "Drivetrain":"Shaft",
+    "Value":59950,
+    "Performance Class":"Payload 600kg, Speed 130mph",
+	"Torque":165,
+	"TorquePeakRPM":"3600",
+	"Power":150,
+	"PowerPeakRPM":"3900",
+	"Weight":350,
+    "Config Type":"Factory",
+}

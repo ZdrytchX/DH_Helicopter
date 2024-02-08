@@ -1,0 +1,675 @@
+{
+	"heli_engine": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Realistic Aero Engine",
+			"value":1799,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_rad","heli_rad", "Radiator"],
+			["heli_intake","heli_intake", "Intake", {"coreSlot":true}],
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_transmission","heli_transmission", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[500,  60],
+				[1000, 100],
+				[2000, 120],
+				[3000, 140],
+				[4000, 135],
+				[5000, 110],
+				[6000, 70],
+
+			],
+
+			"electricsThrottleName": "heli_throttle",
+
+			"idleRPM":1000,
+			"maxRPM":3850,
+			"revLimiterRPMDrop":0,
+			"maxOverRevDamage":1500
+			"inertia":0.09,
+			"friction":5
+			"dynamicFriction":0.022
+			"burnEfficiency":0.28
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.012
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+
+			//cooling and oil system
+			"hasOilStarvingDamage":true
+			"thermalsEnabled":true
+			"engineBlockMaterial":"aluminum"
+			"oilVolume":5
+
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":180
+			"headGasketDamageThreshold":1500000
+			"pistonRingDamageThreshold":1500000
+			"connectingRodDamageThreshold":2000000
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+
+		"soundConfig": {
+			"sampleName": "I4",
+			"mainGain": -18,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.45,
+			"onLoadGain":1,
+			"offLoadGain":0.6,
+			"eqLowGain": 10,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -5,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},
+
+	},
+
+	"heli_engine_easy": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Easy Aero Engine",
+			"value":1799,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_rad","heli_rad", "Radiator"],
+			["heli_intake","heli_intake", "Intake", {"coreSlot":true}],
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			//["heli_transmission","heli_transmission", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[500,  60],
+				[1000, 100],
+				[2000, 120],
+				[3000, 140],
+				[4000, 135],
+				[5000, 110],
+				[6000, 70],
+
+			],
+
+			"electricsThrottleName": "heli_throttle",
+
+			"idleRPM":1000,
+			"maxRPM":3850,
+			"revLimiterRPMDrop":5,
+			"maxOverRevDamage":400000
+			"inertia":0.09,
+			"friction":5
+			"dynamicFriction":0.022
+			"burnEfficiency":0.28
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.012
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+
+			//cooling and oil system
+			"hasOilStarvingDamage":false
+			"thermalsEnabled":true
+			"engineBlockMaterial":"aluminum"
+			"oilVolume":5
+
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":180
+			"headGasketDamageThreshold":1500000
+			"pistonRingDamageThreshold":1500000
+			"connectingRodDamageThreshold":2000000
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+
+		"soundConfig": {
+			"sampleName": "I4",
+			"mainGain": -18,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.45,
+			"onLoadGain":1,
+			"offLoadGain":0.6,
+			"eqLowGain": 10,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -5,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},
+
+	},
+
+	"heli_intake": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Standard",
+			"value":200,
+		},
+
+		"slotType" : "heli_intake",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_exhaust_f", ["heli_exhaust"]],
+			["heli_airfilter", ["heli_core"]],
+		],
+		
+		"clutch": {
+			"engageStartRPM":1200,
+			"engagementRPM":1000
+		},
+		
+	},
+
+	"heli_turbo_stage3": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Turbocharger",
+			"value":2700,
+		},
+
+		"slotType" : "heli_intake",
+
+		"turbocharger": {
+			"volumePer10kRPM":0.07
+			"wastegateStart":16,
+			"wastegateLimit":18,
+			"maxExhaustPower": 8000,
+			"backPressureCoef": 0.000035,
+			"frictionCoef": 35.3,
+			"inertia":2.5,
+			"damageThresholdTemperature": 730,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,         -4.5],
+				[30000,     -1.5],
+				[60000,     6],
+				[90000,     13],
+				[150000,    21],
+				[200000,    25],
+				[250000,    29],
+			],
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,     0.0,    0.0],
+				[650,   0.25,   0.15],
+				[1400,  0.35,   0.23],
+				[2000,  0.42,    0.29],
+				[2200,  0.58,    0.41],
+				[2500,  0.73,    0.61],
+				[2700,  0.88,    0.77],
+				[3000,  1.03,    0.87],
+				[3300,  1.11,    0.93],
+				[3700,  1.02,    1.00],
+				[4000,  0.93,    0.95],
+				[4500,  0.73,    0.91],
+
+			],
+		},
+		
+		"clutch": {
+			"engageStartRPM":2200,
+			"engagementRPM":800
+		},
+		
+		"mainEngine": {
+			"burnEfficiency":0.24,
+			//engine durability
+			"cylinderWallTemperatureDamageThreshold":180
+			//turbocharger name
+			"turbocharger":"turbocharger",
+		},
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_airfilter_2", ["heli_exhaust"]],
+			["heli_turbo", ["heli_exhaust"]],
+			["heli_turbo_pipe", ["heli_core"]],
+		],
+
+	},
+
+	"heli_rad": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Radiator",
+			"value":300,
+		},
+
+		"slotType" : "heli_rad",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+
+		],
+
+		"mainEngine":{
+			"radiatorArea":0.30,
+			"radiatorEffectiveness":7000,
+			"radiatorFanType":"electric",
+			"radiatorFanTemperature":100,
+			"radiatorFanMaxAirSpeed":20,
+			"coolantVolume":5.5,
+			"thermostatTemperature":95
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.5},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":""}
+
+			["hrad2",0.183,0.217,1.08],
+			["hrad3",-0.183,0.217,1.08],
+			["hrad4",0.183,0.421,1.08],
+			["hrad5",0.183,0.421,1.134],
+			["hrad6",-0.183,0.421,1.08],
+			["hrad7",-0.183,0.421,1.134],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":3000,"beamStrength":6000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001}
+			["hrad1","hrad4"],
+			["hrad0","hrad6"],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+
+	},
+
+	"heli_exhaust": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Exhaust",
+			"value":300,
+		},
+
+		"slotType" : "heli_exhaust",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_exhaust", ["heli_exhaust"]],
+
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":1.0},
+			{"group":"heli_exhaust"},
+
+			["hexst0",0.192,0.265,0.839],
+			["hexst1",-0.192,0.265,0.839],
+			["hexst2",0.0,0.654,1.139],
+			["hexst3",0.0,0.913,1.038],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":400000,"beamStrength":"FLT_MAX"},
+
+			["hexst2","hexst1"{"isExhaust":true}],
+			["hexst0","hexst3"],
+			["hexst3","hexst1"],
+			["hexst0","hexst1"],
+			["hexst2","hexst0"],
+			["hexst3","hexst2"{"isExhaust":true}],
+
+			//exhaust to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":10000},
+			{"breakGroup":"heli_exhaust"},
+
+			["hexst0","helimidr8"],
+			["hexst0","helimidl6"],
+			["hexst0","helimidr2"],
+			["hexst0","helimidl0"],
+			["hexst1","helimidr8"{"isExhaust":true}],
+			["hexst1","helimidl6"],
+			["hexst1","helimidr2"],
+			["hexst1","helimidl0"],
+
+			["hexst2","helimidr9"],
+			["hexst2","helimidl7"],
+			["hexst3","helimidr9"],
+			["hexst3","helimidl7"],
+
+			{"breakGroup":""},
+
+		],
+
+	},
+
+	"heli_fueltank": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Fuel Tank",
+			"value":200,
+		},
+
+		"slotType" : "heli_fueltank",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_fueltank", ["heli_fueltank"]],
+
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
+			["$fuel", "range", "l", "Fuel", 10, 1, 15, "Fuel Amount", "Litres of fuel"]
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["fuelTank", "mainTank"],
+		],
+
+		"mainTank": {
+			"energyType":"gasoline",
+			"fuelCapacity": "$fuel",
+			"fuel": {"[engineGroup]:":["fuel"]},
+		},
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.9},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.5},
+			{"group":"heli_fueltank"},
+
+			["hfuel1",0.096,-0.108,0.461],
+			["hfuel2",-0.096,-0.108,0.461],
+			["hfuel4",0.096,0.071,0.461],
+			["hfuel5",-0.096,0.071,0.461],
+
+			{"engineGroup":"fuel"}
+			{"chemEnergy":50,"burnRate":1.2,"flashPoint":220,"vaporPoint":97,"specHeat":0.03,"selfIgnitionCoef":0.03,"smokePoint":220,"containerBeam":"fuelTank"},
+
+			["hfuel0",0.205,-0.108,0.701 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hfuel3",-0.205,-0.108,0.701{"flammable":60,"particleType":[26,28,29,30,31]}],
+			["hfuel6",0.205,0.145,0.701  {"flammable":40,"particleType":[25,28,29,30,31]}],
+			["hfuel7",-0.205,0.145,0.701 {"flammable":20,"particleType":[26,27,29,30,31]}],
+
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"vaporPoint":false,"specHeat":false,"selfIgnitionCoef":false,"smokePoint":false,"containerBeam":false},
+			{"group":""},
+			{"engineGroup":""}
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":300000,"beamDamp":50},
+			{"beamDeform":15000,"beamStrength":"FLT_MAX"},
+
+			["hfuel7","hfuel0"],
+			["hfuel7","hfuel4"],
+			["hfuel5","hfuel1"],
+			["hfuel2","hfuel0"],
+			["hfuel4","hfuel5"],
+			["hfuel5","hfuel0"],
+			["hfuel5","hfuel6"],
+			["hfuel2","hfuel1"],
+			["hfuel7","hfuel5"],
+			["hfuel1","hfuel6"],
+			["hfuel7","hfuel6"],
+			["hfuel2","hfuel7"],
+			["hfuel0","hfuel4"],
+			["hfuel6","hfuel0"],
+			["hfuel3","hfuel5"],
+			["hfuel3","hfuel1"],
+			["hfuel1","hfuel4"],
+			["hfuel3","hfuel7"],
+			["hfuel5","hfuel2"],
+			["hfuel0","hfuel1"],
+			["hfuel3","hfuel4"],
+			["hfuel3","hfuel6"],
+			["hfuel0","hfuel3"],
+			["hfuel2","hfuel3"],
+			["hfuel2","hfuel4"],
+			["hfuel6","hfuel4"],
+
+			//fueltank container beams
+
+			{"breakGroup":"fueltank"},
+			{"beamSpring":1000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":300},
+			{"disableMeshBreaking":true,"disableTriangleBreaking":true},
+			["hfuel7","hfuel1",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hfuel2","hfuel6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"disableMeshBreaking":false,"disableTriangleBreaking":false},
+			{"breakGroup":""},
+
+			//to frame
+			{"beamSpring":100000,"beamDamp":150},
+			{"beamDeform":15000,"beamStrength":500000},
+			{"breakGroup":"ftank"},
+
+			["hfuel1","flowc"],
+			["hfuel2","flowc"],
+			["hfuel4","flowc"],
+			["hfuel5","flowc"],
+
+			["hfuel1","flowr5"],
+			["hfuel2","flowr5"],
+			["hfuel4","flowr5"],
+			["hfuel5","flowr5"],
+
+			["hfuel1","flowr7"],
+			["hfuel2","flowr7"],
+			["hfuel4","flowr7"],
+			["hfuel5","flowr7"],
+
+			["hfuel1","flowl4"],
+			["hfuel2","flowl4"],
+			["hfuel4","flowl4"],
+			["hfuel5","flowl4"],
+
+			["hfuel1","flowl6"],
+			["hfuel2","flowl6"],
+			["hfuel4","flowl6"],
+			["hfuel5","flowl6"],
+
+			["hfuel3","flowl2"],
+			["hfuel0","flowl2"],
+			["hfuel3","flowr3"],
+			["hfuel0","flowr3"],
+
+
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+
+			["hfuel4","hfuel6","hfuel0"],
+			["hfuel1","hfuel4","hfuel0"],
+			["hfuel0","hfuel2","hfuel1"],
+			["hfuel3","hfuel2","hfuel0"],
+			["hfuel2","hfuel3","hfuel5"],
+			["hfuel7","hfuel5","hfuel3"],
+			["hfuel5","hfuel7","hfuel4"],
+			["hfuel6","hfuel4","hfuel7"],
+			["hfuel6","hfuel3","hfuel0"],
+			["hfuel7","hfuel3","hfuel6"],
+			["hfuel1","hfuel2","hfuel4"],
+			["hfuel5","hfuel4","hfuel2"],
+
+		],
+
+	},
+
+	"heli_driveshaft": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Main Shaft",
+			"value":200,
+		},
+
+		"slotType" : "heli_driveshaft",
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":8, "friction":10}]
+		],
+
+	},
+
+}
