@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Factory",
+  "Configuration":"Electric Torque Trainer",
+  "Description":"New Generation Trainers for New Generation Pilots alike! - Featuring an aerodynamically balanced light weight configuration, gentle controls that will even tame a giant, powered by a highly efficient 60kW electric motor.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Battery",
+  "Max RPM":"4000",
+  "Years":{"min":2000, "max":2022},
+  "Off-Road Score":96,
+  "Performance Class":"Payload 150kg, Speed 100mph",
+  "Population":35000,
+  "Power":81,
+  "PowerPeakRPM":3750,
+  "Propulsion":"Electric",
+  "Top Speed":44.7,
+  "Torque":155,
+  "TorquePeakRPM":3550,
+  "Transmission":"Other",
+  "Value":22950,
+  "Weight":370,
+  "Weight/Power":4.567901235
+}

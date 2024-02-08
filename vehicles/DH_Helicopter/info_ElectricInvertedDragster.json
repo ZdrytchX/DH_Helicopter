@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Custom",
+  "Configuration":"Electric Dragster",
+  "Description":"Designed for Drag Race and land speed record use only, this variant has the most weight-effective high load battery and the strongest, albeit inefficient aeromotor available for short bursts of power. After some testing by our Belasco City sponsored drag racing team, we somehow came up with the idea that because flying inverted provided higher speeds and stability but drains our motor oil, we fitted it with a powerful electric one instead. WARNING: AIRCRAFT MAY GET VERY HOT AFTER USE.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Battery",
+  "Max RPM":"4040",
+  "Off-Road Score":2,
+  "Years":{"min":2017, "max":2023},
+  "Performance Class":"Payload 650kg, Speed 216mph",
+  "Population":100,
+  "Power":170,
+  "PowerPeakRPM":"3050 - 3550",
+  "Propulsion":"Electric",
+  "Top Speed":96.4,
+  "Torque":400,
+  "TorquePeakRPM":"0 - 3100",
+  "Transmission":"Other",
+  "Value":49950,
+  "Weight":360,
+  "Weight/Power":2.130177515
+}

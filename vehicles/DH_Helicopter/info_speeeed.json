@@ -1,0 +1,20 @@
+{
+    "Configuration":"Boosted",
+    "Transmission":"Belt Drive",
+    "Description":"Your Speed Demon: This one comes with a turbocharged engine so you need to watch out for that whiplash! - Quad-blade, high lift, high sensitivity controls, negative blade pitch, torque reaction, blade stall, over rpm, oil starvation and engine thermal damage.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+    "Years":{"min":1974, "max":1978},
+	"Propulsion":"ICE",
+    "Value":39950,
+    "Performance Class":"Payload 500kg, Speed 160 mph",
+	"Torque":165,
+	"TorquePeakRPM":"3600",
+	"Top Speed":71,
+	"Power":141,
+	"PowerPeakRPM":"3900",
+	"Max RPM":"3900",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":1250
+}

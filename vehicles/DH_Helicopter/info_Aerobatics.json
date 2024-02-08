@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Factory",
+  "Configuration":"Aerobatic",
+  "Description":"With Military-grade technology, you'll never run out of RPM while doing those aerobatics! Good luck ever reaching max turbocharger RPM hahaha! But be careful when starting up or you may shake yourself up!",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Max RPM":"4200",
+  "Off-Road Score":1,
+  "Performance Class":"Payload 750kg, Speed 165mph",
+  "Population":150,
+  "Power":255,
+  "PowerPeakRPM":3850,
+  "Propulsion":"ICE",
+  "Top Speed":73,
+  "Torque":470,
+  "TorquePeakRPM":3550,
+  "Transmission":"Other",
+  "Value":59950,
+  "Weight":380,
+  "Weight/Power":1.490196078
+}

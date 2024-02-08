@@ -1,0 +1,43 @@
+{
+  "0-100 km/h":6.4,
+  "0-100 mph":17,
+  "0-200 km/h":34.9,
+  "0-60 mph":6,
+  "100-0 km/h":38.1,
+  "100-200 km/h":28.5,
+  "60-0 mph":120.1,
+  "60-100 mph":11,
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Braking G":1.032,
+  "Config Type":"Factory",
+  "Configuration":"Electrico-PerActions",
+  "Description":"In the ever-changing world shifting to Sustainabile Energy sources, Don't get left behind with our new Electrico-Perations Conversion kit! Inspired by our Belasco City sponsored Electric Hypermiling team's efforts, this one is specifically catered towards cost-effective city-wide flight operations with little maintence required and energy efficient motors and flight characteristics. DISCLAIMER: DOES NOT INCLUDE REGENERATIVE GENERATOR. PACKAGE PROVIDED AS-IS WITHOUT WARRANTY. REGENERATIVE GENERATOR TO BE INCLUDED IN FUTURE MODELS. LONG RANGE BATTERIES AVAILABLE AS A SEPERATE PURCHASE.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Battery",
+  "Max RPM":"4000",
+  "Years":{"min":2005, "max":2015},
+  "Off-Road Score":101,
+  "Performance Class":"Payload 200kg, Speed 130mph",
+  "Population":12000,
+  "Power":81,
+  "PowerPeakRPM":3750,
+  "Propulsion":"Electric",
+  "Top Speed":58.56710261,
+  "Torque":155,
+  "TorquePeakRPM":"0 - 3900",
+  "Transmission":"Other",
+  "Value":35950,
+  "Weight":385,
+  "Weight/Power":4.75308642
+}

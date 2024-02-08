@@ -1,14 +1,32 @@
 {
-    "Configuration":"Tactical",
-    "Transmission":"Belt Drive",
-    "Description":"Missiles, Quad-blade, high lift, high sensitivity controls, negative blade pitch, engine thermals.",
-    "Drivetrain":"Shaft",
-    "Value":59950,
-    "Performance Class":"Payload 500kg, Speed 130mph",
-	"Torque":165,
-	"TorquePeakRPM":"3600",
-	"Power":150,
-	"PowerPeakRPM":"3900",
-	"Weight":350,
-    "Config Type":"Factory",
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Factory",
+  "Configuration":"Tactical",
+  "Description":"Missiles, Quad-blade, high lift, high sensitivity controls, negative blade pitch, engine thermals all without torque problems. A lazy arsonist's favourite weapon - Well you still have to aim.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Off-Road Score":1,
+  "Performance Class":"Payload 500kg, Speed 130mph",
+  "Power":140,
+  "PowerPeakRPM":3500,
+  "Propulsion":"ICE",
+  "Top Speed":58,
+  "Torque":290,
+  "TorquePeakRPM":3150,
+  "Transmission":"Other",
+  "Value":69950,
+  "Weight":430,
+  "Weight/Power":3.071428571
 }

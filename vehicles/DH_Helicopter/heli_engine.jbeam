@@ -2,16 +2,14 @@
 	"heli_engine": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Realistic Aero Engine",
-			"value":1799,
+			"name":"DH65-3850 Aero Engine",
+			"value":5799,
 		},
 
 		"slotType" : "heli_engine",
 
 		"slots": [
-			["type", "default", "description"]
-			["heli_rad","heli_rad", "Radiator"],
-			["heli_intake","heli_intake", "Intake", {"coreSlot":true}],
+			["type", "default", "description"],
 			["heli_exhaust","heli_exhaust", "Exhaust"],
 			["heli_transmission","heli_transmission", "Transmission"],
 			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
@@ -30,6 +28,11 @@
 			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
 			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
 		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"],
+			["$clutchRPM", "range", "RPM", "Controls", 1200, 1200, 2200, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 1000, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 1000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
 		
 		"mainEngine": {
 			"torque":[
@@ -45,10 +48,10 @@
 
 			],
 
-			"electricsThrottleName": "heli_throttle",
+			"electricsThrottleName": "heli_throttleToEngine",
 
-			"idleRPM":1000,
-			"maxRPM":3850,
+			"idleRPM":1000,//1000
+			"maxRPM":3850,//3850
 			"revLimiterRPMDrop":0,
 			"maxOverRevDamage":1500
 			"inertia":0.09,
@@ -64,12 +67,15 @@
 			"hasOilStarvingDamage":true
 			"thermalsEnabled":true
 			"engineBlockMaterial":"aluminum"
+			"engineBlockAirflowCoef":1.2//
+			"engineBlockAirCoolingEfficiency":10//
 			"oilVolume":5
 
 			//engine durability
+			"engineBlockTemperatureDamageThreshold":150//
 			"cylinderWallTemperatureDamageThreshold":180
 			"headGasketDamageThreshold":1500000
-			"pistonRingDamageThreshold":1500000
+			"pistonRingDamageThreshold":1700000//1500000
 			"connectingRodDamageThreshold":2000000
 
 			//node beam interface
@@ -80,6 +86,10 @@
 
 			"soundConfig": "soundConfig",
 
+		},		
+		"clutch": {
+			"engageStartRPM":1200,
+			"engagementRPM":1000
 		},
 
 		"soundConfig": {
@@ -92,6 +102,147 @@
 			"eqLowGain": 10,
 			"eqLowFreq": 400,
 			//"eqLowWidth": 0,
+			"eqHighGain": -9,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},
+
+	},
+
+	"heli_engine_highRPM": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH80-4200 High-Revving Aero Engine",
+			"value":17999,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_transmission","heli_transmission", "Transmission"],
+			["heli_dh80limiter","heli_engine_limiter_dh80_4200", "Tuning Configuration",{"coreSlot":true}],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2, "engageStartRPM":2000}]
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[1000, 35],
+				[1250, 55],
+				[1500, 68],
+				[2000, 93],
+				[2500, 115],
+				[3000, 139],
+				[3500, 159],
+				[4000, 155],
+				[4200, 150],
+				[4500, 131],
+				[5000, 102],
+				[5500, 75],
+				[6000, 25],
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+
+			"idleRPM":1800,//1000
+			
+			"maxRPM":4000,
+			
+			/*//concept multi-stage RPM limiter
+			"maxRPM":[//4200,//3850
+				["throttle","maxRPM"]
+				[0,		3600],//economy mode from 0-50%
+				[0.5,	3600],
+				[0.55,	3850],//military power
+				[0.95,	3850],
+				[1,		4200],//I SAID MORE POWER!
+			],*/
+			
+			
+			"revLimiterRPMDrop":0,
+			"maxOverRevDamage":300
+			"inertia":0.39,//0.11
+			"friction":4.7,//5
+			"dynamicFriction":0.0215//0.022
+			"burnEfficiency":0.263//0.28
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.012
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+			"starterMaxRPM":1000
+
+			//cooling and oil system
+			"hasOilStarvingDamage":true
+			"thermalsEnabled":true
+			"engineBlockMaterial":"aluminum"
+			"engineBlockAirflowCoef":1.3//
+			"engineBlockAirCoolingEfficiency":11//
+			"oilVolume":9//7
+
+			//engine durability
+			"engineBlockTemperatureDamageThreshold":170//
+			"cylinderWallTemperatureDamageThreshold":230
+			"headGasketDamageThreshold":1500000
+			"pistonRingDamageThreshold":2100000//1500000
+			"connectingRodDamageThreshold":2000000
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+		//backup balues
+		"clutch": {
+			"engageStartRPM":1200,
+			"engagementRPM":1000
+		},
+
+		"soundConfig": {
+			/*
+			"sampleName": "V6",
+			"mainGain": -17,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.15,
+			"onLoadGain":5,
+			"offLoadGain":0.1,
+			"eqLowGain": 11,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -6,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+			*/
+			
+			"sampleName": "B4S", // I4,V6,B4S,V10,V8,V8_2,B4
+			"mainGain": -13,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.45,
+			"onLoadGain":1,
+			"offLoadGain":0.6,
+			"eqLowGain": 7,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
 			"eqHighGain": -5,
 			"eqHighFreq": 6000,
 			"fundamentalFrequencyCylinderCount":2
@@ -100,19 +251,800 @@
 
 	},
 
-	"heli_engine_easy": {
+
+	"heli_engine_electric": {
 		"information":{
-			"authors":"Darren9",
-			"name":"Easy Aero Engine",
-			"value":1799,
+			"authors":"ZdrytchX",
+			"name":"DHE-e80-4000 155Nm 60kW Non-Regenerative High-Efficiency Electric Aero Motor (96% Efficient)",
+			"value":6500,
 		},
 
 		"slotType" : "heli_engine",
 
 		"slots": [
 			["type", "default", "description"]
-			["heli_rad","heli_rad", "Radiator"],
-			["heli_intake","heli_intake", "Intake", {"coreSlot":true}],
+			["heli_transmission_electric","heli_transmission_electric", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+		//nodes{"chemEnergy":1000,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15}
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [//589000
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchRPM", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Drive Shaft"],
+			["$clutchEngage", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Drive Shaft"],
+			//["$maxRPM", "range", "RPM", "Controls", 3800, 0, 4000, "Max Engine RPM", "Set the maximum RPM of the Electric Motor", 50, "Engine"],
+			["$torque1", "range", "Nm", "Controls", 155, 20, 290, "2000 RPM Torque", "Adjust Low End Max Torque up to 2000 RPM", 1, "Electrics"],
+			["$torque2", "range", "Nm", "Controls", 155, 20, 190, "3100 RPM Torque", "Adjust Low End Torque at 3100 RPM", 1, "Electrics"],
+			["$torque3", "range", "Nm", "Controls", 155, 20, 166, "3550 RPM Torque", "Adjust Low End Torque at 3550 RPM", 1, "Electrics"],
+			["$torque4", "range", "Nm", "Controls", 155, 20, 158, "3700 RPM Torque", "Adjust Low End Torque at 3700 RPM", 1, "Electrics"],
+			["$torque5", "range", "Nm", "Controls", 155, 20, 155, "3800 RPM Torque", "Adjust Torque at Target 3800 RPM", 1, "Electrics"],
+			["$torque6", "range", "Nm", "Controls", 153, 0, 153, "3850 RPM Torque", "Adjust Torque at 3850 RPM", 1, "Electrics"],
+			["$torque7", "range", "Nm", "Controls", 151, 0, 151, "3900 RPM Torque", "Adjust Torque at 3900 RPM", 1, "Electrics"],
+			["$torque8", "range", "Nm", "Controls", 149, 0, 149, "3950 RPM Torque", "Adjust Torque at 3950 RPM", 1, "Electrics"],
+			["$torque9", "range", "Nm", "Controls", 147, 0, 147, "4000 RPM DropOff Torque", "Adjust Torque at Max Rated RPM", 1, "Electrics"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0,    "$torque1"],
+				[2000, "$torque1"],
+				[3100, "$torque2"],
+				[3548, "$torque3"],
+				[3726, "$torque4"],
+				[3800, "$torque5"],
+				[3849, "$torque6"],
+				[3900, "$torque7"],
+				[3953, "$torque8"],
+				[4000, "$torque9"],
+			],
+			//TODO doesnt work
+			/*
+			"regenTorque":[
+				["rpm","torque",],
+				[0,0],
+				[30,5],
+				[100,30],
+				[500,50],
+				[1000,80],
+				[2000,100],
+				[3500,100],
+				[3000,5],//slope off for safety
+				[3500,0],
+			],
+			*/
+
+			"electricsThrottleName": "heli_throttleToEngine",
+			"electricsRegenThrottleName": "regenThrottle"
+			"maximumWantedRegenTorque":100,
+
+			"revLimiterRPMDrop":0,
+			//"maxRPM":3500,
+			//new values
+			//"maxTorqueRating":160,//-1
+			//"maxOverTorqueDamage":5000,//1000
+            //"maximumWantedRegenTorque": 100,
+			"defaultRegen":1.0,
+			"onePedalRegenCoef": 0.85
+			"regenThrottle":0.5,
+
+            "inertia": 0.02,
+            "friction": 2,
+			"dynamicFriction":0.00025,//0.022
+            "electricalEfficiency": 0.96,//0.96 from in-game values
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"energyStorage": "mainBattery",
+			"requiredEnergyType":"electricEnergy",
+
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"regenActive":true,
+			"regenThrottleNeutralPoint":0.5,
+			"regenSlowSpeedDropOff":10
+			"regenThrottle":0.5,
+			"regenFadeRPM":10
+
+			"soundConfig": "soundConfig",
+
+		},
+		//TODO doesnt work
+		/*
+        "vehicleController": {
+			"shiftLogicName":"electricMotor",
+			"motorNames":["mainEngine"],
+            "defaultRegen": 1.0,
+            //"brakeRegenCoef": 1,
+			//"automaticModes":"RPD",
+			"defaultRegenStrength":1
+			"regenActive":true,
+        },*/
+
+        "soundConfig": {
+            "sampleName": "ElectricMotor_03",
+            "mainGain": 3
+			"eqLowGain": -2,
+			"eqLowFreq": 120,
+			"eqHighGain": -3,
+			"eqHighFreq": 12000,
+			"fundamentalFrequencyCylinderCount":68
+			"eqFundamentalGain": 3
+        },
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+
+	"heli_engine_electric2": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHE-p170-4040 310Nm 126kW Non-Regenerative High-Performance Electric Aero Motor (87% Efficient)",
+			"value":8600,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_transmission_electric","heli_transmission_electric", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [//1200000
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchRPM", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Drive Shaft"],
+			["$clutchEngage", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Drive Shaft"],
+			//["$maxRPM", "range", "RPM", "Controls", 3800, 0, 4000, "Max Engine RPM", "Set the maximum RPM of the Electric Motor", 50, "Engine"],
+			["$torque0", "range", "Nm", "Controls", 310, 20, 395, "2000 RPM Torque", "Adjust Low End Max Torque up to 2000 RPM", 1, "Electrics"],
+			["$torque1", "range", "Nm", "Controls", 310, 20, 395, "3050 RPM Torque", "Adjust Low End Torque at 3050 RPM", 1, "Electrics"],
+			["$torque2", "range", "Nm", "Controls", 310, 20, 338, "3550 RPM Torque", "Adjust Low End Torque at 3550 RPM", 1, "Electrics"],
+			["$torque3", "range", "Nm", "Controls", 310, 20, 324, "3700 RPM Torque", "Adjust Low End Torque at 3700 RPM", 1, "Electrics"],
+			["$torque4", "range", "Nm", "Controls", 310, 20, 315, "3800 RPM Torque", "Adjust Torque at Target 3800 RPM", 1, "Electrics"],
+			["$torque5", "range", "Nm", "Controls", 310, 0, 311, "3850 RPM Torque", "Adjust Torque at 3850 RPM", 1, "Electrics"],
+			["$torque6", "range", "Nm", "Controls", 307, 0, 307, "3900 RPM Torque", "Adjust Torque at 3900 RPM", 1, "Electrics"],
+			["$torque7", "range", "Nm", "Controls", 303, 0, 303, "3950 RPM Torque", "Adjust Torque at 3950 RPM", 1, "Electrics"],
+			["$torque8", "range", "Nm", "Controls", 300, 0, 300, "4000 RPM Torque", "Adjust Torque at 4000 RPM", 1, "Electrics"],
+			["$torque9", "range", "Nm", "Controls", 297, 0, 297, "4040 RPM DropOff Torque", "Adjust Torque at Max Rated RPM", 1, "Electrics"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0,    "$torque0"],
+				[2000, "$torque0"],
+				[3038, "$torque1"],
+				[3548, "$torque2"],
+				[3703, "$torque3"],
+				[3809, "$torque4"],
+				[3858, "$torque5"],
+				[3908, "$torque6"],
+				[3960, "$torque7"],
+				[4000, "$torque8"],
+				[4040, "$torque9"],
+			],
+			//TODO doesnt work
+			"regenTorque":[
+				["rpm","torque",],
+				[0,0],
+				[30,5],
+				[100,30],
+				[500,50],
+				[1000,80],
+				[2000,100],
+				[3500,100],
+				[3000,5],//slope off for safety
+				[3500,0],
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+
+			"revLimiterRPMDrop":0,
+			//"maxRPM":"$maxRPM",
+			//new values
+			//"maxTorqueRating":160,//-1
+			//"maxOverTorqueDamage":5000,//1000
+            //"maximumWantedRegenTorque": 100,
+			"defaultRegen":1.0,
+			"regenThrottle":0.5,
+
+            "inertia": 0.02,
+            "friction": 2,
+			"dynamicFriction":0.00055,//0.022
+            "electricalEfficiency": 0.87,//apparently 93% efficiency is still quite generous but this shit generates way too much heat
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"energyStorage": "mainBattery",
+			"requiredEnergyType":"electricEnergy",
+
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+		/*
+		//TODO doesnt work
+        "vehicleController": {
+			//"shiftLogicName":"electricMotor",
+            //"automaticModes": "PRND",
+			//"defaultAutomaticMode":"D",
+
+            "defaultRegen": 1.0,
+            "brakeRegenCoef": 1,
+			"regenThrottle":0.5,
+        },*/
+
+        "soundConfig": {
+            "sampleName": "ElectricMotor",
+            "mainGain": 22
+			"eqLowGain": -10,
+			"eqLowFreq": 240,
+			"eqHighGain": 3,
+			"eqHighFreq": 7200,
+			"maxLoadMix": 1,
+			"minLoadMix": 0.35,
+			"onLoadGain":5,
+			"offLoadGain":0.7,
+			"fundamentalFrequencyCylinderCount":36,
+			"eqFundamentalGain": 21,
+        },
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_electric3": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHE-s110-4200 250Nm 82kW Non-Regenerative Electric Aero Motor (93% Efficient)",
+			"value":8000,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_transmission_electric","heli_transmission_electric", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [//800000
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchRPM", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Drive Shaft"],
+			["$clutchEngage", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Drive Shaft"],
+			["$torque0", "range", "Nm", "Controls", 250, 20, 400, "2000 RPM Torque", "Adjust Low End Max Torque up to 2000 RPM", 1, "Electrics"],
+			["$torque1", "range", "Nm", "Controls", 250, 20, 250, "3200 RPM Torque", "Adjust Low End Torque at 3200 RPM", 1, "Electrics"],
+			["$torque2", "range", "Nm", "Controls", 236, 20, 236, "3390 RPM Torque", "Adjust Low End Torque at 3390 RPM", 1, "Electrics"],
+			["$torque3", "range", "Nm", "Controls", 216, 20, 216, "3700 RPM Torque", "Adjust Low End Torque at 3700 RPM", 1, "Electrics"],
+			["$torque4", "range", "Nm", "Controls", 210, 20, 210, "3800 RPM Torque", "Adjust Torque at Target 3800 RPM", 1, "Electrics"],
+			["$torque6", "range", "Nm", "Controls", 205, 0, 205, "3900 RPM Torque", "Adjust Torque at 3900 RPM", 1, "Electrics"],
+			["$torque8", "range", "Nm", "Controls", 200, 0, 200, "4000 RPM Torque", "Adjust Torque at 4000 RPM", 1, "Electrics"],
+			["$torque9", "range", "Nm", "Controls", 190, 0, 190, "4200 RPM DropOff Torque", "Adjust Torque at Max Rated RPM", 1, "Electrics"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0,    "$torque0"],
+				[2000, "$torque0"],
+				[3200, "$torque1"],
+				[3390, "$torque2"],
+				[3704, "$torque3"],
+				[3809, "$torque4"],
+				[3903, "$torque6"],
+				[4000, "$torque8"],
+				[4200, "$torque9"],
+			],
+			//TODO doesnt work
+			"regenTorque":[
+				["rpm","torque",],
+				[0,0],
+				[30,5],
+				[100,30],
+				[500,50],
+				[1000,80],
+				[2000,100],
+				[3500,100],
+				[3000,5],//slope off for safety
+				[3500,0],
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+
+			"revLimiterRPMDrop":0,
+			//"maxRPM":"$maxRPM",
+			//new values
+			//"maxTorqueRating":160,//-1
+			//"maxOverTorqueDamage":5000,//1000
+            //"maximumWantedRegenTorque": 100,
+			"defaultRegen":1.0,
+			"regenThrottle":0.5,
+
+            "inertia": 0.02,
+            "friction": 2,
+			"dynamicFriction":0.00055,//0.022
+            "electricalEfficiency": 0.93,//apparently 93% efficiency is still quite generous but this shit generates way too much heat
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"energyStorage": "mainBattery",
+			"requiredEnergyType":"electricEnergy",
+
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+		/*
+		//TODO doesnt work
+        "vehicleController": {
+			//"shiftLogicName":"electricMotor",
+            //"automaticModes": "PRND",
+			//"defaultAutomaticMode":"D",
+
+            "defaultRegen": 1.0,
+            "brakeRegenCoef": 1,
+			"regenThrottle":0.5,
+        },*/
+
+        "soundConfig": {
+            "sampleName": "ElectricMotor_04",
+            "mainGain": 12
+			"eqLowGain": -10,
+			"eqLowFreq": 240,
+			"eqHighGain": 3,
+			"eqHighFreq": 7200,
+			"maxLoadMix": 1,
+			"minLoadMix": 0.35,
+			"onLoadGain":5,
+			"offLoadGain":0.7,
+			"fundamentalFrequencyCylinderCount":31.25,
+			"eqFundamentalGain": 12,
+        },
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_electricScrap": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHE-b55-4000 135 Nm 40kW Non-Regenerative Brushed Electric Aero Motor (65% Efficient)",
+			"value":500,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_transmission_electric","heli_transmission_electric", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+		//nodes{"chemEnergy":1000,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15}
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["electricMotor", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [//589'000 -> 400'000 but rounding down
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchRPM", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Drive Shaft"],
+			["$clutchEngage", "range", "RPM", "Controls", 0, 0, 4000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Drive Shaft"],
+			["$torque1", "range", "Nm", "Controls", 135, 20, 135, "2000 RPM Torque", "Adjust Low End Max Torque up to 2000 RPM", 1, "Electrics"],
+			["$torque2", "range", "Nm", "Controls", 135, 20, 135, "2950 RPM Torque", "Adjust Low End Torque at 2950 RPM", 1, "Electrics"],
+			["$torque3", "range", "Nm", "Controls", 125, 20, 125, "3200 RPM Torque", "Adjust Low End Torque at 3200 RPM", 1, "Electrics"],
+			["$torque4", "range", "Nm", "Controls", 108, 20, 108, "3700 RPM Torque", "Adjust Low End Torque at 3700 RPM", 1, "Electrics"],
+			["$torque5", "range", "Nm", "Controls", 105, 20, 105, "3800 RPM Torque", "Adjust Torque at Target 3800 RPM", 1, "Electrics"],
+			["$torque6", "range", "Nm", "Controls", 103, 0, 103, "3850 RPM Torque", "Adjust Torque at 3850 RPM", 1, "Electrics"],
+			["$torque8", "range", "Nm", "Controls", 101, 0, 101, "3950 RPM Torque", "Adjust Torque at 3950 RPM", 1, "Electrics"],
+			["$torque9", "range", "Nm", "Controls", 97, 0, 97, "4000 RPM DropOff Torque", "Adjust Torque at Max Rated RPM", 1, "Electrics"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0,    "$torque1"],
+				[2000, "$torque1"],
+				[2963, "$torque2"],
+				[3200, "$torque3"],
+				[3703, "$torque4"],
+				[3808, "$torque5"],
+				[3844, "$torque6"],
+				[3919, "$torque8"],
+				[4000, "$torque9"],
+			],
+			//TODO doesnt work
+			/*
+			"regenTorque":[
+				["rpm","torque",],
+				[0,0],
+				[30,5],
+				[100,30],
+				[500,50],
+				[1000,80],
+				[2000,100],
+				[3500,100],
+				[3000,5],//slope off for safety
+				[3500,0],
+			],
+			*/
+			"electricsThrottleName": "heli_throttleToEngine",
+
+			//"revLimiterRPMDrop":0,
+			//"maxRPM":"$maxRPM",
+			//new values
+			//"maxTorqueRating":160,//-1
+			//"maxOverTorqueDamage":5000,//1000
+            //"maximumWantedRegenTorque": 100,
+			"defaultRegen":1.0,
+			"regenThrottle":0.5,
+
+            "inertia": 0.03,
+            "friction": 3.2,
+			"dynamicFriction":0.00325,//0.022
+            "electricalEfficiency": 0.65,
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"energyStorage": "mainBattery",
+			"requiredEnergyType":"electricEnergy",
+
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+		/*
+		//TODO doesnt work
+        "vehicleController": {
+			//"shiftLogicName":"electricMotor",
+            //"automaticModes": "PRND",
+			//"defaultAutomaticMode":"D",
+
+            "defaultRegen": 1.0,
+            "brakeRegenCoef": 1,
+			"regenThrottle":0.5,
+        },*/
+
+        "soundConfig": {
+            "sampleName": "ElectricMotor_02",
+            "mainGain": 8
+			"eqLowGain": -1,
+			"eqLowFreq": 120,
+			"eqHighGain": 10,
+			"eqHighFreq": 12000,
+			"maxLoadMix": 1,
+			"minLoadMix": 0.55,
+			"fundamentalFrequencyCylinderCount":68
+			"eqFundamentalGain": 8
+        },
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_scrap": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Scrapyard DH50-3600 Aero Engine",
+			"value":500,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_transmission","heli_transmission", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 3595, 3300, 3595, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 650, 620, 2000, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 1200, 1000, 2500, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 1000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[400,  35],
+				[800, 65],
+				[1200, 96]
+				[2000, 105],
+				[2500, 108],
+				[3000, 106],
+				[3500, 99],
+				[4000, 85],
+				[5000, 30],
+				[6000, 5],
+
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+
+			"idleRPM":"$idler",//1000
+			"maxRPM":"$maximumRPM",//3850
+			"revLimiterRPMDrop":15,
+			"redlineTorqueDropOffRange":7,
+			//new values
+			"maxTorqueRating":135,//-1
+			"maxOverTorqueDamage":500,//1000
+
+			"idleRPMRoughness":100
+			"maxOverRevDamage":150
+			"inertia":0.09,
+			"friction":5.2//5
+			"dynamicFriction":0.023//0.022
+			"burnEfficiency":0.27//0.28
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.019
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+
+			//cooling and oil system
+			"hasOilStarvingDamage":true
+			"thermalsEnabled":true
+			"engineBlockMaterial":"aluminum"
+			"engineBlockAirflowCoef":1.1//
+			"engineBlockAirCoolingEfficiency":15//
+			"oilVolume":3
+
+			//engine durability
+			"engineBlockTemperatureDamageThreshold":135//
+			"cylinderWallTemperatureDamageThreshold":170
+			"headGasketDamageThreshold":1500000
+			"pistonRingDamageThreshold":1500000//1500000
+			"connectingRodDamageThreshold":1800000
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+
+		"soundConfig": {
+			"sampleName": "I3_engine",
+			"mainGain": -1,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.05,
+			"onLoadGain":3,
+			"offLoadGain":0.6,
+			"eqLowGain": 10,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -9,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},		
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_dh50": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH50-3600 Aero Engine",
+			"value":3500,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_transmission","heli_transmission", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"]],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 3600, 3300, 3650, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 650, 620, 2000, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 1200, 1000, 2500, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 1000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[400,  35],
+				[800, 65],
+				[1200, 96]
+				[2000, 105],
+				[2500, 108],
+				[3000, 110],
+				[3500, 110],
+				[4000, 90],
+				[5000, 50],
+				[6000, 15],
+
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+			"revLimiterRPMDrop":0,
+			"idleRPM":"$idler",//1000
+			"maxRPM":"$maximumRPM",//3850
+			"maxOverRevDamage":300
+			//new values
+			"maxTorqueRating":155,//-1
+			"maxOverTorqueDamage":800,//1000
+
+			"inertia":0.09,
+			"friction":5.2//5
+			"dynamicFriction":0.023//0.022
+			"burnEfficiency":0.27//0.28
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.019
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+
+			//cooling and oil system
+			"hasOilStarvingDamage":true
+			"thermalsEnabled":true
+			"engineBlockMaterial":"aluminum"
+			"engineBlockAirflowCoef":1.1//
+			"engineBlockAirCoolingEfficiency":15//
+			"oilVolume":3
+
+			//engine durability
+			"engineBlockTemperatureDamageThreshold":135//
+			"cylinderWallTemperatureDamageThreshold":170
+			"headGasketDamageThreshold":1500000
+			"pistonRingDamageThreshold":1500000//1500000
+			"connectingRodDamageThreshold":1800000
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+
+		"soundConfig": {
+			"sampleName": "I3_engine",
+			"mainGain": -6,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.05,
+			"onLoadGain":3,
+			"offLoadGain":0.6,
+			"eqLowGain": 10,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -9,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_easy": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Simplified DH65-3850 Aero Engine",
+			"value":5799,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
 			["heli_exhaust","heli_exhaust", "Exhaust"],
 			//["heli_transmission","heli_transmission", "Transmission"],
 			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
@@ -132,6 +1064,11 @@
 			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
 			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
 		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchRPM", "range", "RPM", "Controls", 1200, 1200, 2200, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 1000, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 1000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
 		
 		"mainEngine": {
 			"torque":[
@@ -147,7 +1084,7 @@
 
 			],
 
-			"electricsThrottleName": "heli_throttle",
+			"electricsThrottleName": "heli_throttleToEngine",
 
 			"idleRPM":1000,
 			"maxRPM":3850,
@@ -198,15 +1135,220 @@
 			"eqHighFreq": 6000,
 			"fundamentalFrequencyCylinderCount":2
 			"eqFundamentalGain": 10
+		},		
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+//RPM LIMITER MODIFICATIONS
+
+
+//DH80 specific configurations
+
+	"heli_engine_limiter_dh80_4000": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH80-4000 High Torque Standard",
+			"value":19,
+		},
+		
+		"slotType" : "heli_dh80limiter",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		]
+		
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 4000, 3300, 4050, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 1300, 1130, 2200, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 2200, 1500, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 800, 600, 2600, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+
+		"mainEngine": {
+			"maxRPM":"$maximumRPM",
+			"idleRPM":"$idler",//1000
+			"particulates":0.035,
+			"burnEfficiency":0.31,
+			"maxTorqueRating":335,//-1
+			"maxOverTorqueDamage":3500,//1000
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[1000, 30],
+				[1250, 70],
+				[1500, 102],
+				[2000, 133],
+				[2500, 148],
+				[3000, 155],
+				[3500, 160],
+				[4000, 157],
+				[4200, 128],
+				[4500, 65],
+				[5000, 0],
+			],
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+	}
+
+	"heli_engine_limiter_dh80_flat": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH80-4200 Flat Torque Configuration",
+			"value":19,
+		},
+		
+		"slotType" : "heli_dh80limiter",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 4200, 3300, 4200, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 1250, 1130, 2500, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 2200, 1500, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 800, 600, 2600, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+
+		"mainEngine": {
+			"maxRPM":"$maximumRPM",
+			"idleRPM":"$idler",//1000
+			"particulates":0.035,
+			"burnEfficiency":0.31,
+			"maxTorqueRating":320,//-1
+			"maxOverTorqueDamage":2500,//1000
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[1000, 25],
+				[1250, 75],
+				[1500, 110],
+				[2000, 128],
+				[2500, 135],
+				[3000, 142],
+				[3500, 143],
+				[4000, 142],
+				[4200, 141],
+				[4500, 120],
+				[5000, 2],
+			]
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+	}
+
+	"heli_engine_limiter_dh80_4200": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH80-4200 Factory Standard",
+			"value":19,
+		},
+		
+		"slotType" : "heli_dh80limiter",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 4200, 3300, 4200, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 1800, 1300, 2500, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 2200, 1500, 4000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 800, 600, 2600, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+
+		"mainEngine": {
+			"maxRPM":"$maximumRPM",
+			"idleRPM":"$idler",
+			"maxTorqueRating":325,//-1
+			"maxOverTorqueDamage":2000,//1000
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+	}
+
+	"heli_engine_limiter_dh80_5200": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH80-5200 Ultra-High RPM Range Modification",
+			"value":19,
+		},
+
+		"slotType" : "heli_dh80limiter",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 5200, 3300, 5200, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 2000, 1500, 3000, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 2200, 1500, 5000, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 800, 600, 2600, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[1000, 20],
+				[1250, 50],
+				[1500, 62],
+				[2000, 83],
+				[2500, 105],
+				[3000, 129],
+				[3500, 150],
+				[4000, 153],
+				[4200, 148],
+				[4500, 133],
+				[5000, 105],
+				[5500, 79],
+				[6000, 35],
+			],
+
+			"idleRPM":"$idler",//1000
+			
+			"maxRPM":"$maximumRPM",
+			
+			"revLimiterRPMDrop":0,
+			"maxOverRevDamage":30,//300
+			//new values
+			"maxTorqueRating":315,//-1
+			"maxOverTorqueDamage":1800,//1000
+
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
 		},
 
 	},
 
+//INTAKES AND TURBOCHARGERS
 	"heli_intake": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Standard",
-			"value":200,
+			"name":"Standard Intake Filter",
+			"value":30,
 		},
 
 		"slotType" : "heli_intake",
@@ -216,18 +1358,14 @@
 			["heli_exhaust_f", ["heli_exhaust"]],
 			["heli_airfilter", ["heli_core"]],
 		],
-		
-		"clutch": {
-			"engageStartRPM":1200,
-			"engagementRPM":1000
-		},
+
 		
 	},
 
 	"heli_turbo_stage3": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Turbocharger",
+			"name":"Turbocharger - Civil Aviation use",
 			"value":2700,
 		},
 
@@ -270,11 +1408,6 @@
 			],
 		},
 		
-		"clutch": {
-			"engageStartRPM":2200,
-			"engagementRPM":800
-		},
-		
 		"mainEngine": {
 			"burnEfficiency":0.24,
 			//engine durability
@@ -291,11 +1424,139 @@
 
 	},
 
+	"heli_turbo_military": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Turbocharger - Military-Grade",
+			"value":9500,
+		},
+
+		"slotType" : "heli_intake",
+
+		"turbocharger": {
+			"volumePer10kRPM":0.19//0.07
+			"wastegateStart":33.5,
+			"wastegateLimit":33.9,
+			"maxExhaustPower": 13300,
+			"backPressureCoef": 0.000039,
+			"frictionCoef": 7.5,
+			"pressureRatePSI":27,//default 30
+			"inertia":7.5,
+			"damageThresholdTemperature": 750,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,         -13.5],
+				[30000,     -1.5],
+				[60000,     9],
+				[90000,     19],
+				[150000,    29],
+				[200000,    35],
+				[250000,    37],
+				[300000,    38],
+			],
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,     -0.65,    0.0],
+				[650,   -0.25,   0.05],
+				[1400,  -0.15,   0.13],
+				[1700,  -0.03,    0.20],
+				[2000,  0.20,    0.28],
+				[2150,  0.39,    0.39],
+				[2350,  0.53,    0.52],
+				[2550,  0.75,    0.66],
+				[2700,  0.90,    0.79],
+				[3000,  1.07,    0.87],
+				[3300,  1.11,    0.95],
+				[3700,  1.13,    0.97],
+				[4000,  1.09,    1.00],
+				[4200,  0.93,    0.99],
+				[4500,  0.71,    0.93],
+				[5000,  0.35,    0.90],
+				[6000,  0.25,    0.86],
+				[7000,  0.20,    0.85],
+
+			],
+		},
+		
+		"mainEngine": {
+			"burnEfficiency":0.25,
+			//turbocharger name
+			"turbocharger":"turbocharger",
+		},
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_airfilter_2", ["heli_exhaust"]],
+			["heli_turbo", ["heli_exhaust"]],
+			["heli_turbo_pipe", ["heli_core"]],
+		],
+
+	},
+
+	"heli_turbo_weak": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Turbocharger - Scrapyard",
+			"value":150,
+		},
+
+		"slotType" : "heli_intake",
+
+		"turbocharger": {
+			"volumePer10kRPM":0.06
+			"wastegateStart":16,
+			"wastegateLimit":18,
+			"maxExhaustPower": 8000,
+			"backPressureCoef": 0.000095,
+			"frictionCoef": 37.3,
+			"inertia":3.5,
+			"damageThresholdTemperature": 715,
+			"pressurePSI":[
+				//turbineRPM, pressure(PSI)
+				[0,         -5.9],
+				[30000,     -3.5],
+				[60000,     1],
+				[90000,     7],
+				[150000,    11],
+				[200000,    15],
+				[250000,    17],
+			],
+			"engineDef":[
+				//engineRPM, efficiency, exhaustFactor
+				[0,     -0.3,    0.0],
+				[650,   -0.25,   0.05],
+				[1400,  -0.12,   0.13],
+				[2000,  -0.09,    0.19],
+				[2200,  0.19,    0.31],
+				[2500,  0.30,    0.52],
+				[2700,  0.57,    0.77],
+				[3000,  0.65,    0.93],
+				[3300,  0.70,    1.00],
+				[3700,  0.62,    0.97],
+				[4000,  0.50,    0.95],
+				[4500,  -0.15,    0.90],
+
+			],
+		},
+		
+		"mainEngine": {
+			"burnEfficiency":0.21,
+			//turbocharger name
+			"turbocharger":"turbocharger",
+		},
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_airfilter_2", ["heli_exhaust"]],
+			["heli_turbo", ["heli_exhaust"]],
+			["heli_turbo_pipe", ["heli_core"]],
+		],
+
+	},
+
 	"heli_rad": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Radiator",
-			"value":300,
+			"name":"Standard Electrical Radiator",
+			"value":700,
 		},
 
 		"slotType" : "heli_rad",
@@ -305,6 +1566,11 @@
 			["heli_rad_1", ["heli_rad_1"]],
 
 		],
+				
+		"slots":[
+			["type", "default", "description"]
+			["heli_radiator_mods","", "Radiator Modifications"],
+		]
 
 		"mainEngine":{
 			"radiatorArea":0.30,
@@ -422,7 +1688,306 @@
 
 	},
 
-	"heli_exhaust": {
+	"heli_rad_scrapyard": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Scrapyard Mechanical Radiator",
+			"value":320,
+		},
+
+		"slotType" : "heli_rad",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+
+		],
+		
+		"slots":[
+			["type", "default", "description"]
+			["heli_radiator_mods","", "Radiator Modifications"],
+		]
+		
+		"mainEngine":{
+			"radiatorArea":0.30,
+			"radiatorEffectiveness":6500,
+			"radiatorFanType":"mechanical",
+			"mechanicalFanRPMCoef":0.5,
+			"radiatorFanMaxAirSpeed":17,
+			"coolantVolume":5.5,
+			"thermostatTemperature":90
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.5},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":""}
+
+			["hrad2",0.183,0.217,1.08],
+			["hrad3",-0.183,0.217,1.08],
+			["hrad4",0.183,0.421,1.08],
+			["hrad5",0.183,0.421,1.134],
+			["hrad6",-0.183,0.421,1.08],
+			["hrad7",-0.183,0.421,1.134],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":3000,"beamStrength":6000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001}
+			["hrad1","hrad4"],
+			["hrad0","hrad6"],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+
+	},
+
+	"heli_rad_military": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Military Mechanical Radiator",
+			"value":1850,
+		},
+
+		"slotType" : "heli_rad",
+		
+		"slots":[
+			["type", "default", "description"]
+			["heli_radiator_mods","", "Radiator Modifications"],
+		]
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+
+		],
+
+		"mainEngine":{
+			"radiatorArea":0.27,
+			"radiatorEffectiveness":9500,
+			"radiatorFanType":"mechanical",
+			"mechanicalFanRPMCoef":0.5,
+			"radiatorFanMaxAirSpeed":50,
+			"coolantVolume":5.5,
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.5},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":""}
+
+			["hrad2",0.183,0.217,1.08],
+			["hrad3",-0.183,0.217,1.08],
+			["hrad4",0.183,0.421,1.08],
+			["hrad5",0.183,0.421,1.134],
+			["hrad6",-0.183,0.421,1.08],
+			["hrad7",-0.183,0.421,1.134],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":3000,"beamStrength":6000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001}
+			["hrad1","hrad4"],
+			["hrad0","hrad6"],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+	"heli_rad_coolingfins": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Extra Cooling Fins and Coolant Resovoir",
+			"value":150,
+		},
+		"slotType" : "heli_radiator_mods",
+		
+		"mainEngine":{
+			"radiatorArea":0.35,//so mathematically front cross section of the radiator only covers like 0.000432 m^2 but the top-down view covers much more and its complicated
+			"coolantVolume":7,
+        },
+		//drag penalty for additional cooling surface, recycled radiator nodes
+		/*
+		"quads":[
+			["id1:", "id2:", "id3:","id4",],
+			{"dragCoef":10.5},
+			["hrad0", "hrad1", "hrad2", "hrad3"],
+		],
+		*/
+		//Because the game's fucking retarded and can't draw a symmetric rectangle I'm having to split it up
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":10.5},
+			["hrad0", "hrad1", "hrad2"],
+			["hrad1", "hrad3", "hrad2"],
+		],
+		
+	}
+
+	"heli_exhaust": {//////
 		"information":{
 			"authors":"Darren9",
 			"name":"Exhaust",
@@ -430,12 +1995,37 @@
 		},
 
 		"slotType" : "heli_exhaust",
+		
+		"slots":[
+			["type", "default", "description"]
+			["heli_intake","", "Intake"],
+		]
 
 		"flexbodies": [
 			["mesh", "[group]:", "nonFlexMaterials"],
 			["heli_exhaust", ["heli_exhaust"]],
 
 		],
+
+		"soundConfig": {//https://wiki.beamng.com/Sound.html
+			"maxLoadMix": 0.75,
+			"minLoadMix": 0.15,
+			"onLoadGain":6,
+			"offLoadGain":0.03,//0.1
+			"eqLowGain": 9,//11
+			"eqLowWidth":25,//0 default  The higher that value, the more narrow the band is. Low values also influence frequency content that is slightly below and above the target frequency.
+			"eqLowFreq": 700,
+			"eqHighGain": -20,//-9
+			"eqHighFreq": 2000,//6000
+			"highCutFreq":7000,//10000 default
+
+
+			"lowShelfGain":-8,
+			"lowShelfFreq":70,
+
+			"highShelfGain":0,
+			"highShelfFreq":2000,
+		},
 
 		"nodes":[
 			["id", "posX", "posY", "posZ"],
@@ -449,7 +2039,7 @@
 			["hexst0",0.192,0.265,0.839],
 			["hexst1",-0.192,0.265,0.839],
 			["hexst2",0.0,0.654,1.139],
-			["hexst3",0.0,0.913,1.038],
+			["hexst3",0.0,0.913,1.038, {"exhaustAudioMufflingCoef": 0.2, "exhaustAudioGainChange":-6}],//new audio muffling
 
 			{"group":""},
 
@@ -493,12 +2083,14 @@
 		],
 
 	},
+	
 
+//FUEL TANKS
 	"heli_fueltank": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Fuel Tank",
-			"value":200,
+			"value":60,
 		},
 
 		"slotType" : "heli_fueltank",
@@ -511,7 +2103,7 @@
 
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
-			["$fuel", "range", "l", "Fuel", 10, 1, 15, "Fuel Amount", "Litres of fuel"]
+			["$fuel", "range", "l", "Fuel", 15, 1, 15, "Fuel Tank Capacity", "Unless racing, keep this max."]
 		],
 
 		"energyStorage": [
@@ -530,7 +2122,7 @@
 			{"selfCollision":true}
 			{"collision":true}
 			{"frictionCoef":0.9},
-			{"nodeMaterial":"|NM_METAL"},
+			{"nodeMaterial":"|NM_PLASTIC"},//|NM_METAL
 			{"nodeWeight":0.5},
 			{"group":"heli_fueltank"},
 
@@ -656,11 +2248,662 @@
 
 	},
 
+
+	"heli_battery_10000wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHi-10000 Battery Cell (50kg)",
+			"value":9500,
+		},
+
+		"slotType" : "heli_rad",
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "mainBattery"],
+		],
+
+        "mainBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 10,//One kilogram of Lithium-Ion battery pack stores approximately 200 watt-hours of energy
+            "startingCapacity": 10,
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":6.25},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":"fuel"},
+			{"chemEnergy":200,"burnRate":0.39,"flashPoint":800,"specHeat":0.2,"selfIgnitionCoef":0.1,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15},
+			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":9000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
+			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+
+	"heli_battery_6000wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHi-6000 Battery Cell (30kg)",
+			"value":3750,
+		},
+
+		"slotType" : "heli_rad",
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "mainBattery"],
+		],
+
+        "mainBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 6,//One kilogram of Lithium-Ion battery pack stores approximately 200 watt-hours of energy
+            "startingCapacity": 6,
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":3.75},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":"fuel"},
+			{"chemEnergy":120,"burnRate":0.39,"flashPoint":800,"specHeat":0.2,"selfIgnitionCoef":0.1,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15},
+			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":9000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
+			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+
+
+	"heli_battery_3200wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHi-3200 Battery Cell (16kg)",
+			"value":1000,
+		},
+
+		"slotType" : "heli_rad",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "mainBattery"],
+		],
+
+        "mainBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 3.2,//One kilogram of Lithium-Ion battery pack stores approximately 200 watt-hours of energy
+            "startingCapacity": 3.2,
+        },
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":2},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":"fuel"},
+			{"chemEnergy":80,"burnRate":0.39,"flashPoint":800,"specHeat":0.2,"selfIgnitionCoef":0.1,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15},
+			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+			{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":9000},
+			{"containerBeam": false, "highlight":{"radius":0.005, "col":"#ff0000ff" }}
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
+			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+
+	"heli_battery_800wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"DHi-800 Battery Cell (4kg)",
+			"value":350,
+		},
+
+		"slotType" : "heli_rad",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "mainBattery"],
+		],
+
+        "mainBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 0.8,//One kilogram of Lithium-Ion battery pack stores approximately 200 watt-hours of energy
+            "startingCapacity": 0.8,
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.5},
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":"fuel"},
+			{"chemEnergy":16,"burnRate":0.39,"flashPoint":800,"specHeat":0.2,"selfIgnitionCoef":0.1,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.15},
+			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":9000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
+			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+
+	"heli_battery_200wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"2x 200Wh Lead-Acid Car Battery (24kg)",
+			"value":50,
+		},
+
+		"slotType" : "heli_fueltank",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "mainBattery"],
+		],
+
+        "mainBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 0.4,//
+            "startingCapacity": 0.4,
+        },
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":6},//TIL, a 200 amp hour 12V car battery weighs approximately 24kg
+			{"group":"heli_rad_1"},
+			{"engineGroup":"radiator"}
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			{"engineGroup":"fuel"}
+			{"chemEnergy":72,"burnRate":0.1,"flashPoint":800,"vaporPoint":97,"specHeat":2,"selfIgnitionCoef":0.1,"smokePoint":337,"containerBeam":"fuelTank","baseTemp":"thermals","conductionRadius":0.15},
+			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":9000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
+			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+
+	},
+
 	"heli_driveshaft": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Main Shaft",
-			"value":200,
+			"name":"8:1 Standard Main Shaft with J-Nutt",
+			"value":500,
 		},
 
 		"slotType" : "heli_driveshaft",
@@ -670,6 +2913,169 @@
 			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":8, "friction":10}]
 		],
 
+	},
+	
+	"heli_driveshaft2": {
+	"information":{
+		"authors":"ZdrytchX",
+		"name":"10% Final Drive Step up High Torque Main Shaft with J-Nutt",
+		"value":500,
+	},
+
+	"slotType" : "heli_driveshaft",
+
+	"powertrain" : [
+		["type", "name", "inputName", "inputIndex"]
+		["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":8, "friction":10}],
+		["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":0.9, "friction":2}]
+	],
+
+	},
+
+	"heli_driveshaft3": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Variable-Speed Drive Shaft with J-Nutt",
+			"value":800,
+		},
+
+		"slotType" : "heli_driveshaft",
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$DriveShaftRatio", "range", ":1", "Controls", 8, 4, 16, "Rotor Drive Shaft Ratio", "8:1 is standard. Does not affect tail rotor speed.", 0.1, "Rotors"],
+			["$DiffRatio", "range", "x", "Controls", 1.0, 0.5, 2, "Drive Shaft Ratio", "Final Gear Ratio that affects both main and tail rotors. Higher tail rotor speed doesn't necessarily give you more tail authority due to the way torque is modelled.", 0.01, "Rotors"],
+		],
+		
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":"$DriveShaftRatio", "friction":9.5}],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":"$DiffRatio", "friction":2}]
+		],
+
+	},
+	"heli_driveshaft_locked": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Scrapyard 8:1 Drive Shaft with Rachetted Clutch and J-Nutt",
+			"value":200,
+		},
+
+		"slotType" : "heli_driveshaft",
+		
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":8, "friction":10.5}],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+
+		"clutch": {
+			"engageStartRPM":0,
+			"engagementRPM":0,
+		},
+		
+		"mainEngine": {
+			"maxTorqueRating":118,//-1
+			"maxOverTorqueDamage":300,//1000
+		},
+
+	},
+	"heli_driveshaft_welded": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Welded 8:1 Direct Drive Shaft with J-Nutt",
+			"value":200,
+		},
+
+		"slotType" : "heli_driveshaft",
+		
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":8, "friction":9}],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+
+		"clutch": {
+			"engageStartRPM":0,
+			"engagementRPM":0,
+			"clutchWelded":1,
+		},
+		
+		"mainEngine": {
+			"maxTorqueRating":118,//-1
+			"maxOverTorqueDamage":300,//1000
+		},
+
+	},
+
+	"heli_transmission":
+	{
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Direct Drive Transmission",
+			"value":0,
+		},
+		"slotType" : "heli_transmission",
+	},
+/*
+	"heli_transmission_CVT":
+	{
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Continuously Variable Transmission",
+			"value":350,
+		},
+		"slotType" : "heli_transmission",
+
+		"vehicleController": {
+			"automaticModes":"PRNDS",
+			"cvtHighRPM":5900,
+			"cvtLowRPM":600,
+			"torqueConverterLockupRPM": 1800,
+			"aggressionSmoothingDown":0.5,
+			"cvtAggression":0.1,
+			"aggressionHoldOffThrottleDelay":0,
+		},
+	},
+*/
+	"heli_transmission_electric":
+	{
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Direct Drive Electric Transmission",
+			"value":0,
+		},
+		"slotType" : "heli_transmission_electric",
+		"vehicleController": {
+			"shiftLogicName":"electricMotor",
+			"motorNames":["mainEngine"],
+            "defaultRegen": 1.0,
+            "brakeRegenCoef": 1,
+			"automaticModes":"PD",
+			"defaultRegenStrength":1
+			"regenActive":true,
+        },
+	},
+
+	"heli_transmission_reverseElectric":
+	{
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Reversible Electric Transmission",
+			"value":250,
+		},
+
+		"slotType" : "heli_transmission_electric",
+
+        "vehicleController": {
+			"shiftLogicName":"electricMotor",
+			"motorNames":["mainEngine"],
+            "defaultRegen": 1.0,
+            "brakeRegenCoef": 1,
+			"automaticModes":"RPD",
+			"defaultRegenStrength":1
+			"regenActive":true,
+        },
 	},
 
 }

@@ -1,10 +1,13 @@
 {
     "Name":"Super Gnat",
     "Brand":"DH",
+    "Country":"Netherlands",
     "Type":"Aircraft",
+    "Body Style":"Helicopter",
+    "Derby Class":"Helicopter",
 	"Author":"Darren9",
-	"Years":{"min":2017, "max":2018},
-	"default_pc":"Helicopter",
+	"Years":{"min":1960, "max":2025},
+	"default_pc":"HeliTorque",
     "default_color":"Lime Green",
     "colors":{
 		"Black": "0 0 0 0.9"

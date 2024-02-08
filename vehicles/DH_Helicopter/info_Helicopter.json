@@ -1,14 +1,41 @@
 {
-    "Configuration":"Fun",
-    "Transmission":"Belt Drive",
-    "Description":"Quad-blade, high lift, high sensitivity controls, negative blade pitch, engine thermals.",
-    "Drivetrain":"Shaft",
-    "Value":59950,
-    "Performance Class":"Payload 500kg, Speed 130mph",
-	"Torque":165,
-	"TorquePeakRPM":"3600",
-	"Power":150,
-	"PowerPeakRPM":"3900",
-	"Weight":350,
-    "Config Type":"Factory",
+  "0-100 km/h":6.3,
+  "0-100 mph":13.7,
+  "0-200 km/h":27.9,
+  "0-60 mph":5.9,
+  "100-0 km/h":96.5,
+  "100-200 km/h":21.6,
+  "60-0 mph":251.4,
+  "60-100 mph":7.7,
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Braking G":0.407,
+  "Config Type":"Factory",
+  "Configuration":"Fun",
+  "Description":"Quad-blade, high lift, high sensitivity controls, negative blade pitch and engine thermals without torque.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Off-Road Score":101,
+  "Performance Class":"Payload 500kg, Speed 130mph",
+  "Power":140,
+  "PowerPeakRPM":3500,
+  "Propulsion":"ICE",
+  "Top Speed":57.66596126,
+  "Torque":290,
+  "TorquePeakRPM":3150,
+  "Transmission":"Other",
+  "Value":58950,
+  "Weight":360,
+  "Weight/Power":2.571428571
 }

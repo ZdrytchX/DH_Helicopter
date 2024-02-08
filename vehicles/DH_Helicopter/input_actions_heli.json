@@ -16,29 +16,28 @@
 // "isCentered" (defaults to false): whether the axis values will be reported from -1 to +1 (true) or from 0 to +1 (false)
 // "order":      helps set the display order in the Controls menu
 {
-"elevator"           :{"order": 1, "onChange":"input.event('elevator', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Pitch (axis)", "desc": "Control the pitch." },
-"aileron"            :{"order": 2, "onChange":"input.event('aileron', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Roll (axis)", "desc": "Control the roll." },
-"collective"         :{"order": 3, "onChange":"electrics.values.collective = VALUE", "title": "Collective (axis)", "desc": "Control the height.", "isCentered": false },
+"elevator"           :{"order": 1, "onChange":"input.event('elevator', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Pitch (axis)", "desc": "Pitch Control (positive = pitch down)." },
+"aileron"            :{"order": 2, "onChange":"input.event('aileron', VALUE, FILTERTYPE)", "isCentered":true, "title": "Cyclic Roll (axis)", "desc": "Roll Control (positive = roll right)" },
+"collective"         :{"order": 3, "onChange":"electrics.values.collective = VALUE", "title": "Collective (axis)", "desc": "Lift Control.", "isCentered": false },
 
-"collective_increase":{"order": 4, "onChange":"electrics.values.collective_change = VALUE", "title": "Collective Increase", "desc": "" },
-"collective_decrease":{"order": 5, "onChange":"electrics.values.collective_change = -VALUE","title": "Collective Decrease", "desc": "" },
+"collective_increase":{"order": 4, "onChange":"electrics.values.collective_change = VALUE", "title": "Collective Increase", "desc": "Increase Lift" },
+"collective_decrease":{"order": 5, "onChange":"electrics.values.collective_change = -VALUE","title": "Collective Decrease", "desc": "Decrease Lift" },
 
-"rudder"             :{"order": 6, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "isCentered":true, "title": "Rudder (axis)", "desc": "Control the tail rotor." },
+"rudder"             :{"order": 6, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "isCentered":true, "title": "Torque (axis)", "desc": "Torque (tail) Rotor Control" },
 
-"rudder_left"        :{"order": 7, "onChange":"input.event('rudder', -VALUE, FILTERTYPE)", "title": "Rudder Left", "desc": "Yaw left." },
-"rudder_right"       :{"order": 8, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "title": "Rudder Right", "desc": "Yaw right." },
+"rudder_left"        :{"order": 7, "onChange":"input.event('rudder', -VALUE, FILTERTYPE)", "title": "Torque Left", "desc": "Yaw left." },
+"rudder_right"       :{"order": 8, "onChange":"input.event('rudder', VALUE, FILTERTYPE)", "title": "Torque Right", "desc": "Yaw right." },
 
-"trim_up"            :{"order": 9, "onChange":"input.event('trimChange', VALUE, FILTERTYPE)", "title": "Rudder Trim +", "desc": "add trim to tail rotor." },
-"trim_down"          :{"order": 10,"onChange":"input.event('trimChange', -VALUE, FILTERTYPE)", "title": "Rudder Trim -", "desc": "subtract trim from tail rotor." },
+"trim_up"            :{"order": 9, "onChange":"input.event('trimChange', VALUE, FILTERTYPE)", "title": "Torque Trim +", "desc": "Trim to yaw right" },
+"trim_down"          :{"order": 10,"onChange":"input.event('trimChange', -VALUE, FILTERTYPE)", "title": "Torque Trim -", "desc": "Trim to yaw left" },
 
-"throttle_increase"  :{"order": 11,"onChange":"electrics.values.throttle_change = VALUE", "title": "Throttle Increase", "desc": "" },
-"throttle_decrease"  :{"order": 12,"onChange":"electrics.values.throttle_change = -VALUE","title": "Throttle Decrease", "desc": "" },
+"throttle_axis"      :{"order": 11,"onChange":"electrics.values.heli_throttle = VALUE, FILTERTYPE", "isCentered":false, "title": "Throttle (axis)", "desc": "" },
+"throttle_increase"  :{"order": 12,"onChange":"electrics.values.throttle_change = VALUE", "title": "Throttle Increase", "desc": "Increase Throttle" },
+"throttle_decrease"  :{"order": 13,"onChange":"electrics.values.throttle_change = -VALUE","title": "Throttle Decrease", "desc": "Decrease Throttle" },
 
-"release_rope"       :{"order": 13,"onChange":"electrics.values.rope = VALUE", "title": "Release Rope", "desc": "" },
+"release_rope"       :{"order": 14,"onChange":"electrics.values.rope = VALUE", "title": "Release Rope", "desc": "In case the ropes get eaten up by your rotors when you fly too fast /shrug/" },
 
-"toggle_sight"       :{"order": 14, "onUp":"electrics.values.msight = 1-(electrics.values.msight or 0)", "title": "Activate Weapons", "desc": "Toggle the weapon system" },
+"toggle_sight"       :{"order": 15, "onDown":"electrics.values.msight = 1-(electrics.values.msight or 0)", "title": "Activate Weapons", "desc": "Toggle the weapon system" },
 
-"fire"             :{"order": 15, "onChange":"electrics.values.dh_trigger = VALUE", "title": "Trigger", "desc": "" },
-
-
+"fire"               :{"order": 16, "onChange":"electrics.values.dh_trigger = VALUE", "title": "Trigger", "desc": "Unleash Mayhem!" },
 }

@@ -1,0 +1,51 @@
+{
+  "deliveryProviders":[
+    {
+      "id":"hospitalHelipad",
+      "name":"Hospital Helicopter Rooftop",
+      "description":"Receives and sends essential goods for the hospital and surrounding emergency services. You can't get here without an aircraft, at least not the normal way.",
+      "preview":"previews/hospital.jpg",
+      "pickUpSpotNames":["hospital_helipad_walkway"],
+      "dropOffSpotNames":["hospital_helipad"],
+      "sitesFile":"helipad.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel","medicalAid"],
+      "logisticTypesReceived":["parcel","medicalAid","food"],
+      "logisticMaxItems":22,
+      "unlockCondition":{"type":"minItemCount","target":1},
+	  "logisticGenerators":[
+	    {
+          "type":"receiver",
+          "logisticTypes":["medicalAid"],
+          "min":-3,
+          "max":2,
+          "interval":120
+        }, {
+          "type":"receiver",
+          "logisticTypes":["parcel","food"],
+          "min":-5,
+          "max":1,
+          "interval":120
+        }, {
+          "type":"provider",
+          "logisticTypes":["food","medicalAid","parcel"],
+          "min":-3,
+          "max":3,
+          "interval":120
+        }, {
+          "type":"provider",
+          "logisticTypes":["medicalAid"],
+          "min":0,
+          "max":6,
+          "interval":120
+        }, {
+          "type":"provider",
+          "logisticTypes":["medicalAid","parcel"],
+          "min":-3,
+          "max":5,
+          "interval":120
+        }
+	  ]
+    }
+  ]
+}

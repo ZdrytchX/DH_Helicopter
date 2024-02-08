@@ -1,0 +1,19 @@
+{
+    "Configuration":"Pigeon Smasher",
+    "Transmission":"Belt Drive",
+    "Description":"I smash pigeons with a weighted cube. What more could you want?",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+    "Years":{"min":1986, "max":1987},
+    "Value":36950,
+    "Performance Class":"Payload 750kg, Speed 120mph",
+    "Top Speed":53,
+	"Torque":325,
+	"TorquePeakRPM":"3350",
+	"Power":166,
+	"PowerPeakRPM":"4000",
+	"Weight":600,
+    "Config Type":"Special",
+	"Population":2
+}

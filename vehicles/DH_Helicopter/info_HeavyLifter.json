@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      7.04,
+      1.5
+    ]
+  ],
+  "Config Type":"Service",
+  "Configuration":"XL Crate Heavy Lifter",
+  "Description":"Ever wanted a High risk, Fast reward vehicle for career mode? Here you go! DH Super Gnat XL Heavy Lifter is now available for Career mode - Spawns in service vehicle seller shops that sell taxis alike.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Off-Road Score":87,
+  "Performance Class":"Payload 750kg, Speed 160mph",
+  "Years":{"min":1975, "max":2025},
+  "Population":9500,
+  "Power":166,
+  "PowerPeakRPM":3700,
+  "Propulsion":"ICE",
+  "Top Speed":71,
+  "Torque":330,
+  "TorquePeakRPM":3250,
+  "Transmission":"Other",
+  "Value":36950,
+  "Weight":435,
+  "Weight/Power":2.620481928
+}

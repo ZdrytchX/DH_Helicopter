@@ -1,0 +1,20 @@
+{
+    "Configuration":"Scrapyard Bodgejob",
+    "Transmission":"Belt Drive",
+    "Description":"Wait a sec - The airworthiness certificate expired several years ago! And it doesn't even have a radiator! Surely its safe to fly... right?",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+  "Years":{"min":1960, "max":2001},
+    "Value":2950,
+    "Performance Class":"Payload 150kg, Speed 95mph",
+    "Top Speed":42,
+	"Torque":98,
+	"TorquePeakRPM":"3300",
+	"Power":42,
+	"PowerPeakRPM":"3550",
+	"Max RPM":"3600",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":35000
+}

@@ -1,0 +1,20 @@
+{
+    "Configuration":"Trashed Trainer",
+    "Transmission":"Belt Drive",
+    "Description":"Looks like someone found some rusty trash on the side of the road... Maybe it still runs since it has some car batteries in it?",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Battery",
+	"Propulsion":"Electric",
+    "Value":3850,
+	"Years":{"min":1978, "max":2002},
+    "Performance Class":"Payload 200kg, Speed 130mph",
+    "Top Speed":58,
+	"Torque":133,
+	"TorquePeakRPM":"0",
+	"Power":55,
+	"PowerPeakRPM":"3200",
+	"Max RPM":"4000",
+	"Weight":370,
+    "Config Type":"Custom",
+	"Population":25000
+}

@@ -4,7 +4,8 @@ local max = math.max
 
 local function init()
     electrics.values.throttle_change = 0
-	electrics.values.heli_throttle = 0
+	electrics.values.heli_throttle = 0--to display on gui
+	electrics.values.heli_throttleToEngine = 0--actually goes to engine
 	electrics.values.heli_fuelwarn = 0
 	electrics.values.heli_engwarn = 0
 	electrics.values.collective = 0
@@ -139,6 +140,7 @@ local function init()
 		   b.name == "missile12la" then missile12labeam = b.cid elseif
 		   b.name == "missile12lb" then missile12lbbeam = b.cid end
 	end
+
 end	
 
 local function reset()
@@ -161,8 +163,13 @@ local function updateGFX(dt)
 	
 	electrics.values.wheelspeed = electrics.values.airspeed
 	electrics.values.clutch = electrics.values.collective
-	electrics.values.brake = electrics.values.rudder
+	electrics.values.brake = (electrics.values.rudder + 1) / 2 -- fix that annoying negative value error spat out by the pedals GUI
+
 	electrics.values.throttle = electrics.values.heli_throttle
+	electrics.values.regenThrottle = parkingbrake
+	--electrics.values.regenStrength = 1
+	electrics.values.heli_throttleToEngine = electrics.values.throttle
+
 	if dh_fire < 0 then dh_fire = 0 end
 	electrics.values.dh_fire = dh_fire
 	

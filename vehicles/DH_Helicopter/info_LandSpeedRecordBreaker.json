@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Custom",
+  "Configuration":"Air Speed Record Breaker",
+  "Description":"From the Belasco City sponsored team, this GOD-LIKE variant is purpose-built for straight line airspeed record breaking, also intended to be flown upside down differs in that it includes a 6kWh battery, fine tuned (but fragile) rotor configuration that works with the twist-camber-inducing 608.4 RPM net rotor speed, and a feathered tail rotor. Despite the absurdly high rotor speed, top speeds are actually achieved with a reduced rotor speed around 480-530 RPM where the maximum power can be delivered while optimising the twisted blade angle of attack for best lift-drag aerodynamic characteristics. Our Record-breaking pilot has achieved a maximum of 229 mph (368 kph, 198kt) but it is suspected that this model could theoretically achieve up to 232 mph (373 kph, 202kt), perhaps even better if the pilot slimmed down or if we replaced them with a seat-less dummy electric controller.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Battery",
+  "Max RPM":"4040",
+  "Off-Road Score":2,
+  "Years":{"min":2021, "max":2022},
+  "Performance Class":"Payload 650kg, Speed 229mph",
+  "Population":3,
+  "Power":170,
+  "PowerPeakRPM":"3050 - 3550",
+  "Propulsion":"Electric",
+  "Top Speed":102.37,
+  "Torque":400,
+  "TorquePeakRPM":"0 - 3100",
+  "Transmission":"Other",
+  "Value":51950,
+  "Weight":360,
+  "Weight/Power":2.130177515
+}

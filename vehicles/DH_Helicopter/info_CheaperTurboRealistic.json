@@ -1,0 +1,17 @@
+{
+    "Configuration":"Budget Turbo with Tow Cable",
+    "Transmission":"Belt Drive",
+    "Description":"If there's a will, there's a way! - DH Farm Gnat is your average workman's horse of the 20th Century.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+    "Years":{"min":1962, "max":1991},
+    "Value":6900,
+    "Performance Class":"Payload 350kg, Speed 110mph",
+	"Torque":120,
+	"TorquePeakRPM":"3300",
+	"Power":60,
+	"PowerPeakRPM":"3550",
+	"Max RPM":"3600",
+	"Weight":350,
+    "Config Type":"Service",
+}

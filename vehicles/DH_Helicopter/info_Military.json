@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Military",
+  "Configuration":"Military",
+  "Description":"Ever had that annoying brother you just reallly want to shoot at but still remain agile enough to evade whatever he throws at you? Well this surplus, totally-not-decomissioned-weapon-system equipped Super Gnat is for you!",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Years":{"min":1978, "max":2002},
+  "Off-Road Score":28,
+  "Performance Class":"Payload 700kg, Speed 150mph",
+  "Population":600,
+  "Power":255,
+  "PowerPeakRPM":3850,
+  "Propulsion":"ICE",
+  "Top Speed":67,
+  "Torque":470,
+  "TorquePeakRPM":3550,
+  "Transmission":"Other",
+  "Value":69696,
+  "Weight":450,
+  "Weight/Power":1.764705882
+}

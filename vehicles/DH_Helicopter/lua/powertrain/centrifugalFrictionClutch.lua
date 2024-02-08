@@ -21,11 +21,15 @@ local function updateTorque(device, dt)
 
   local avDiff = device.inputAV - device.outputAV1
 
+  if (not device.clutchWelded) then
   -- If the output is slower than the input, engage clutch proportianally to rpm, else disengage amd freewheel
-  if(avDiff > 0) then
-    device.clutchRatio = min(max((device.inputAV-device.engageStartAV)/device.engagementAV, 0),1)
+	  if(avDiff > 0) then
+		device.clutchRatio = min(max((device.inputAV-device.engageStartAV)/device.engagementAV, 0),1)
+	  else
+		device.clutchRatio = 0
+	  end
   else
-    device.clutchRatio = 0
+	device.clutchRatio = device.clutchWelded
   end
 
   device.clutchAngle = min(max(device.clutchAngle + avDiff * dt * device.clutchStiffness, -device.maxClutchAngle), device.maxClutchAngle)
@@ -69,6 +73,24 @@ local function calculateInertia(device)
   device.cumulativeGearRatio = cumulativeGearRatio
   device.maxCumulativeGearRatio = maxCumulativeGearRatio
 end
+--[[
+local function applyRegenThrottle(device)
+	device.positiveThrottle = electrics.values.heli_throttle
+
+	--this stuff is specific for electric motors
+	if device.regenActive then
+		local throttleOffset = device.throttleNeutralPoint
+		-- while this is ripped from the official code, the official code is buggy in that it always multiplies the floored result by 0.25
+		-- ideally it should be based on RPM and not airspeed, need to include "device" table for rotor RPM data
+		--local throttleOffset = throttleOffset  -- * max(1, electrics.values.wheelspeed / device.regenSlowSpeedDropOff)
+		device.positiveThrottle = max(0, (electrics.values.heli_throttle - throttleOffset) / (1 - throttleOffset))
+		device.negativeThrottle = max(0, min(1, (throttleOffset - electrics.values.heli_throttle) / throttleOffset))
+		electrics.values.regenThrottle = device.negativeThrottle
+	end
+	--deliver power to the engine
+	electrics.values.heli_throttleToEngine = device.positiveThrottle
+end
+--]]
 
 local function new(jbeamData)
   local device = {
@@ -93,9 +115,18 @@ local function new(jbeamData)
     clutchAngle = 0,
     clutchRatio = 1,
     torqueDiff = 0,
+	
 
+	clutchWelded = jbeamData.clutchWelded or nil,
+
+	--special case for electric motors
+	regenActive  = jbeamData.regenActive or nil,
     engageStartAV = jbeamData.engageStartRPM or 1000,
     engagementAV  = jbeamData.engagementRPM or 1000,
+	throttleNeutralPoint = jbeamData.regenThrottleNeutralPoint or 0.25,--default 0.15
+	regenSlowSpeedDropOff = jbeamData.regenSlowSpeedDropOff or 2.5,--default 2.5
+	positiveThrottle = jbeamData.regenThrottle or 0.5,--nil
+	negativeThrottle = 1,--test
 
     validate = validate,
     calculateInertia = calculateInertia,

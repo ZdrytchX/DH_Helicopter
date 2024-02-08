@@ -1,0 +1,264 @@
+{
+  "deliveryProviders":[
+    {
+      "id":"industrialWarehouse",
+      "name":"Spearleaf Industrial Warehouse",
+      "description":"Ships and receives a wide variety of cargo types.",
+      "preview":"previews/industrialWarehouse.jpg",
+      "pickUpSpotNames":["industrialWarehouse_parkingB"],
+      "dropOffSpotNames":["industrialWarehouse_parkingB"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticMaxItems":12,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+	{
+      "id":"industrialWarehouseContainers34",
+      "name":"Spearleaf Container Hold",
+      "description":"Ships and receives parcels",
+      "preview":"previews/industrialWarehouse.jpg",
+      "pickUpSpotNames":["spearleafLogistics_container34"],
+      "dropOffSpotNames":["spearleafLogistics_container34"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel"],
+      "logisticTypesReceived":["parcel"],
+      "logisticMaxItems":22,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+	{
+      "id":"industrialWarehouseContainers14",
+      "name":"Spearleaf Container Hold",
+      "description":"Ships and receives shop and office supplies",
+      "preview":"previews/industrialWarehouse.jpg",
+      "pickUpSpotNames":["spearleafLogistics_container14"],
+      "dropOffSpotNames":["spearleafLogistics_container14"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["shopSupplies","officeSupplies"],
+      "logisticTypesReceived":["shopSupplies","officeSupplies"],
+      "logisticMaxItems":12,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+	{
+      "id":"industrialWarehouseContainers22",
+      "name":"Spearleaf Container Hold",
+      "description":"Ships and receives mechanical and industrial supplies",
+      "preview":"previews/industrialWarehouse.jpg",
+      "pickUpSpotNames":["spearleafLogistics_container22"],
+      "dropOffSpotNames":["spearleafLogistics_container22"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["mechanicalParts", "industrial"],
+      "logisticTypesReceived":["mechanicalParts", "industrial"],
+      "logisticMaxItems":12,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+	{
+      "id":"industrialWarehouseContainers03",
+      "name":"Spearleaf Container Hold",
+      "description":"Ships and receives food stock",
+      "preview":"previews/industrialWarehouse.jpg",
+      "pickUpSpotNames":["spearleafLogistics_container03"],
+      "dropOffSpotNames":["spearleafLogistics_container03"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["foodSupplies"],
+      "logisticTypesReceived":["foodSupplies"],
+      "logisticMaxItems":32,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+    {
+      "id":"rentabox",
+      "name":"Rent-A-Box",
+      "description":"Ships and receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "pickUpSpotNames":["rentabox_parking"],
+      "dropOffSpotNames":["rentabox_parking"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies"],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticMaxItems":38,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+    {
+      "id":"rentaboxA",
+      "name":"Rent-A-Box A",
+      "description":"Receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "dropOffSpotNames":["rentabox_A"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["shopSupplies","officeSupplies"],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticMaxItems":38,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    },
+    {
+      "id":"rentaboxB",
+      "name":"Rent-A-Box B",
+      "description":"Receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "dropOffSpotNames":["rentabox_B"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":[],
+      "logisticTypesReceived":["shopSupplies","officeSupplies","mechanicalParts"],
+      "logisticGenerators":[
+        {
+          "type":"receiver",
+          "logisticTypes":["shopSupplies"],
+          "min":13,
+          "max":3,
+          "interval":120
+        }, {
+          "type":"receiver",
+          "logisticTypes":["officeSupplies"],
+          "min":-0.5,
+          "max":5,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["mechanicalParts"],
+          "min":-0.5,
+          "max":5,
+          "interval":90
+        }
+      ],
+    },
+    {
+      "id":"rentabox",
+      "name":"Rent-A-Box C",
+      "description":"Receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "dropOffSpotNames":["rentabox_C"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":[],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","industrial"],
+      "logisticGenerators":[
+        {
+          "type":"receiver",
+          "logisticTypes":["parcel"],
+          "min":-3,
+          "max":1,
+          "interval":120
+        }, {
+          "type":"receiver",
+          "logisticTypes":["shopSupplies"],
+          "min":-0.5,
+          "max":2,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["officeSupplies"],
+          "min":-0.5,
+          "max":3,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["mechanicalParts"],
+          "min":-0.5,
+          "max":2,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["industrial"],
+          "min":-0.5,
+          "max":5,
+          "interval":90
+        }
+      ],
+    },
+    {
+      "id":"rentabox",
+      "name":"Rent-A-Box D",
+      "description":"Receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "dropOffSpotNames":["rentabox_D"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":[],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","industrial"],
+      "logisticGenerators":[
+        {
+          "type":"receiver",
+          "logisticTypes":["parcel"],
+          "min":-3,
+          "max":1,
+          "interval":120
+        }, {
+          "type":"receiver",
+          "logisticTypes":["shopSupplies"],
+          "min":-0.5,
+          "max":2,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["officeSupplies"],
+          "min":-0.5,
+          "max":3,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["mechanicalParts"],
+          "min":-0.5,
+          "max":2,
+          "interval":90
+        }, {
+          "type":"receiver",
+          "logisticTypes":["industrial"],
+          "min":-0.5,
+          "max":5,
+          "interval":90
+        }
+      ],
+    },
+    {
+      "id":"rentabox",
+      "name":"Rent-A-Box E",
+      "description":"Receives a wide variety of cargo types.",
+      "preview":"previews/rentabox.jpg",
+      "dropOffSpotNames":["rentabox_E"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel","industrial"],
+      "logisticTypesReceived":["parcel","industrial"],
+      "logisticMaxItems":5,
+      "unlockCondition":{"type":"minItemCount","target":1},
+      "logisticGenerators":[
+        {
+          "type":"receiver",
+          "logisticTypes":["parcel"],
+          "min":-3,
+          "max":1,
+          "interval":120
+        }, {
+          "type":"receiver",
+          "logisticTypes":["industrial"],
+          "min":-0.5,
+          "max":5,
+          "interval":90
+        }
+      ],
+    },
+    {
+      "id":"spearleafLogistics",
+      "name":"Spearleaf Logistics",
+      "description":"Ships and receives a wide variety of cargo types.",
+      "preview":"previews/spearleafLogistics.jpg",
+
+      "pickUpSpotNames":["spearleafLogistics_parkingB", "spearleafLogistics_parkingA"],
+      "dropOffSpotNames":["spearleafLogistics_parkingB", "spearleafLogistics_parkingA"],
+      "sitesFile":"warehouses.sites.json",
+      "showIncomingCargo":true,
+      "logisticTypesProvided":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticTypesReceived":["parcel","shopSupplies","officeSupplies","mechanicalParts","foodSupplies", "industrial"],
+      "logisticMaxItems":32,
+      "unlockCondition":{"type":"minItemCount","target":1}
+    }
+  ]
+}

@@ -1,14 +1,33 @@
 {
-    "Configuration":"With lifting rope",
-    "Transmission":"Belt Drive",
-    "Description":"Quad-blade, very high lift, high sensitivity controls, negative blade pitch, engine thermals, lifting rope.",
-    "Drivetrain":"Shaft",
-    "Value":59950,
-    "Performance Class":"Payload 600kg, Speed 130mph",
-	"Torque":165,
-	"TorquePeakRPM":"3600",
-	"Power":150,
-	"PowerPeakRPM":"3900",
-	"Weight":350,
-    "Config Type":"Factory",
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      6,
+      1.5
+    ]
+  ],
+  "Config Type":"Service",
+  "Configuration":"With lifting rope",
+  "Description":"Quad-blade, very high lift, high sensitivity controls, negative blade pitch, engine thermals, lifting rope. Has no torque.",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Years":{"min":1985, "max":2008},
+  "Induction Type":"NA",
+  "Off-Road Score":73,
+  "Performance Class":"Payload 600kg, Speed 130mph",
+  "Power":66,
+  "PowerPeakRPM":3750,
+  "Propulsion":"ICE",
+  "Top Speed":58,
+  "Torque":130,
+  "TorquePeakRPM":"2800 - 3650",
+  "Transmission":"Other",
+  "Value":59950,
+  "Weight":360,
+  "Weight/Power":5.454545455
 }

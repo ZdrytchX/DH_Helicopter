@@ -1037,7 +1037,8 @@
 		"props": [
 			["func"      , "mesh"   ,         "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
 			["rpm", "heli_missile_sight_g", "msight4","msight1","msight0", {"x":0,"y":-90, "z":0  },{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_gauges_screen",   "msight4","msight1","msight0", {"x":0,"y":-90, "z":0  },{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			/*
+			["rpm", "heli_gauges_screen",   "msight4","msight1","msight0", {"x":0,"y":-90, "z":0  },{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],*/
 			["rpm", "heli_missile_sight_h", "msight1","msight4","msight0", {"x":0,"y": 90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
 		],
 		

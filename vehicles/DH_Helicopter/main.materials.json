@@ -1,0 +1,72 @@
+{
+  "heli_cabin": {
+    "name": "heli_cabin",
+    "mapTo": "heli_cabin",
+    "class": "Material",
+    "persistentId": "878a8a43-8095-4836-a012-f41198bed4d1",
+    "Stages": [
+      {
+        "diffuseColor": [
+          0.639999986,
+          0.639999986,
+          0.639999986,
+          1
+        ],
+        "specular": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ]
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      }
+    ],
+    "translucentBlendOp": "None"
+  },
+  "heli_cabin_glass": {
+    "name": "heli_cabin_glass",
+    "mapTo": "heli_cabin_glass",
+    "class": "Material",
+    "persistentId": "b7a9a48c-70c7-4abc-b489-10c4678eeff3",
+    "Stages": [
+      {
+        "diffuseColor": [
+          0.639999986,
+          0.639999986,
+          0.639999986,
+          1
+        ],
+        "specular": [
+          0.5,
+          0.5,
+          0.5,
+          1
+        ]
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      },
+      {
+        "diffuseColor": null,
+        "specular": null
+      }
+    ],
+    "translucentBlendOp": "None"
+  }
+}

@@ -1,14 +1,34 @@
 {
-    "Configuration":"Realistic",
-    "Transmission":"Belt Drive",
-    "Description":"Quad-blade, high lift, high sensitivity controls, negative blade pitch, torque reaction, blade stall, over rpm, oil starvation and engine thermal damage. (you may need to trim the tail rotor)",
-    "Drivetrain":"Shaft",
-    "Value":59950,
-    "Performance Class":"Payload 500kg, Speed 130mph",
-	"Torque":110,
-	"TorquePeakRPM":"3600",
-	"Power":70,
-	"PowerPeakRPM":"3900",
-	"Weight":350,
-    "Config Type":"Factory",
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Factory",
+  "Configuration":"Realistic",
+  "Description":"Darren9's Legendary Original Factory Design with Realistic Configuration: Quad-blade, high lift, high sensitivity controls, negative blade pitch, torque reaction, blade stall, over rpm, oil starvation and engine thermal damage. (you may need to trim the tail rotor)",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"NA",
+  "Years":{"min":1960, "max":2022},
+  "Off-Road Score":1,
+  "Performance Class":"Payload 200kg, Speed 130mph",
+  "Population":50000,
+  "Power":66,
+  "PowerPeakRPM":3750,
+  "Propulsion":"ICE",
+  "Top Speed":58,
+  "Torque":130,
+  "TorquePeakRPM":"2800 - 3650",
+  "Transmission":"Other",
+  "Value":19950,
+  "Weight":380,
+  "Weight/Power":5.757575758
 }

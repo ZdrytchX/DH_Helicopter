@@ -1,0 +1,34 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+  "Config Type":"Custom",
+  "Configuration":"Man-Over",
+  "Description":"Using the best customisable parts, this pre-configured custom beige build comes has double the nimbleness! Don't overdo it though because this boy's an expensive investment. You're also free to tune it however you like, just don't go Man-Over into a board like this dummy did!",
+  "Drivetrain":"2x2",
+  "Fuel Type":"Gasoline",
+  "Induction Type":"Turbo",
+  "Years":{"min":1992, "max":2008},
+  "Off-Road Score":99,
+  "Performance Class":"Payload 700kg, Speed 150mph",
+  "Population":500,
+  "Power":255,
+  "PowerPeakRPM":3850,
+  "Propulsion":"ICE",
+  "Top Speed":67,
+  "Torque":470,
+  "TorquePeakRPM":3550,
+  "Transmission":"Other",
+  "Value":62950,
+  "Weight":380,
+  "Weight/Power":1.490196078
+}

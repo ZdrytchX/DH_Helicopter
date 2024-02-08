@@ -2,8 +2,8 @@
 	"heli_frame_low": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Lower Box Frame",
-			"value":1600,
+			"name":"Lower Box Frame (Rigid)",
+			"value":2550,
 		},
 		
 		"slotType" : "heli_frame_low",
@@ -11,7 +11,7 @@
 		"slots": [
 			["type", "default", "description"]
 			["heli_frame_mid","heli_frame_mid", "Upper Tube Frame"],
-			["heli_fueltank","heli_fueltank", "Fuel Tank"],
+			["heli_fueltank","heli_fueltank", "Lower Storage"],
 			["heli_seat","heli_seat", "Seat"],
 			["heli_console","heli_console", "Console"],
 			["heli_towhtich","heli_towhtich", "Lifting Rope"],
@@ -52,7 +52,7 @@
 			["flowr7",-0.232,-0.193,1.081{"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
 			["flowc",0.0,-0.18,0.32      {"group":["heli_frame_low","heli_rope_attach"]}],
 			
-			{"frictionCoef":1.0},
+			{"frictionCoef":1.0},//skid friction
 			["flowl8",0.684,0.566,0.188],
 			["flowr9",-0.684,0.566,0.188],
 			["flowl0",0.232,-1.262,0.188],
@@ -97,8 +97,8 @@
 			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
 			
 			//low frame
-			{"beamSpring":800000,"beamDamp":100},
-			{"beamDeform":4000,"beamStrength":"FLT_MAX"},
+			{"beamSpring":800000,"beamDamp":100},//800000
+			{"beamDeform":4000,"beamStrength":"FLT_MAX"},//4000,FLT_MAX
 			
 			["flowr9","flowl8"],
 			["flowr1","flowl0"],
@@ -213,13 +213,13 @@
 			//cyclic stick
 			{"beamSpring":1100000,"beamDamp":100},
 			{"beamDeform":40000,"beamStrength":"FLT_MAX"},
-			
+			{"breakGroup":"stickGroup"},
 			["stickl","sticku"],
 			["stickl","flowr3"],
 			["stickl","flowl2"],
 			
 			//collective lever
-			
+			{"breakGroup":"collectiveGroup"},
 			["lever0","lever2"],
 			["lever1","lever2"],
 			["lever0","lever1"],
@@ -233,7 +233,7 @@
 			["lever2","flowl6"],
 			["lever1","flowr7"],
 			["lever2","flowr7"],
-			
+			{"breakGroup":""},
 		],	
 		
 		"rails": {
@@ -285,12 +285,603 @@
 		],	
 		
 	},	
+
+	"heli_frame_low_modified": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Lower Box Frame (Adjustable)",
+			"value":2250,
+		},
+		
+		"slotType" : "heli_frame_low",
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$SkidFriction", "range", "x", "Controls", 0.7, 0.3, 2.0, "Skid Friction", "Adjust how much your tripod skids wants to eat dirt.", 0.1, "Skids"]
+			["$SkidTread", "range", "x", "Controls", 1.3, 0, 2.0, "Skid Traction", "Adjust how much your tripod skids prefers to eat dirt over tarmac: slick tyres being 0 and offroad tyres being 0.9", 0.1, "Skids"]
+			["$SkidSlide", "range", "x", "Controls", 0.6, 0.3, 2.0, "Skid Sliding Friction", "Adjust how much your tripod slides once already sliding. Default should be the same as skid friction", 0.1, "Skids"]
+			["$SkidSpring", "range", "N", "Controls", 20000, 1000, 30000, "Skid Stiffness", "Adjust how stiff your skid legs are", 1000, "Skids"]
+		],
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_frame_mid","heli_frame_mid", "Upper Tube Frame"],
+			["heli_fueltank","heli_fueltank", "Lower Storage"],
+			["heli_seat","heli_seat", "Seat"],
+			["heli_console","heli_console", "Console"],
+			["heli_towhtich","heli_towhtich", "Lifting Rope"],
+			
+		],
+		
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//pilot controls
+			["rpm", "heli_cyclic_stick",    "sticku","stickl","helimid4",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_collective_stick","lever0","lever1","lever2",  {"x":90,"y":0, "z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_foot_rudder_l",   "foot3","foot2","foot1",     {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_foot_rudder_r",   "foot2","foot3","foot0",     {"x":0,"y":0, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_framelow_4", ["heli_frame_low"]],
+			["heli_plate_low", ["heli_frame_low"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.0},
+			
+			//low frame
+			{"group":"heli_frame_low"},
+			
+			["flowl2",0.232,-0.774,0.539 {"group":["heli_frame_low","heli_seat"]}],
+			["flowr3",-0.232,-0.774,0.539{"group":["heli_frame_low","heli_seat"]}],
+			["flowl4",0.232,-0.302,0.45  {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowr5",-0.232,-0.302,0.45 {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowl6",0.232,-0.193,1.081 {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowr7",-0.232,-0.193,1.081{"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowc",0.0,-0.18,0.32      {"group":["heli_frame_low","heli_rope_attach"]}],
+			
+			{"frictionCoef":"$SkidFriction","treadCoef":"$SkidTread","slidingFrictionCoef":"$SkidSlide"},//1.0 skid friction
+			["flowl8",0.684,0.566,0.188],
+			["flowr9",-0.684,0.566,0.188],
+			["flowl0",0.232,-1.262,0.188],
+			["flowr1",-0.232,-1.262,0.188],
+			{"frictionCoef":0.7},
+			
+			{"group":""},
+			
+			// foot controls
+			["foot0",0.183,-1.322,0.544],
+			["foot1",-0.183,-1.322,0.544],
+			{"group":"heli_frame_low"},
+			["foot2",0.232,-1.142,0.274],
+			["foot3",-0.232,-1.142,0.274],
+			{"group":""},
+			
+			//ref nodes
+			{"collision":false}
+			{"nodeWeight":0.5},
+			["back",0.0,0.138,1.0],
+			["ref",0.0,0.0,1.0],
+			["up",0.0,0.0,1.138],
+			["left",0.138,0.0,1.0],
+			["right",-0.138,0.0,1.0],
+			
+			//cyclic stick
+			{"nodeWeight":1.5},
+			{"selfCollision":false}
+			["stickl",0.0,-0.774,0.539],
+			["sticku",0.0,-0.734,0.832],
+			
+			//collective lever
+			["lever0",0.288,-0.501,0.478],
+			["lever1",0.171,-0.16,0.561],
+			["lever2",-0.171,-0.16,0.561],
+			
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			
+			//front feet to rear legs
+			{"BeamSpring":50000,"beamDamp":100,"beamDeform":30000,"beamStrength":38000},
+			["flowr1","flowr9"],
+			["flowl0","flowl8"],
+			//low frame
+			{"beamSpring":"$SkidSpring","beamDamp":100},//800000
+			{"beamDeform":25000,"beamStrength":30000},//4000,FLT_MAX
+			
+			["flowr9","flowl8"],
+			["flowr1","flowl0"],
+			["flowr3","flowl2"],
+			["flowl6","flowr9"],
+			["flowr7","flowr3"],
+			["flowr5","flowl4"],
+			["flowr5","flowl2"],
+			["flowl0","flowr9"],
+			["flowl4","flowl8"],
+			["flowr5","flowr3"],
+			["flowr3","flowr1",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.3,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.8,"maxStress":4000}],
+			["flowl0","flowl2",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.4,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.0,"maxStress":6000}],
+			["flowr7","flowr9",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.4,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.6,"maxStress":3500}],
+			["flowl6","flowl8",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.3,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.1,"maxStress":5500}],
+			["flowr1","flowr9"],
+			["flowl4","flowl2"],
+			["flowl0","flowr3"],
+			["flowl2","flowl8"],
+			["flowr7","flowr5"],
+			["flowl4","flowr3"],
+			["flowr5","flowl8"],
+			["flowr5","flowr1"],
+			["flowr5","flowr9"],
+			["flowr7","flowl8"],
+			["flowl6","flowl0"],
+			["flowr7","flowl4"],
+			["flowl6","flowl2"],
+			["flowr1","flowl8"],
+			["flowr7","flowr1"],
+			["flowr3","flowr9"],
+			["flowl6","flowr3"],
+			["flowl4","flowr9"],
+			["flowr7","flowl2"],
+			["flowl4","flowl0"],
+			["flowl6","flowr7"],
+			["flowl4","flowl6"],
+			["flowl6","flowr5"],
+			["flowr1","flowl2"],
+			{"beamSpring":800000},
+			["flowl0","flowc"],
+			["flowr1","flowc"],
+			["flowl2","flowc"],
+			["flowr3","flowc"],
+			["flowl4","flowc"],
+			["flowr5","flowc"],
+			["flowl6","flowc"],
+			["flowr7","flowc"],
+			
+			{"beamDeform":150000,"beamStrength":"FLT_MAX"},
+			
+			["flowr9","flowc"],
+			["flowl8","flowc"],
+			
+			// foot controls
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["foot2","foot1"],
+			["foot3","foot1"],
+			["foot3","foot0"],
+			["foot2","foot3"],
+			["foot2","foot0"],
+			
+			["foot3","flowl0"],
+			["foot3","flowr1"],
+			["foot2","flowr1"],
+			["foot2","flowl0"],
+			
+			//ref nodes
+			{"beamSpring":200000,"beamDamp":60},
+			{"beamDeform":100000,"beamStrength":"FLT_MAX"},
+			
+			["ref","back"],
+			["ref","left"],
+			["ref","up"],
+			["back","left"],
+			["back","up"],
+			["up","left"],
+			["right","ref"],
+			["right","back"],
+			["right","up"],
+			["right","left"],
+			
+			{"beamDeform":7000,"beamStrength":"FLT_MAX"},
+			
+			["flowr7","back"],
+			["flowl6","back"],
+			["flowr5","back"],
+			["flowl4","back"],
+			["flowc","back"],
+			["flowr7","ref"],
+			["flowl6","ref"],
+			["flowr5","ref"],
+			["flowl4","ref"],
+			["flowc","ref"],
+			["flowr7","up"],
+			["flowl6","up"],
+			["flowr5","up"],
+			["flowl4","up"],
+			["flowc","up"],
+			["flowr7","left"],
+			["flowl6","left"],
+			["flowr5","left"],
+			["flowl4","left"],
+			["flowc","left"],
+			["flowr7","right"],
+			["flowl6","right"],
+			["flowr5","right"],
+			["flowl4","right"],
+			["flowc","right"],
+			
+			//cyclic stick
+			{"beamSpring":1100000,"beamDamp":100},
+			{"beamDeform":40000,"beamStrength":50000},
+			{"breakGroup":"stickGroup"},
+			["stickl","sticku"],
+			["stickl","flowr3"],
+			["stickl","flowl2"],
+			
+			//collective lever
+			{"breakGroup":"collectiveGroup"},
+			["lever0","lever2"],
+			["lever1","lever2"],
+			["lever0","lever1"],
+			["lever1","flowc"],
+			["lever2","flowc"],
+			["lever1","flowl4"],
+			["lever2","flowl4"],
+			["lever1","flowr5"],
+			["lever2","flowr5"],
+			["lever1","flowl6"],
+			["lever2","flowl6"],
+			["lever1","flowr7"],
+			["lever2","flowr7"],
+			{"breakGroup":""},
+		],	
+		
+		"rails": {
+			"footl":{"links:":["flowl0", "flowl2"],  "looped":false, "capped":true}
+			"footr":{"links:":["flowr1", "flowr3"],  "looped":false, "capped":true}
+			"cyclic":{"links:":["flowr3", "flowl2"],  "looped":false, "capped":true}
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			["foot2", "footl",true, true, 0, 5000000, 5000000, 345435],
+			["foot3", "footr",true, true, 0, 5000000, 5000000, 345435],
+			["stickl", "cyclic",true, true, 0, 1000000, 1000000, 345435],
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":70000,"beamDamp":100},
+			{"beamDeform":10000,"beamStrength":20000},
+			//animate controls
+			["flowr3","sticku",{"inputSource":"aileron",   "inputFactor":-1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.89,"outLimit":1.11}],
+			["flowc","sticku", {"inputSource":"elevator",  "inputFactor": 1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.89,"outLimit":1.11}],
+			["flowl6","lever0",{"inputSource":"collective","inputFactor":-1.0,"inRate":1,"outRate":1,"inLimit":0.76,"outLimit":1.0}],
+			["flowr3","foot1", {"inputSource":"rudder",    "inputFactor": 1.0,"inRate":1,"outRate":1,"inLimit":0.93,"outLimit":1.15}],
+			["flowl2","foot0", {"inputSource":"rudder",    "inputFactor":-1.0,"inRate":1,"outRate":1,"inLimit":0.93,"outLimit":1.15}],
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+			// seat
+			["flowr5","flowl6","flowr7"],
+			["flowl4","flowl6","flowr5"],
+			["flowl2","flowl4","flowr5"],
+			["flowr3","flowl2","flowr5"],
+			["flowr1","flowl2","flowr3"],
+			["flowl0","flowl2","flowr1"],
+			//frame
+			["flowr3","flowr5","flowr1"],
+			["flowr1","flowr5","flowc"],
+			["flowl4","flowl2","flowl0"],
+			["flowl4","flowl0","flowc"],
+			["flowr7","flowc","flowr5"],
+			["flowr7","flowl6","flowc"],
+			["flowl6","flowl4","flowc"],
+			["flowr5","flowc","flowr9"],
+			["flowc","flowl4","flowl8"],
+			["flowr1","flowc","flowl0"],
+		],	
+		
+	},	
+
+	"heli_frame_low_trashed": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Rusted Lower Frame",
+			"value":1250,
+		},
+		
+		"slotType" : "heli_frame_low",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_frame_mid","heli_frame_mid", "Upper Tube Frame"],
+			["heli_fueltank","heli_fueltank", "Lower Storage"],
+			["heli_seat","heli_seat", "Seat"],
+			["heli_console","heli_console", "Console"],
+			["heli_towhtich","heli_towhtich", "Lifting Rope"],
+			
+		],
+		
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//pilot controls
+			["rpm", "heli_cyclic_stick",    "sticku","stickl","helimid4",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_collective_stick","lever0","lever1","lever2",  {"x":90,"y":0, "z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_foot_rudder_l",   "foot3","foot2","foot1",     {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_foot_rudder_r",   "foot2","foot3","foot0",     {"x":0,"y":0, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_framelow_4", ["heli_frame_low"]],
+			["heli_plate_low", ["heli_frame_low"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.1},
+			
+			//low frame
+			{"group":"heli_frame_low"},
+			
+			["flowl2",0.232,-0.774,0.539 {"group":["heli_frame_low","heli_seat"]}],
+			["flowr3",-0.232,-0.774,0.539{"group":["heli_frame_low","heli_seat"]}],
+			["flowl4",0.232,-0.302,0.45  {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowr5",-0.232,-0.302,0.45 {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowl6",0.232,-0.193,1.081 {"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowr7",-0.232,-0.193,1.081{"group":["heli_frame_low","heli_seat","heli_rope_attach"]}],
+			["flowc",0.0,-0.18,0.32      {"group":["heli_frame_low","heli_rope_attach"]}],
+			
+			{"frictionCoef":0.6,"treadCoef":1.3,"slidingFrictionCoef":0.4},
+			["flowl8",0.684,0.566,0.188],
+			["flowr9",-0.684,0.566,0.188],
+			["flowl0",0.232,-1.262,0.188],
+			["flowr1",-0.232,-1.262,0.188],
+			{"frictionCoef":0.7},
+			
+			{"group":""},
+			
+			// foot controls
+			["foot0",0.183,-1.322,0.544],
+			["foot1",-0.183,-1.322,0.544],
+			{"group":"heli_frame_low"},
+			["foot2",0.232,-1.142,0.274],
+			["foot3",-0.232,-1.142,0.274],
+			{"group":""},
+			
+			//ref nodes
+			{"collision":false}
+			{"nodeWeight":0.5},
+			["back",0.0,0.138,1.0],
+			["ref",0.0,0.0,1.0],
+			["up",0.0,0.0,1.138],
+			["left",0.138,0.0,1.0],
+			["right",-0.138,0.0,1.0],
+			
+			//cyclic stick
+			{"nodeWeight":1.5},
+			{"selfCollision":false}
+			["stickl",0.0,-0.774,0.539],
+			["sticku",0.0,-0.734,0.832],
+			
+			//collective lever
+			["lever0",0.288,-0.501,0.478],
+			["lever1",0.171,-0.16,0.561],
+			["lever2",-0.171,-0.16,0.561],
+			
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+
+			//front feet to rear legs
+			{"BeamSpring":6000,"beamDamp":100,"beamDeform":5000,"beamStrength":10000},
+			["flowr1","flowr9"],
+			["flowl0","flowl8"],
+			//low frame
+			{"beamSpring":5000,"beamDamp":100},//800000
+			{"beamDeform":5000,"beamStrength":10000},//4000,FLT_MAX
+			
+			["flowr9","flowl8"],
+			["flowr1","flowl0"],
+			["flowr3","flowl2"],
+			["flowl6","flowr9"],
+			["flowr7","flowr3"],
+			["flowr5","flowl4"],
+			["flowr5","flowl2"],
+			["flowl0","flowr9"],
+			["flowl4","flowl8"],
+			["flowr5","flowr3"],
+			["flowr3","flowr1",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.3,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.8,"maxStress":4000}],
+			["flowl0","flowl2",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.4,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.0,"maxStress":6000}],
+			["flowr7","flowr9",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.4,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.6,"maxStress":3500}],
+			["flowl6","flowl8",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.3,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.1,"maxStress":5500}],
+			["flowl4","flowl2"],
+			["flowl0","flowr3"],
+			["flowl2","flowl8"],
+			["flowr7","flowr5"],
+			["flowl4","flowr3"],
+			["flowr5","flowl8"],
+			["flowr5","flowr1"],
+			["flowr5","flowr9"],
+			["flowr7","flowl8"],
+			["flowl6","flowl0"],
+			["flowr7","flowl4"],
+			["flowl6","flowl2"],
+			["flowr1","flowl8"],
+			["flowr7","flowr1"],
+			["flowr3","flowr9"],
+			["flowl6","flowr3"],
+			["flowl4","flowr9"],
+			["flowr7","flowl2"],
+			["flowl4","flowl0"],
+			["flowl6","flowr7"],
+			["flowl4","flowl6"],
+			["flowl6","flowr5"],
+			["flowr1","flowl2"],
+			{"beamSpring":3000,"beamDeform":7000},
+			["flowl0","flowc"],
+			["flowr1","flowc"],
+			["flowl2","flowc"],
+			["flowr3","flowc"],
+			["flowl4","flowc"],
+			["flowr5","flowc"],
+			["flowl6","flowc"],
+			["flowr7","flowc"],
+			
+			{"beamDeform":50000,"beamStrength":10000},
+			
+			["flowr9","flowc"],
+			["flowl8","flowc"],
+			
+			// foot controls
+			{"beamDeform":50000,"beamStrength":10000},
+			
+			["foot2","foot1"],
+			["foot3","foot1"],
+			["foot3","foot0"],
+			["foot2","foot3"],
+			["foot2","foot0"],
+			
+			["foot3","flowl0"],
+			["foot3","flowr1"],
+			["foot2","flowr1"],
+			["foot2","flowl0"],
+			
+			//ref nodes
+			{"beamSpring":50000,"beamDamp":60},
+			{"beamDeform":10000,"beamStrength":10000},
+			
+			["ref","back"],
+			["ref","left"],
+			["ref","up"],
+			["back","left"],
+			["back","up"],
+			["up","left"],
+			["right","ref"],
+			["right","back"],
+			["right","up"],
+			["right","left"],
+			
+			{"beamDeform":5000,"beamStrength":10000},
+			
+			["flowr7","back"],
+			["flowl6","back"],
+			["flowr5","back"],
+			["flowl4","back"],
+			["flowc","back"],
+			["flowr7","ref"],
+			["flowl6","ref"],
+			["flowr5","ref"],
+			["flowl4","ref"],
+			["flowc","ref"],
+			["flowr7","up"],
+			["flowl6","up"],
+			["flowr5","up"],
+			["flowl4","up"],
+			["flowc","up"],
+			["flowr7","left"],
+			["flowl6","left"],
+			["flowr5","left"],
+			["flowl4","left"],
+			["flowc","left"],
+			["flowr7","right"],
+			["flowl6","right"],
+			["flowr5","right"],
+			["flowl4","right"],
+			["flowc","right"],
+			
+			//cyclic stick
+			{"beamSpring":800000,"beamDamp":100},
+			{"beamDeform":40000,"beamStrength":50000},
+			{"breakGroup":"stickGroup"},
+			["stickl","sticku"],
+			["stickl","flowr3"],
+			["stickl","flowl2"],
+			
+			//collective lever
+			{"breakGroup":"collectiveGroup"},
+			["lever0","lever2"],
+			["lever1","lever2"],
+			["lever0","lever1"],
+			["lever1","flowc"],
+			["lever2","flowc"],
+			["lever1","flowl4"],
+			["lever2","flowl4"],
+			["lever1","flowr5"],
+			["lever2","flowr5"],
+			["lever1","flowl6"],
+			["lever2","flowl6"],
+			["lever1","flowr7"],
+			["lever2","flowr7"],
+			
+			{"breakGroup":""},
+		],	
+		
+		"rails": {
+			"footl":{"links:":["flowl0", "flowl2"],  "looped":false, "capped":true}
+			"footr":{"links:":["flowr1", "flowr3"],  "looped":false, "capped":true}
+			"cyclic":{"links:":["flowr3", "flowl2"],  "looped":false, "capped":true}
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			["foot2", "footl",true, true, 0, 5000000, 5000000, 345435],
+			["foot3", "footr",true, true, 0, 5000000, 5000000, 345435],
+			["stickl", "cyclic",true, true, 0, 1000000, 1000000, 345435],
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":60000,"beamDamp":100},
+			{"beamDeform":10000,"beamStrength":20000},
+			//animate controls
+			["flowr3","sticku",{"inputSource":"aileron",   "inputFactor":-1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.89,"outLimit":1.11}],
+			["flowc","sticku", {"inputSource":"elevator",  "inputFactor": 1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.89,"outLimit":1.11}],
+			["flowl6","lever0",{"inputSource":"collective","inputFactor":-1.0,"inRate":0.5,"outRate":0.5,"inLimit":0.76,"outLimit":1}],
+			["flowr3","foot1", {"inputSource":"rudder",    "inputFactor": 1.0,"inRate":0.5,"outRate":0.5,"inLimit":0.93,"outLimit":1.15}],//0.95 to 1.05
+			["flowl2","foot0", {"inputSource":"rudder",    "inputFactor":-1.0,"inRate":0.5,"outRate":0.5,"inLimit":0.93,"outLimit":1.15}],
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":9.5},
+			// seat
+			["flowr5","flowl6","flowr7"],
+			["flowl4","flowl6","flowr5"],
+			["flowl2","flowl4","flowr5"],
+			["flowr3","flowl2","flowr5"],
+			["flowr1","flowl2","flowr3"],
+			["flowl0","flowl2","flowr1"],
+			//frame
+			["flowr3","flowr5","flowr1"],
+			["flowr1","flowr5","flowc"],
+			["flowl4","flowl2","flowl0"],
+			["flowl4","flowl0","flowc"],
+			["flowr7","flowc","flowr5"],
+			["flowr7","flowl6","flowc"],
+			["flowl6","flowl4","flowc"],
+			["flowr5","flowc","flowr9"],
+			["flowc","flowl4","flowl8"],
+			["flowr1","flowc","flowl0"],
+		],	
+		
+	},	
+
 	
 	"heli_frame_mid": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Upper Tube Frame",
-			"value":1600,
+			"value":1650,
 		},
 
 		"slotType" : "heli_frame_mid",
@@ -301,6 +892,7 @@
 			["heli_swash","heli_swash", "Swash Plate"],
 			["heli_engine","heli_engine", "Engine", {"coreSlot":true}],
 			["heli_missiles","heli_missiles", "Tactical"],
+			["heli_rad","heli_rad", "Upper Storage"],
 		],
 		
 		"flexbodies": [
@@ -337,6 +929,9 @@
 			["helimidr3",-0.177,-0.177,1.275],
 			["helimidl7",0.177,0.177,1.275],
 			["helimidr9",-0.177,0.177,1.275],
+			
+			//ZdrytchX: centre of top part to simulate mast bumping
+			["helimidMast",0,0,1.325],
 			
 			{"engineGroup":""}
 			{"group":""},
@@ -400,6 +995,12 @@
 			["helimid10","helimidl7"]
 			["helimid10","helimidr9"]
 			["helimid10","helimid5"]
+
+			["helimidMast","helimidl7"],
+			["helimidMast","helimidl1"],
+			["helimidMast","helimidr3"],
+			["helimidMast","helimidr9"],
+			["helimidMast","helimid4"],
 			
 			//lowframe to mid
 			{"beamSpring":800000,"beamDamp":100},
@@ -447,6 +1048,234 @@
 			["flowl6","helimidr3"],
 			["flowr5", "helimidr3"],
 			["flowl4", "helimidr3"],
+
+			//ZdrytchX: new attatchment points to stabilise frame
+			{"beamSpring":320000},
+			["flowr9", "helimidr8"],
+			["flowl8", "helimidl6"],
+			["flowl8", "helimidr8"],
+			["flowr9", "helimidl6"],
+			
+			{"breakGroup":""},
+			
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+			// core
+			["rotor16", "swash10", "swashr8"],
+			["rotor16", "swashr8", "swash0"],
+			["rotor16", "swash0", "swashl2"],
+			["rotor16", "swashl2", "swash10"],
+			["helimidl6", "helimidr8", "rollr1"],
+			["helimidr8", "helimidr2", "pitchr1"],
+			["helimidr2", "helimidl0", "rollf1"],
+			["helimidl0", "helimidl6", "pitchl1"],
+			["pitchr1", "rollr1", "helimidr8"],
+			["rollf1", "pitchr1", "helimidr2"],
+			["pitchl1", "rollf1", "helimidl0"],
+			["rollr1", "pitchl1", "helimidl6"],
+			
+		],
+		
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["swashr8", "swash10", "rollr1", "pitchr1"],
+			["swash0", "swashr8", "pitchr1", "rollf1"],
+			["swashl2", "swash0", "rollf1", "pitchl1"],
+			["swash10", "swashl2", "pitchl1", "rollr1"],
+			
+			
+			//["helimidr9", "helimidl7", "helimidl6", "helimidr8"],
+			//["helimidr3", "helimidr9", "helimidr8", "helimidr2"],
+			//["helimidl1", "helimidr3", "helimidr2", "helimidl0"],
+			["helimidr2", "helimidr8", "helimidl6", "helimidl0"],
+		],
+		
+	},
+
+	
+	"heli_frame_mid_rusty": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Rusty Upper Frame",
+			"value":650,
+		},
+
+		"slotType" : "heli_frame_mid",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_tail","heli_tail", "Tail Boom"],
+			["heli_swash","heli_swash", "Swash Plate"],
+			["heli_engine","heli_engine", "Engine", {"coreSlot":true}],
+			["heli_missiles","heli_missiles", "Tactical"],
+			["heli_rad","heli_rad", "Upper Storage"],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_frame_core2", ["heli_core"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":false}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.3},
+			{"group":"heli_core"},
+			
+			["helimid4",0.0,0.0,0.9,{"group":["heli_core","rotor_center"]}],
+			["helimid5",0.0,0.0,2.5,{"group":["heli_core","rotor_center"]}],
+			["helimid10",0.0,0.0,0.4],
+			
+			{"collision":true}
+			{"engineGroup":"engine_block"}
+			{"chemEnergy":1000,"burnRate":0.39,"flashPoint":800,"specHeat": 0.2,"selfIgnitionCoef":false,"smokePoint":650,"baseTemp":"thermals","conductionRadius":0.23},
+			
+			["helimidl0",0.177,-0.177,0.779],
+			["helimidr2",-0.177,-0.177,0.779],
+			["helimidl6",0.300,0.250,0.779],
+			["helimidr8",-0.300,0.250,0.779{"isExhaust":true}],
+			
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false, "specHeat": false,"selfIgnitionCoef":false,"smokePoint":false,"baseTemp":false,"conductionRadius":false}
+			{"engineGroup":["engine_block","engine_intake"]}
+			
+			["helimidl1",0.177,-0.177,1.275],
+			["helimidr3",-0.177,-0.177,1.275],
+			["helimidl7",0.177,0.177,1.275],
+			["helimidr9",-0.177,0.177,1.275],
+			
+			//ZdrytchX: centre of top part to simulate mast bumping
+			["helimidMast",0,0,1.295],
+			
+			{"engineGroup":""}
+			{"group":""},
+			
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":110000,"beamDamp":100},
+			{"beamDeform":50000,"beamStrength":60000},
+			
+			["helimidl6","helimidr8"],
+			["helimid4","helimidl0"],
+			["helimidr9","helimidl0"],
+			["helimidr3","helimidr8"],
+			["helimidl1","helimid4"],
+			["helimidl7","helimidr9"],
+			["helimidl7","helimidl6"],
+			["helimid4","helimidl6"],
+			["helimidr9","helimid4"],
+			["helimid4","helimidr2"],
+			["helimidr8","helimidr2"],
+			["helimidr9","helimid5"],
+			["helimidl7","helimidl0"],
+			["helimidl1","helimid5"],
+			["helimidl7","helimidr2"],
+			["helimidl1","helimidr8"],
+			["helimid5","helimid4"],
+			["helimidr9","helimidl6"],
+			["helimidl0","helimidl6"],
+			["helimidl7","helimid4"],
+			["helimidl1","helimidr9"],
+			["helimidr3","helimidl7"],
+			["helimidr9","helimidr2"],
+			["helimidr9","helimidr8"],
+			["helimidl0","helimidr8"],
+			["helimidl1","helimidl6"],
+			["helimidr3","helimid5"],
+			["helimidr2","helimidl0"],
+			["helimidl1","helimidl7"],
+			["helimidr9","helimidr3"],
+			["helimidr3","helimidl0"],
+			["helimidl1","helimidr2"],
+			["helimidr2","helimidl6"],
+			["helimidl7","helimidr8"],
+			["helimid4","helimidr8"],
+			["helimidr3","helimid4"],
+			["helimidr3","helimidl1"],
+			["helimidr3","helimidl6"],
+			["helimidr3","helimidr2"],
+			["helimidl1","helimidl0"],
+			["helimidl7","helimid5"],
+			["helimid10","helimidl0"]
+			["helimid10","helimidr2"]
+			["helimid10","helimidl6"]
+			["helimid10","helimidr8"]
+			["helimid10","helimidl1"]
+			["helimid10","helimidr3"]
+			["helimid10","helimidl7"]
+			["helimid10","helimidr9"]
+			["helimid10","helimid5"]
+			
+			["helimidMast","helimidl7"],
+			["helimidMast","helimidl1"],
+			["helimidMast","helimidr3"],
+			["helimidMast","helimidr9"],
+			
+			//lowframe to mid
+			{"beamSpring":80000,"beamDamp":100},
+			{"beamDeform":1200,"beamStrength":7000},
+			{"breakGroup":"midframe"},
+			
+			["helimid10","flowl0"{"name":"engine"}]
+			["helimid10","flowr1"]
+			["helimid10","flowl8"]
+			["helimid10","flowr9"]
+			["helimid5","flowl0"]
+			["helimid5","flowr1"]
+			["helimid5","flowl8"]
+			["helimid5","flowr9"]
+			
+			["flowr7","helimidl6"],
+			["flowl6","helimidl6"],
+			["flowr5", "helimidl6"],
+			["flowl4", "helimidl6"],
+			["flowr7","helimidl0"],
+			["flowl6","helimidl0"],
+			["flowr5", "helimidl0"],
+			["flowl4", "helimidl0"],
+			["flowr7","helimidr8"],
+			["flowl6","helimidr8"],
+			["flowr5", "helimidr8"],
+			["flowl4", "helimidr8"],
+			["flowr7","helimidr2"],
+			["flowl6","helimidr2"],
+			["flowr5", "helimidr2"],
+			["flowl4", "helimidr2"],
+			["flowr7","helimidl7"],
+			["flowl6","helimidl7"],
+			["flowr5", "helimidl7"],
+			["flowl4", "helimidl7"],
+			["flowr7","helimidl1"],
+			["flowl6","helimidl1"],
+			["flowr5", "helimidl1"],
+			["flowl4", "helimidl1"],
+			["flowr7","helimidr9"],
+			["flowl6","helimidr9"],
+			["flowr5", "helimidr9"],
+			["flowl4", "helimidr9"],
+			["flowr7","helimidr3"],
+			["flowl6","helimidr3"],
+			["flowr5", "helimidr3"],
+			["flowl4", "helimidr3"],
+			
+			//ZdrytchX: new attatchment points to stabilise frame
+			{"beamSpring":160000,"beamDeform":3200},
+			["flowr9", "helimidr8"],
+			["flowl8", "helimidl6"],
+			["flowl8", "helimidr8"],
+			["flowr9", "helimidl6"],
+			
 			
 			{"breakGroup":""},
 			
@@ -489,11 +1318,12 @@
 		
 	},
 	
+
 	"heli_swash": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Full Range Swash Plate",
-			"value":1600,
+			"value":3600,//1600
 		},
 
 		"slotType" : "heli_swash",
@@ -688,8 +1518,8 @@
 		],
 		
 		"variables": [
-			["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
-			["$colltune", "range", "cm", "Controls", 2.155, 1.8, 2.2, "Max Collective", "Raise or lower the maximum rotor blade AoA at full collective"]
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "category"]
+			["$colltune", "range", "cm", "Controls", 2.155, 1.8, 2.2, "Max Collective", "Raise or lower the maximum rotor blade AoA at full collective", "Rotors"]
 		],
 		
 		"hydros": [
@@ -717,11 +1547,245 @@
 		
 	},
 	
+	"heli_swash_responsive": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Adjustable Range Swash Plate",
+			"value":5800,//1600
+		},
+
+		"slotType" : "heli_swash",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_rotor","heli_rotor", "Main Rotor"],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_swash_outer", ["swash_outer"]],
+			["heli_swash_inner", ["swash_inner"]],
+		],
+		
+		"props": [
+			["func"      , "mesh"         , "idRef:", "idX:", "idY:" ,    "baseRotation"        , "rotation"            , "translation"    , "min", "max", "offset", "multiplier"]   
+			// center
+			["rpm", "heli_swash_center", "swash5","helimid4","swash1",{"x":90, "y":0, "z":90}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// control links upper
+			["rpm", "heli_control_1_u", "swash0","rollf1","swash10",  {"x":0,"y":90,"z":90},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_2_u", "swashl2","pitchl2","swashr8",{"x":0,"y":90,"z":0},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_3_u", "swash10","rollr1","swash0",  {"x":0,"y":90,"z":90},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_4_u", "swashr8","pitchr1","swashl2",{"x":0,"y":90,"z":0},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// control links lower
+			["rpm", "heli_control_1_l", "rollf1","swash0","rollr1",   {"x":180,"y":90,"z":90},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_2_l", "pitchl1","swashl2","pitchr1",{"x":180,"y":90,"z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_3_l", "rollr1","swash10","rollf1",  {"x":180,"y":90,"z":90},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_4_l", "pitchr1","swashr8","pitchl1",{"x":180,"y":90,"z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+		],	
+			
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":3.0},
+			{"group":"swash_outer"},
+			
+			["swash0",0.0,-0.177,1.42],
+			["swashl2",0.177,0.0,1.42],
+			["swash4",0.0,0.0,1.243,{"group":["swash_outer","swash_inner"]}],
+			["swash5",0.0,0.0,1.42, {"group":["swash_outer","swash_inner"]}],
+			["swash6",0.0,0.0,1.597,{"group":["swash_outer","swash_inner"]}],
+			["swashr8",-0.177,0.0,1.42],
+			["swash9",0.0,0.137,1.42],
+			["swash10",0.0,0.177,1.42],
+			
+			{"group":"swash_inner"},
+			
+			["swash1",0.0,-0.137,1.42 {"group":["torquelink_l","swash_inner"]}],
+			["swashr7",-0.137,0.0,1.42{"group":["torquelink_l","swash_inner"]}],
+			["swashl3",0.137,0.0,1.42 {"group":["torquelink2_l","swash_inner"]}],
+			["swash9",0.0,0.137,1.42  {"group":["torquelink2_l","swash_inner"]}],
+			
+			{"group":""},
+			//roll & pitch
+			
+			["rollf1",0.0,-0.177,1.275],
+			["rollf2",0.0,-0.177,1.37],
+			["rollr1",0.0,0.177,1.275],
+			["rollr2",0.0,0.177,1.37],
+			
+			["pitchr1",-0.177,0.0,1.275],
+			["pitchr2",-0.177,0.0,1.37],
+			["pitchl1",0.177,0.0,1.275],
+			["pitchl2",0.177,0.0,1.37],
+			
+			//collective mixers
+			
+			["collf",0.0,-0.177,1.31],
+			["collb",0.0,0.177,1.31],
+			["collr",-0.177,0.0,1.31],
+			["colll",0.177,0.0,1.31],
+			
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":4500000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["swashr7","swashl3"],
+			["swash5","swash1"],
+			["swash6","swash4"],
+			["swash5","swashl3"],
+			["swash10","swash4"],
+			["swash0","swash6"],
+			["swash10","swashl2"],
+			["swash6","swashr7"],
+			["swash1","swash9"],
+			["swash10","swash6"],
+			["swash6","swash1"],
+			["swashl3","swash1"],
+			["swash5","swash4"],
+			["swash10","swash5"],
+			["swashl2","swash4"],
+			["swash0","swash5"],
+			["swash4","swash9"],
+			["swash5","swash6"],
+			["swash4","swashr7"],
+			["swashl2","swash6"],
+			["swashr8","swashl2"],
+			["swash0","swash10"],
+			["swash4","swashl3"],
+			["swashr8","swash5"],
+			["swash4","swash1"],
+			["swash9","swashl3"],
+			["swashl2","swash0"],
+			["swashr8","swash10"],
+			["swash6","swash9"],
+			["swash1","swashr7"],
+			["swashr8","swash4"],
+			["swash6","swashl3"],
+			["swashr7","swash9"],
+			["swashr8","swash6"],
+			["swash0","swashr8"],
+			["swash5","swashr7"],
+			["swash5","swash9"],
+			["swash0","swash4"],
+			["swashl2","swash5"],
+			
+			//roll and pitch
+			{"beamSpring":1500000,"beamDamp":10},
+			
+			["rollf1","helimidr3"],
+			["rollf1","helimidl1"],
+			["rollf2","helimidr3"],
+			["rollf2","helimidl1"],
+			
+			["rollr1","helimidr9"],
+			["rollr1","helimidl7"],
+			["rollr2","helimidr9"],
+			["rollr2","helimidl7"],
+			
+			["pitchr1","helimidr3"],
+			["pitchr1","helimidr9"],
+			["pitchr2","helimidr3"],
+			["pitchr2","helimidr9"],
+			
+			["pitchl1","helimidl1"],
+			["pitchl1","helimidl7"],
+			["pitchl2","helimidl1"],
+			["pitchl2","helimidl7"],
+			
+			{"beamSpring":0,"beamDamp":50},
+			
+			["rollf1","swash0"],
+			["rollr1","swash10"],
+			
+			["pitchr1","swashr8"],
+			["pitchl1","swashl2"],
+			
+		],
+		
+		"rails": {
+			"swashcen":{"links:":["helimid5", "helimid4"],  "looped":false, "capped":true}
+			
+			"rollf"   :{"links:":["helimidr3", "helimidl1"],"looped":false, "capped":true}
+			"rollf2"  :{"links:":["rollf1", "swash0"],      "looped":false, "capped":true}
+			"rollr"   :{"links:":["helimidr9", "helimidl7"],"looped":false, "capped":true}
+			"rollr2"  :{"links:":["rollr1", "swash10"],     "looped":false, "capped":true}
+			
+			"pitchr"  :{"links:":["helimidr3", "helimidr9"],"looped":false, "capped":true}
+			"pitchr2" :{"links:":["pitchr1", "swashr8"],    "looped":false, "capped":true}
+			"pitchl"  :{"links:":["helimidl1", "helimidl7"],"looped":false, "capped":true}
+			"pitchl2" :{"links:":["pitchl1", "swashl2"],    "looped":false, "capped":true}
+			
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			["swash5", "swashcen",true, true, 0, 5000000, 5000000, 345435],
+			
+			["rollf1", "rollf",   true, true, 0, 5000000, 5000000, 345435],
+			["rollf2", "rollf2",  true, true, 0, 5000000, 5000000, 345435],
+			["rollr1", "rollr",   true, true, 0, 5000000, 5000000, 345435],
+			["rollr2", "rollr2",  true, true, 0, 5000000, 5000000, 345435],
+			
+			["pitchr1","pitchr",  true, true, 0, 5000000, 5000000, 345435],
+			["pitchr2","pitchr2", true, true, 0, 5000000, 5000000, 345435],
+			["pitchl1","pitchl",  true, true, 0, 5000000, 5000000, 345435],
+			["pitchl2","pitchl2", true, true, 0, 5000000, 5000000, 345435],
+			
+			["collf",  "rollf2",  true, true, 0, 5000000, 5000000, 345435],
+			["collb",  "rollr2",  true, true, 0, 5000000, 5000000, 345435],
+			["collr",  "pitchr2", true, true, 0, 5000000, 5000000, 345435],
+			["colll",  "pitchl2", true, true, 0, 5000000, 5000000, 345435],
+			
+		],
+		
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$colltune", "range", "units", "Controls", 1.975, 1.8, 2.5, "Max Collective", "Raise or lower the maximum rotor blade AoA at full collective", 0.005, "Rotors"],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
+			["$colltuneNeg", "range", "units", "Controls", 0.9, 0.85, 1.0, "Minimum Collective", "Raise or lower the negative pitch range of the rotor blade AoA at full down collective", 0.005, "Rotors"],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
+			["$CyclicPitchRate", "range", "x", "Controls", 1.9, 0.5, 50.0, "Cyclic Pitch Response", "Responsiveness of the Pitch Axis in (Whole Range/Second)", 0.5, "Rotors"],
+			["$CyclicRollRate", "range", "x", "Controls", 1.9, 0.5, 50.0, "Cyclic Roll Response", "Responsiveness of the Roll Axis in (Whole Range/Second)", 0.5, "Rotors"],
+			["$CyclicRangeLowerLimit", "range", "units", "Controls", 0.8, 0.5, 0.9, "Cyclic Lower Deadstop", "Lower Pitch and Roll Range", 0.005, "Rotors"],//has to be seperate due to json datastructure limitation - no calculations allowed within json formatting
+			["$CyclicRangeUpperLimit", "range", "units", "Controls", 1.2, 1.1, 1.5, "Cyclic Upper Deadstop", "Upper Pitch and Roll Range", 0.005, "Rotors"],//has to be seperate due to json datastructure limitation - no calculations allowed within json formatting
+			["$CollectiveRate", "range", "x", "Controls", 4, 0.5, 50.0, "Collective Response", "Responsiveness of the Collective Axis in (Whole Range/Second)", 0.5, "Rotors"]
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":4500000,"beamDamp":100},
+			{"beamDeform":100000,"beamStrength":"FLT_MAX"},
+			
+			["collf","swash0", {"inputSource":"aileron",   "inputFactor": 1.0,"inRate":"$CyclicRollRate","outRate":"$CyclicRollRate","inLimit":"$CyclicRangeLowerLimit","outLimit":"$CyclicRangeUpperLimit"}],
+			["collb","swash10",{"inputSource":"aileron",   "inputFactor":-1.0,"inRate":"$CyclicRollRate","outRate":"$CyclicRollRate","inLimit":"$CyclicRangeLowerLimit","outLimit":"$CyclicRangeUpperLimit"}],
+		
+			["collr","swashr8",{"inputSource":"elevator",  "inputFactor":-1.0,"inRate":"$CyclicPitchRate","outRate":"$CyclicPitchRate","inLimit":"$CyclicRangeLowerLimit","outLimit":"$CyclicRangeUpperLimit"}],
+			["colll","swashl2",{"inputSource":"elevator",  "inputFactor": 1.0,"inRate":"$CyclicPitchRate","outRate":"$CyclicPitchRate","inLimit":"$CyclicRangeLowerLimit","outLimit":"$CyclicRangeUpperLimit"}],//in-out rate 1.9
+			
+			{"beamPrecompression":"$colltuneNeg"}//this determines negative pitch authority
+			
+			["collf","rollf1", {"inputSource":"collective","inputFactor":1.0, "inRate":"$CollectiveRate","outRate":"$CollectiveRate","inLimit":1.0,"outLimit":"$colltune"}],//in-out rate 4
+			["collb","rollr1" ,{"inputSource":"collective","inputFactor":1.0, "inRate":"$CollectiveRate","outRate":"$CollectiveRate","inLimit":1.0,"outLimit":"$colltune"}],
+			
+			["collr","pitchr1",{"inputSource":"collective","inputFactor":1.0, "inRate":"$CollectiveRate","outRate":"$CollectiveRate","inLimit":1.0,"outLimit":"$colltune"}],
+			["colll","pitchl1",{"inputSource":"collective","inputFactor":1.0, "inRate":"$CollectiveRate","outRate":"$CollectiveRate","inLimit":1.0,"outLimit":"$colltune"}],
+			
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			
+		],
+		
+	},
+	
 	"heli_swash2": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Limited Range Swash Plate",
-			"value":1600,
+			"value":2800,
 		},
 
 		"slotType" : "heli_swash",
@@ -939,6 +2003,229 @@
 		],
 		
 	},
+
+	"heli_swash3": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Training Limited Swash Plate",
+			"value":2200,
+		},
+
+		"slotType" : "heli_swash",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_rotor","heli_rotor", "Main Rotor"],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_swash_outer", ["swash_outer"]],
+			["heli_swash_inner", ["swash_inner"]],
+		],
+		
+		"props": [
+			["func"      , "mesh"         , "idRef:", "idX:", "idY:" ,    "baseRotation"        , "rotation"            , "translation"    , "min", "max", "offset", "multiplier"]   
+			// center
+			["rpm", "heli_swash_center", "swash5","helimid4","swash1",{"x":90, "y":0, "z":90}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// control links upper
+			["rpm", "heli_control_1_u", "swash0","rollf1","swash10",  {"x":0,"y":90,"z":90},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_2_u", "swashl2","pitchl2","swashr8",{"x":0,"y":90,"z":0},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_3_u", "swash10","rollr1","swash0",  {"x":0,"y":90,"z":90},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_4_u", "swashr8","pitchr1","swashl2",{"x":0,"y":90,"z":0},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// control links lower
+			["rpm", "heli_control_1_l", "rollf1","swash0","rollr1",   {"x":180,"y":90,"z":90},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_2_l", "pitchl1","swashl2","pitchr1",{"x":180,"y":90,"z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_3_l", "rollr1","swash10","rollf1",  {"x":180,"y":90,"z":90},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_control_4_l", "pitchr1","swashr8","pitchl1",{"x":180,"y":90,"z":0}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+		],	
+			
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":3.0},
+			{"group":"swash_outer"},
+			
+			["swash0",0.0,-0.177,1.42],
+			["swashl2",0.177,0.0,1.42],
+			["swash4",0.0,0.0,1.243,{"group":["swash_outer","swash_inner"]}],
+			["swash5",0.0,0.0,1.42, {"group":["swash_outer","swash_inner"]}],
+			["swash6",0.0,0.0,1.597,{"group":["swash_outer","swash_inner"]}],
+			["swashr8",-0.177,0.0,1.42],
+			["swash9",0.0,0.137,1.42],
+			["swash10",0.0,0.177,1.42],
+			
+			{"group":"swash_inner"},
+			
+			["swash1",0.0,-0.137,1.42 {"group":["torquelink_l","swash_inner"]}],
+			["swashr7",-0.137,0.0,1.42{"group":["torquelink_l","swash_inner"]}],
+			["swashl3",0.137,0.0,1.42 {"group":["torquelink2_l","swash_inner"]}],
+			["swash9",0.0,0.137,1.42  {"group":["torquelink2_l","swash_inner"]}],
+			
+			{"group":""},
+			//roll & pitch
+			
+			["rollf1",0.0,-0.177,1.275],
+			["rollf2",0.0,-0.177,1.37],
+			["rollr1",0.0,0.177,1.275],
+			["rollr2",0.0,0.177,1.37],
+			
+			["pitchr1",-0.177,0.0,1.275],
+			["pitchr2",-0.177,0.0,1.37],
+			["pitchl1",0.177,0.0,1.275],
+			["pitchl2",0.177,0.0,1.37],
+			
+			//collective mixers
+			
+			["collf",0.0,-0.177,1.31],
+			["collb",0.0,0.177,1.31],
+			["collr",-0.177,0.0,1.31],
+			["colll",0.177,0.0,1.31],
+			
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":4500000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["swashr7","swashl3"],
+			["swash5","swash1"],
+			["swash6","swash4"],
+			["swash5","swashl3"],
+			["swash10","swash4"],
+			["swash0","swash6"],
+			["swash10","swashl2"],
+			["swash6","swashr7"],
+			["swash1","swash9"],
+			["swash10","swash6"],
+			["swash6","swash1"],
+			["swashl3","swash1"],
+			["swash5","swash4"],
+			["swash10","swash5"],
+			["swashl2","swash4"],
+			["swash0","swash5"],
+			["swash4","swash9"],
+			["swash5","swash6"],
+			["swash4","swashr7"],
+			["swashl2","swash6"],
+			["swashr8","swashl2"],
+			["swash0","swash10"],
+			["swash4","swashl3"],
+			["swashr8","swash5"],
+			["swash4","swash1"],
+			["swash9","swashl3"],
+			["swashl2","swash0"],
+			["swashr8","swash10"],
+			["swash6","swash9"],
+			["swash1","swashr7"],
+			["swashr8","swash4"],
+			["swash6","swashl3"],
+			["swashr7","swash9"],
+			["swashr8","swash6"],
+			["swash0","swashr8"],
+			["swash5","swashr7"],
+			["swash5","swash9"],
+			["swash0","swash4"],
+			["swashl2","swash5"],
+			
+			//roll and pitch
+			{"beamSpring":1500000,"beamDamp":10},
+			
+			["rollf1","helimidr3"],
+			["rollf1","helimidl1"],
+			["rollf2","helimidr3"],
+			["rollf2","helimidl1"],
+			
+			["rollr1","helimidr9"],
+			["rollr1","helimidl7"],
+			["rollr2","helimidr9"],
+			["rollr2","helimidl7"],
+			
+			["pitchr1","helimidr3"],
+			["pitchr1","helimidr9"],
+			["pitchr2","helimidr3"],
+			["pitchr2","helimidr9"],
+			
+			["pitchl1","helimidl1"],
+			["pitchl1","helimidl7"],
+			["pitchl2","helimidl1"],
+			["pitchl2","helimidl7"],
+			
+			{"beamSpring":0,"beamDamp":50},
+			
+			["rollf1","swash0"],
+			["rollr1","swash10"],
+			
+			["pitchr1","swashr8"],
+			["pitchl1","swashl2"],
+			
+		],
+		
+		"rails": {
+			"swashcen":{"links:":["helimid5", "helimid4"],  "looped":false, "capped":true}
+			
+			"rollf"   :{"links:":["helimidr3", "helimidl1"],"looped":false, "capped":true}
+			"rollf2"  :{"links:":["rollf1", "swash0"],      "looped":false, "capped":true}
+			"rollr"   :{"links:":["helimidr9", "helimidl7"],"looped":false, "capped":true}
+			"rollr2"  :{"links:":["rollr1", "swash10"],     "looped":false, "capped":true}
+			
+			"pitchr"  :{"links:":["helimidr3", "helimidr9"],"looped":false, "capped":true}
+			"pitchr2" :{"links:":["pitchr1", "swashr8"],    "looped":false, "capped":true}
+			"pitchl"  :{"links:":["helimidl1", "helimidl7"],"looped":false, "capped":true}
+			"pitchl2" :{"links:":["pitchl1", "swashl2"],    "looped":false, "capped":true}
+			
+		},
+		
+		"slidenodes": [	
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			["swash5", "swashcen",true, true, 0, 5000000, 5000000, 345435],
+			
+			["rollf1", "rollf",   true, true, 0, 5000000, 5000000, 345435],
+			["rollf2", "rollf2",  true, true, 0, 5000000, 5000000, 345435],
+			["rollr1", "rollr",   true, true, 0, 5000000, 5000000, 345435],
+			["rollr2", "rollr2",  true, true, 0, 5000000, 5000000, 345435],
+			
+			["pitchr1","pitchr",  true, true, 0, 5000000, 5000000, 345435],
+			["pitchr2","pitchr2", true, true, 0, 5000000, 5000000, 345435],
+			["pitchl1","pitchl",  true, true, 0, 5000000, 5000000, 345435],
+			["pitchl2","pitchl2", true, true, 0, 5000000, 5000000, 345435],
+			
+			["collf",  "rollf2",  true, true, 0, 5000000, 5000000, 345435],
+			["collb",  "rollr2",  true, true, 0, 5000000, 5000000, 345435],
+			["collr",  "pitchr2", true, true, 0, 5000000, 5000000, 345435],
+			["colll",  "pitchl2", true, true, 0, 5000000, 5000000, 345435],
+			
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":4500000,"beamDamp":100},
+			{"beamDeform":100000,"beamStrength":"FLT_MAX"},
+			
+			["collf","swash0", {"inputSource":"aileron",   "inputFactor": 1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.93,"outLimit":1.07}],
+			["collb","swash10",{"inputSource":"aileron",   "inputFactor":-1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.93,"outLimit":1.07}],
+		
+			["collr","swashr8",{"inputSource":"elevator",  "inputFactor":-1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.93,"outLimit":1.07}],
+			["colll","swashl2",{"inputSource":"elevator",  "inputFactor": 1.0,"inRate":1.0,"outRate":1.0,"inLimit":0.93,"outLimit":1.07}],
+			
+			{"beamPrecompression":1}//limited negative G loading 1.38
+			
+			["collf","rollf1", {"inputSource":"collective","inputFactor":1.0, "inRate":0.3,"outRate":1.0,"inLimit":1.0,"outLimit":1.3}],
+			["collb","rollr1" ,{"inputSource":"collective","inputFactor":1.0, "inRate":0.3,"outRate":1.0,"inLimit":1.0,"outLimit":1.3}],
+			
+			["collr","pitchr1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.3,"outRate":1.0,"inLimit":1.0,"outLimit":1.3}],
+			["colll","pitchl1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.3,"outRate":1.0,"inLimit":1.0,"outLimit":1.3}],
+			
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+			
+		],
+		
+	},
 	
 	"heli_tail": {
 		"information":{
@@ -952,6 +2239,7 @@
 		"slots": [
 			["type", "default", "description"]
 			["heli_tail_plane","heli_tail_plane", "Stabilising tail-plane"],
+			["heli_tailrotor1","heli_tailrotor1", "Tail Rotor", {"coreSlot":true}],//fix for being able to equip a tail rotor without a tail
 		],
 		
 		"props": [
@@ -1060,11 +2348,18 @@
 			["tail3", "helimidr3"],
 			
 			//stabilize to lowframe
-			
+			//was:
+			/*
 			["flowl8", "tail6"],
 			["flowr9", "tail6"],
 			["flowl8", "tail7"],
 			["flowr9", "tail7"],
+			*/
+			//should be stabilised to midframe instead
+			["helimidl6", "tail6"],
+			["helimidr8", "tail6"],
+			["helimidl6", "tail7"],
+			["helimidr8", "tail7"],
 			
 			{"breakGroup":""},
 		],
@@ -1082,12 +2377,163 @@
 		],
 		
 	},
+
+	"heli_tail_rusty": {
+		"information":{
+			"authors":"Darren9",
+			"name":"Rusting Tail Boom",
+			"value":1600,
+		},
+
+		"slotType" : "heli_tail",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_tail_plane","heli_tail_plane", "Stabilising tail-plane"],
+			["heli_tailrotor1","heli_tailrotor1", "Tail Rotor", {"coreSlot":true}],//fix for being able to equip a tail rotor without a tail
+		],
+		
+		"props": [
+			["func"      , "mesh"              , "idRef:", "idX:", "idY:"       ,        "baseRotation"        , "rotation"            , "translation"    , "min", "max", "offset", "multiplier"]   
+			//tailshaft
+			["tail_rotor", "heli_tailshaft",  "tail3","tail7","taill4",    {"x":180, "y":0, "z":90}, {"x":0, "y":1, "z": 0}, {"x":0, "y":0, "z":0}, 0,360,0,1],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_tailboom", ["tail_boom"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.2},
+			{"group":"tail_boom"},
+			
+			["taill0",0.194,0.313,1.153],
+			["tailr1",-0.194,0.313,1.153],
+			["tail2",0.0,0.565,1.014],
+			["tail3",0.0,0.565,1.293],
+			["taill4",0.14,1.06,1.153],
+			["tailr5",-0.14,1.06,1.153],
+			["tail6",0.0,1.712,1.014],
+			["tail7",0.0,1.712,1.293],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":2000000,"beamDamp":100},
+			{"beamDeform":100000,"beamStrength":"FLT_MAX"},
+			
+			["taill4","tailr1"],
+			["taill4","tail3"],
+			["tailr5","tailr1"],
+			["tailr5","tail2"],
+			["tailr5","taill0"],
+			["tail6","tail2"],
+			["tailr5","tail3"],
+			["taill4","tailr5"],
+			["taill4","taill0"],
+			["tail2","taill0"],
+			["taill4","tail2"],
+			["tail3","tailr1"],
+			["tail3","taill0"],
+			["tail6","taill4"],
+			["tail2","tailr1"],
+			["tail7","tailr5"],
+			["tail7","taill4"],
+			["tail6","tailr5"],
+			["tail3","tail2"],
+			["tail7","tail3"],
+			["tail7","tail6"],
+			["taill0","tailr1"],
+			
+			//tail to mid
+			{"beamDeform":20000,"beamStrength":10000,"beamDeform":5000},
+			{"breakGroup":"tail"},
+			
+			["tailr1","helimidl6"],
+			["taill0","helimidl6"],
+			["tail2", "helimidl6"],
+			["tail3", "helimidl6"],
+			
+			["tailr1","helimidl0"],
+			["taill0","helimidl0"],
+			["tail2", "helimidl0"],
+			["tail3", "helimidl0"],
+			
+			["tailr1","helimidr8"],
+			["taill0","helimidr8"],
+			["tail2", "helimidr8"],
+			["tail3", "helimidr8"],
+			
+			["tailr1","helimidr2"],
+			["taill0","helimidr2"],
+			["tail2", "helimidr2"],
+			["tail3", "helimidr2"],
+			
+			["tailr1","helimidl7"],
+			["taill0","helimidl7"],
+			["tail2", "helimidl7"],
+			["tail3", "helimidl7"],
+			
+			["tailr1","helimidl1"],
+			["taill0","helimidl1"],
+			["tail2", "helimidl1"],
+			["tail3", "helimidl1"],
+			
+			["tailr1","helimidr9"],
+			["taill0","helimidr9"],
+			["tail2", "helimidr9"],
+			["tail3", "helimidr9"],
+			
+			["tailr1","helimidr3"],
+			["taill0","helimidr3"],
+			["tail2", "helimidr3"],
+			["tail3", "helimidr3"],
+			
+			//stabilize to lowframe
+			//was:
+			/*
+			["flowl8", "tail6"],
+			["flowr9", "tail6"],
+			["flowl8", "tail7"],
+			["flowr9", "tail7"],
+			*/
+			//should be stabilised to midframe instead
+			["helimidl6", "tail6"],
+			["helimidr8", "tail6"],
+			["helimidl6", "tail7"],
+			["helimidr8", "tail7"],
+			
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":25.5,"skinDragCoef":35},
+			["tail7", "tail3", "tail6"],
+		],
+		
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":35.5,"skinDragCoef":35},
+			["tailr1", "taill0", "taill4", "tailr5"],
+		],
+		
+	},
 	
 	"heli_tail_plane": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Tail Plane",
-			"value":1600,
+			"value":1300,
 		},
 
 		"slotType" : "heli_tail_plane",
@@ -1166,11 +2612,200 @@
 		
 	},
 	
+	"heli_tail_plane_unrefined": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Unrefined Tail Plane",
+			"value":120,
+		},
+
+		"slotType" : "heli_tail_plane",
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_tailplane", ["tail_plane"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":false}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.6},
+			{"group":"tail_plane"},
+			
+			["tailp1",0.123,1.758,1.203],
+			
+			{"selfCollision":true}
+			{"collision":true}
+			
+			["tailp0",-0.153,1.54,1.146],
+			["tailp2",-0.153,2.05,0.925],
+			["tailp3",-0.153,2.05,1.555],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":700000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["tailp0","tailp2"],
+			["tailp1","tailp2"],
+			["tailp0","tailp1"],
+			["tailp2","tailp3"],
+			["tailp1","tailp3"],
+			["tailp3","tailp0"],
+			
+			//tailplane to tail
+			{"beamDeform":4000,"beamStrength":8000},
+			{"breakGroup":"tailp"},
+			
+			["tailp0","taill4"],
+			["tailp1","taill4"],
+			["tailp2","taill4"],
+			["tailp3","taill4"],
+			
+			["tailp0","tailr5"],
+			["tailp1","tailr5"],
+			["tailp2","tailr5"],
+			["tailp3","tailr5"],
+			
+			["tailp0","tail6"],
+			["tailp1","tail6"],
+			["tailp2","tail6"],
+			["tailp3","tail6"],
+			
+			["tailp0","tail7"],
+			["tailp1","tail7"],
+			["tailp2","tail7"],
+			["tailp3","tail7"],
+			
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":15.5,"skinDragCoef":5},
+			["tailp0", "tailp2", "tailp3",{"liftCoef":120}],
+			{"skinDragCoef":0}
+		],
+		
+	},
+
+	"heli_tail_plane_racing": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Tuneable Tail Plane",
+			"value":2870,
+		},
+
+		"slotType" : "heli_tail_plane",
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$tailPlaneAngle", "range", "units", "Controls", -0.173, -0.2, -0.153, "Vertical Stabiliser angle", "Adjust pre-trimmed stabiliser angle. -0.153 is neutral trimmed", 0.001, "Aerodynamic Balancing"],
+			["$tailHorizontalPlaneAngle", "range", "units", "Controls", 1.203, 1.0, 1.3, "Horizontal Stabiliser angle", "Adjust pre-trimmed stabiliser angle. 1.203 is neutral trimmed. Decrease for nose-down moment while flying forwards.", 0.001, "Aerodynamic Balancing"]
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_tailplane", ["tail_plane"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":false}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":0.6},
+			{"group":"tail_plane"},
+			
+			["tailp1",0.123,1.758,1.203],//0.123
+			
+			{"selfCollision":true}
+			{"collision":true}
+			
+			["tailp0","$tailPlaneAngle",1.54,1.203],//-0.153, 1.54, 1.146
+			["tailp2",-0.153,2.05,0.925],
+			["tailp3",-0.153,2.05,1.555],
+			
+			//horizontal stabiliser
+			["tailh4",-0.153,1.92,"$tailHorizontalPlaneAngle"],
+			["tailh5",0,1.85,"$tailHorizontalPlaneAngle"],//1.85 makes it line up smoothly with the visual model but adjusting the vert stab changes aero surface area
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":700000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+			
+			["tailp0","tailp2"],
+			["tailp1","tailp2"],
+			["tailp0","tailp1"],
+			["tailp2","tailp3"],
+			["tailp1","tailp3"],
+			["tailp3","tailp0"],
+			
+			["tailh4","tailp0"],
+			["tailh5","tailp0"],
+			
+			//tailplane to tail
+			{"beamDeform":4000,"beamStrength":8000},
+			{"breakGroup":"tailp"},
+			
+			["tailp0","taill4"],
+			["tailp1","taill4"],
+			["tailp2","taill4"],
+			["tailp3","taill4"],
+			["tailh4","taill4"],
+			["tailh5","taill4"],
+			
+			["tailp0","tailr5"],
+			["tailp1","tailr5"],
+			["tailp2","tailr5"],
+			["tailp3","tailr5"],
+			["tailh4","tailr5"],
+			["tailh5","tailr5"],
+			
+			["tailp0","tail6"],
+			["tailp1","tail6"],
+			["tailp2","tail6"],
+			["tailp3","tail6"],
+			["tailh4","tail6"],
+			["tailh5","tail6"],
+			
+			["tailp0","tail7"],
+			["tailp1","tail7"],
+			["tailp2","tail7"],
+			["tailp3","tail7"],
+			["tailh4","tail7"],
+			["tailh5","tail7"],
+			
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			//vertical stab
+			["tailp0", "tailp2", "tailp3",{"liftCoef":230,"stallAngle": 0.38,"dragCoef":10.5}],
+			//horizontal stabiliser
+			["tailp0", "tailh4", "tailh5",{"liftCoef":175,"stallAngle": 0.5,"dragCoef":9}],//29deg aoa stall
+		],
+		
+	},
+	
 	"heli_seat": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Seat",
-			"value":300,
+			"value":200,
 		},
 
 		"slotType" : "heli_seat",
@@ -1187,12 +2822,106 @@
 			["heli_seat_u", ["heli_seat"]],
 		],
 	},
+	//needs new flammable/break nodes as seat has no nodes or beams
+	/*
+	"heli_seat_fuel": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Seat with internal fuel capacity",
+			"value":500,
+		},
+
+		"slotType" : "heli_seat",
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description"]
+			["$fuel", "range", "l", "Fuel", 20, 1, 20, "Extra range Fuel Tank Capacity", "You're a sneaky one aren't you? Just be aware that if you crash your 'waterbed' may burn you."]
+		],
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_dummy","heli_dummy", "Pilot", {"coreSlot":true}],
+			
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_seat_l", ["heli_seat"]],
+			["heli_seat_u", ["heli_seat"]],
+		],
+	},
+	*/
+	//doesn't work unfortunately :/
+/*
+	"heli_seat_methanol": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Sneaky Seat with hidden Water-Methanol injection system",
+			"value":1600,
+		},
+
+		"slotType" : "heli_seat",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_dummy","heli_dummy", "Pilot", {"coreSlot":true}],
+			
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_seat_l", ["heli_seat"]],
+			["heli_seat_u", ["heli_seat"]],
+		],
+		
+		"energyStorage": [
+				["type", "name"],
+				["n2oTank", "seatBottle"],
+		],
+		"seatBottle": {
+				"capacity": 3.5,//default:4.54,
+				"energyDensity": 18000000,//default 41000000/5
+		},
 	
+	},
+	
+
+	"heli_seat_n2o": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Sneaky Seat with hidden N2O boost system for when you're temporarily short of power",
+			"value":1800,
+		},
+
+		"slotType" : "heli_seat",
+		
+		"slots": [
+			["type", "default", "description"]
+			["heli_dummy","heli_dummy", "Pilot", {"coreSlot":true}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_seat_l", ["heli_seat"]],
+			["heli_seat_u", ["heli_seat"]],
+		],
+		
+		"energyStorage": [
+				["type", "name"],
+				["n2oTank", "seatBottle"],
+		],
+		"seatBottle": {
+				"capacity": 3.5,//default:4.54,
+				"startingCapacity": 3.5,//default:4.54,
+		},
+	
+	},
+	*/
 	"heli_console": {
 		"information":{
 			"authors":"Darren9",
 			"name":"Instrument Console",
-			"value":300,
+			"value":600,
 		},
 
 		"slotType" : "heli_console",
@@ -1247,8 +2976,7 @@
 			{"breakGroupType":0},
 			{"optional":true},
 			{"beamSpring":300000,"beamDamp":100},
-			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
-			
+			{"beamDeform":"50000","beamStrength":"80000"},//custom was 50000, FLT_MAX
 			["console3","console0"],
 			["console1","console8"],
 			["console4","console6"],
@@ -1293,7 +3021,7 @@
 			
 			//console to frame
 			{"beamSpring":300000,"beamDamp":100},
-			{"beamDeform":"FLT_MAX","beamStrength":5000},
+			{"beamDeform":"7900","beamStrength":15000},//FLT_MAX, 5000
 			{"breakGroup":"heli_console"},
 			
 			["console9","flowr3"],
@@ -1348,7 +3076,7 @@
 		"information":{
 			"authors":"Darren9",
 			"name":"Rope With Tow Hitch Connector",
-			"value":300,
+			"value":120,
 		},
 
 		"slotType" : "heli_towhtich",
@@ -1399,7 +3127,7 @@
 			["id1:", "id2:"],
 			{"breakGroupType":0},
 			{"optional":true},
-			{"beamSpring":400000,"beamDamp":10},
+			{"beamSpring":400000,"beamDamp":20},
 			{"beamDeform":400000,"beamStrength":70000},
 			{"breakGroup":"rope"},
 			
@@ -1415,7 +3143,7 @@
 			["rope_5","rope_end"],
 			
 			//pre stiffness
-			{"beamSpring":350,"beamDamp":10},
+			{"beamSpring":350,"beamDamp":20},
 			{"beamPrecompression":1.02},
 			{"breakGroup":"rope"},
 			
@@ -1429,7 +3157,7 @@
 			["rope_4","rope_end"],
 			
 			//to frame
-			{"beamSpring":800000,"beamDamp":100},
+			{"beamSpring":800000,"beamDamp":20},
 			{"beamDeform":60000,"beamStrength":170000},
 			{"beamPrecompression":1.0},
 			
@@ -1457,5 +3185,609 @@
 			{"dragCoef":5.5},
 		],
 		
-	},	
+	},
+
+	"heli_tow_parent": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Rigid and Rope Hitch Connector (Roofbars Cargo)",
+			"value":220,
+		},
+
+		"slotType" : "heli_towhtich",
+		/*
+		"slots": [//TODO cargo slots for career mode wooo
+		["roofroackshithackTODO","", "Roof Accessory"],
+		]*/
+
+		"slots":[
+			["type", "default", "description"]
+			["fullsize_roof_accessory","", "Rotor Roofbar Cargo TEST"],
+			//["fullsize_roof_accessory2","", "Rotor Roofbar Cargo TEST2"],
+		]
+		
+		"props": [
+			["func", "mesh",       "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//ropes
+			["rpm", "heli_rope_1", "rope_1","rope_start","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_2","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_3","rope_2","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_4","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_5","rope_4","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end","rope_5","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rope_attach", ["heli_rope_attach"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},//0.7
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.2},//0.2
+			["rope_1", 0.0, 1.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_2", 0.0, 2.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_3", 0.0, 3.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_4", 0.0, 4.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_5", 0.0, 5.0, 0.545, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"nodeWeight":0.3},//0.3
+			
+			["rope_end", 0.0, 6.0, 0.545, {"couplerTag":"tow_bobsUrUncle","couplerStrength":1001000,"couplerRadius":5}],
+			
+			{"nodeWeight":0.5},//0.5
+			{"group":"heli_rope_attach"},
+			{"nodeWeight":1.5},//0.5
+			["rope_start", 0.0, 0.0, 0.32, {"couplerTag":"tow_hitch","couplerStrength":501000,"couplerRadius":5,"forceAutoCoupling":true,"couplerStartRadius":1}],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamDeform":400000,"beamStrength":70000},
+			{"breakGroup":"rope"},
+			
+			["rope_start","rope_1"{"name":"Rope"}]
+			
+			//{"beamType":"|LBEAM"},//
+			
+			{"breakGroup":""},
+			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamDeform":400000,"beamStrength":350000},//400000,350000
+			
+			["rope_1","rope_2"],//look up LBEAM,{"id3:","rope_2"}
+			["rope_2","rope_3"],
+			["rope_3","rope_4"],
+			["rope_4","rope_5"],
+			["rope_5","rope_end"],
+			
+			//pre stiffness
+			{"beamSpring":350,"beamDamp":20},
+			{"beamPrecompression":1.02},
+			{"breakGroup":"rope"},
+			
+			["rope_start","rope_2"],
+			
+			{"breakGroup":""},
+			
+			["rope_1","rope_3"],
+			["rope_2","rope_4"],
+			["rope_3","rope_5"],
+			["rope_4","rope_end"],
+			
+			//to frame
+			{"beamSpring":800000,"beamDamp":20},//20
+			{"beamDeform":60000,"beamStrength":170000},
+			{"beamPrecompression":1.0},
+			
+			["flowl4","rope_start"],
+			["flowr5","rope_start"],
+			["flowl6","rope_start"],
+			["flowr7","rope_start"],
+			["flowc","rope_start"],
+			
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":700000,"beamDamp":5},//50
+			{"beamDeform":100000,"beamStrength":150000},
+			{"breakGroup":"rope"},
+			["rope_start", "rope_1",{"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":1.5}],
+			{"breakGroup":""},
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":250.5,"skinDragCoef":15},
+			["rope_4","rope_5","rope_end"],
+			{"dragCoef":25.5,"skinDragCoef":15},
+		],
+		
+	},
+	"heli_tow_parent_noRope": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Rigid Hitch Connector",
+			"value":80,
+		},
+
+		"slotType" : "heli_towhtich",
+		/*
+		"slots": [//TODO cargo slots for career mode wooo
+		["roofroackshithackTODO","", "Roof Accessory"],
+		]*/
+
+		"slots":[
+			["type", "default", "description"]
+			["fullsize_roof_accessory","", "Rotor Roofbar Cargo TEST"],
+			//["fullsize_roof_accessory2","", "Rotor Roofbar Cargo TEST2"],
+		]
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rope_attach", ["heli_rope_attach"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},//0.7
+			{"nodeMaterial":"|NM_PLASTIC"},
+			
+			{"nodeWeight":0.5},//0.5
+			{"group":"heli_rope_attach"},
+			{"nodeWeight":1.5},//0.5
+			["rope_start", 0.0, 0.0, 0.32, {"couplerTag":"tow_hitch","couplerStrength":501000,"couplerRadius":5,"forceAutoCoupling":true,"couplerStartRadius":1}],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			
+			//to frame
+			{"beamSpring":800000,"beamDamp":20},//20
+			{"beamDeform":60000,"beamStrength":170000},
+			{"beamPrecompression":1.0},
+			
+			["flowl4","rope_start"],
+			["flowr5","rope_start"],
+			["flowl6","rope_start"],
+			["flowr7","rope_start"],
+			["flowc","rope_start"],
+			
+		],
+		
+	},
+
+	//COMPARTMENTS
+	//Special use case to recycle fuel tank model as a storage compartment for electrically driven variants
+	"heli_CargoTank_8": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Cargo Compartment (Large)",
+			"value":60,
+		},
+
+		"slotType" : "heli_fueltank",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_fueltank", ["heli_fueltank"]],
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.9},
+			{"nodeMaterial":"|NM_PLASTIC"},//|NM_METAL
+			{"nodeWeight":0.5},
+			{"group":"heli_fueltank"},
+
+			["hfuel1",0.096,-0.108,0.461],
+			["hfuel2",-0.096,-0.108,0.461],
+			["hfuel4",0.096,0.071,0.461],
+			["hfuel5",-0.096,0.071,0.461],
+
+			["hfuel0",0.205,-0.108,0.701 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hfuel3",-0.205,-0.108,0.701{"flammable":60,"particleType":[26,28,29,30,31]}],
+			["hfuel6",0.205,0.145,0.701  {"flammable":40,"particleType":[25,28,29,30,31]}],
+			["hfuel7",-0.205,0.145,0.701 {"flammable":20,"particleType":[26,27,29,30,31]}],
+
+			{"group":""},
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":300000,"beamDamp":50},
+			{"beamDeform":15000,"beamStrength":"FLT_MAX"},
+
+			["hfuel7","hfuel0"],
+			["hfuel7","hfuel4"],
+			["hfuel5","hfuel1"],
+			["hfuel2","hfuel0"],
+			["hfuel4","hfuel5"],
+			["hfuel5","hfuel0"],
+			["hfuel5","hfuel6"],
+			["hfuel2","hfuel1"],
+			["hfuel7","hfuel5"],
+			["hfuel1","hfuel6"],
+			["hfuel7","hfuel6"],
+			["hfuel2","hfuel7"],
+			["hfuel0","hfuel4"],
+			["hfuel6","hfuel0"],
+			["hfuel3","hfuel5"],
+			["hfuel3","hfuel1"],
+			["hfuel1","hfuel4"],
+			["hfuel3","hfuel7"],
+			["hfuel5","hfuel2"],
+			["hfuel0","hfuel1"],
+			["hfuel3","hfuel4"],
+			["hfuel3","hfuel6"],
+			["hfuel0","hfuel3"],
+			["hfuel2","hfuel3"],
+			["hfuel2","hfuel4"],
+			["hfuel6","hfuel4"],
+
+			//fueltank container beams
+
+			{"breakGroup":"fueltank"},
+			{"beamSpring":1000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":300},
+			{"disableMeshBreaking":true,"disableTriangleBreaking":true},
+			["hfuel7","hfuel1"],
+			["hfuel2","hfuel6"],
+			{"disableMeshBreaking":false,"disableTriangleBreaking":false},
+			{"breakGroup":""},
+
+			//to frame
+			{"beamSpring":100000,"beamDamp":150},
+			{"beamDeform":15000,"beamStrength":500000},
+			{"breakGroup":"ftank"},
+
+			["hfuel1","flowc"],
+			["hfuel2","flowc"],
+			["hfuel4","flowc"],
+			["hfuel5","flowc"],
+
+			["hfuel1","flowr5"],
+			["hfuel2","flowr5"],
+			["hfuel4","flowr5"],
+			["hfuel5","flowr5"],
+
+			["hfuel1","flowr7"],
+			["hfuel2","flowr7"],
+			["hfuel4","flowr7"],
+			["hfuel5","flowr7"],
+
+			["hfuel1","flowl4"],
+			["hfuel2","flowl4"],
+			["hfuel4","flowl4"],
+			["hfuel5","flowl4"],
+
+			["hfuel1","flowl6"],
+			["hfuel2","flowl6"],
+			["hfuel4","flowl6"],
+			["hfuel5","flowl6"],
+
+			["hfuel3","flowl2"],
+			["hfuel0","flowl2"],
+			["hfuel3","flowr3"],
+			["hfuel0","flowr3"],
+
+
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+
+			["hfuel4","hfuel6","hfuel0"],
+			["hfuel1","hfuel4","hfuel0"],
+			["hfuel0","hfuel2","hfuel1"],
+			["hfuel3","hfuel2","hfuel0"],
+			["hfuel2","hfuel3","hfuel5"],
+			["hfuel7","hfuel5","hfuel3"],
+			["hfuel5","hfuel7","hfuel4"],
+			["hfuel6","hfuel4","hfuel7"],
+			["hfuel6","hfuel3","hfuel0"],
+			["hfuel7","hfuel3","hfuel6"],
+			["hfuel1","hfuel2","hfuel4"],
+			["hfuel5","hfuel4","hfuel2"],
+
+		],
+		//Pay attention to this section in future BNG updates for liquid transport
+		//https://docs.beamng.com/modding/vehicle/sections/cargostorage/
+		//last updated 2024-01-30
+		"cargoStorage":[
+			["name","cargoTypes", "capacity","weightNodes:"],
+			["Cargo Tank",["parcel"], 8, ["hfuel0","hfuel1","hfuel2","hfuel3","hfuel4","hfuel5","hfuel6","hfuel7"]],
+		],
+
+	},
+
+	"heli_CargoTank_4": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Cargo Compartment (Small)",
+			"value":37,
+		},
+
+		"slotType" : "heli_fueltank",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_fueltank", ["heli_fueltank"]],
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.9},
+			{"nodeMaterial":"|NM_PLASTIC"},//|NM_METAL
+			{"nodeWeight":0.5},
+			{"group":"heli_fueltank"},
+
+			["hfuel1",0.096,-0.108,0.461],
+			["hfuel2",-0.096,-0.108,0.461],
+			["hfuel4",0.096,0.071,0.461],
+			["hfuel5",-0.096,0.071,0.461],
+
+			["hfuel0",0.205,-0.108,0.701 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hfuel3",-0.205,-0.108,0.701{"flammable":60,"particleType":[26,28,29,30,31]}],
+			["hfuel6",0.205,0.145,0.701  {"flammable":40,"particleType":[25,28,29,30,31]}],
+			["hfuel7",-0.205,0.145,0.701 {"flammable":20,"particleType":[26,27,29,30,31]}],
+
+			{"group":""},
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":300000,"beamDamp":50},
+			{"beamDeform":15000,"beamStrength":"FLT_MAX"},
+
+			["hfuel7","hfuel0"],
+			["hfuel7","hfuel4"],
+			["hfuel5","hfuel1"],
+			["hfuel2","hfuel0"],
+			["hfuel4","hfuel5"],
+			["hfuel5","hfuel0"],
+			["hfuel5","hfuel6"],
+			["hfuel2","hfuel1"],
+			["hfuel7","hfuel5"],
+			["hfuel1","hfuel6"],
+			["hfuel7","hfuel6"],
+			["hfuel2","hfuel7"],
+			["hfuel0","hfuel4"],
+			["hfuel6","hfuel0"],
+			["hfuel3","hfuel5"],
+			["hfuel3","hfuel1"],
+			["hfuel1","hfuel4"],
+			["hfuel3","hfuel7"],
+			["hfuel5","hfuel2"],
+			["hfuel0","hfuel1"],
+			["hfuel3","hfuel4"],
+			["hfuel3","hfuel6"],
+			["hfuel0","hfuel3"],
+			["hfuel2","hfuel3"],
+			["hfuel2","hfuel4"],
+			["hfuel6","hfuel4"],
+
+			//fueltank container beams
+
+			{"breakGroup":"fueltank"},
+			{"beamSpring":1000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":300},
+			{"disableMeshBreaking":true,"disableTriangleBreaking":true},
+			["hfuel7","hfuel1"],
+			["hfuel2","hfuel6"],
+			{"disableMeshBreaking":false,"disableTriangleBreaking":false},
+			{"breakGroup":""},
+
+			//to frame
+			{"beamSpring":100000,"beamDamp":150},
+			{"beamDeform":15000,"beamStrength":500000},
+			{"breakGroup":"ftank"},
+
+			["hfuel1","flowc"],
+			["hfuel2","flowc"],
+			["hfuel4","flowc"],
+			["hfuel5","flowc"],
+
+			["hfuel1","flowr5"],
+			["hfuel2","flowr5"],
+			["hfuel4","flowr5"],
+			["hfuel5","flowr5"],
+
+			["hfuel1","flowr7"],
+			["hfuel2","flowr7"],
+			["hfuel4","flowr7"],
+			["hfuel5","flowr7"],
+
+			["hfuel1","flowl4"],
+			["hfuel2","flowl4"],
+			["hfuel4","flowl4"],
+			["hfuel5","flowl4"],
+
+			["hfuel1","flowl6"],
+			["hfuel2","flowl6"],
+			["hfuel4","flowl6"],
+			["hfuel5","flowl6"],
+
+			["hfuel3","flowl2"],
+			["hfuel0","flowl2"],
+			["hfuel3","flowr3"],
+			["hfuel0","flowr3"],
+
+
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+
+			["hfuel4","hfuel6","hfuel0"],
+			["hfuel1","hfuel4","hfuel0"],
+			["hfuel0","hfuel2","hfuel1"],
+			["hfuel3","hfuel2","hfuel0"],
+			["hfuel2","hfuel3","hfuel5"],
+			["hfuel7","hfuel5","hfuel3"],
+			["hfuel5","hfuel7","hfuel4"],
+			["hfuel6","hfuel4","hfuel7"],
+			["hfuel6","hfuel3","hfuel0"],
+			["hfuel7","hfuel3","hfuel6"],
+			["hfuel1","hfuel2","hfuel4"],
+			["hfuel5","hfuel4","hfuel2"],
+
+		],
+		//Pay attention to this section in future BNG updates for liquid transport
+		//https://docs.beamng.com/modding/vehicle/sections/cargostorage/
+		//last updated 2024-01-30
+		"cargoStorage":[
+			["name","cargoTypes", "capacity","weightNodes:"],
+			["Cargo Tank",["parcel"], 4, ["heli_fueltank"]],
+		],
+
+	},
+
+
+	"heli_CargoRad1": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Small Cargo Box",
+			"value":25,
+		},
+
+		"slotType" : "heli_rad",
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rad_1", ["heli_rad_1"]],
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.5},
+			{"group":"heli_rad_1"},
+
+			["hrad0",0.183,0.209,1.134],
+			["hrad1",-0.183,0.209,1.134],
+
+			["hrad2",0.183,0.217,1.08],
+			["hrad3",-0.183,0.217,1.08],
+			["hrad4",0.183,0.421,1.08],
+			["hrad5",0.183,0.421,1.134],
+			["hrad6",-0.183,0.421,1.08],
+			["hrad7",-0.183,0.421,1.134],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"beamSpring":90000,"beamDamp":160},
+			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+
+			["hrad1","hrad5"],
+			["hrad1","hrad6"],
+			["hrad2","hrad6"],
+			["hrad0","hrad4"],
+			["hrad0","hrad5"],
+			["hrad0","hrad7"],
+			["hrad2","hrad4"],
+			["hrad0","hrad1"],
+			["hrad1","hrad7"],
+			["hrad4","hrad7"],
+			["hrad6","hrad5"],
+			["hrad6","hrad7"],
+			["hrad2","hrad1"],
+			["hrad3","hrad4"],
+			["hrad4","hrad5"],
+			["hrad3","hrad0"],
+			["hrad3","hrad1"],
+			["hrad2","hrad0"],
+			["hrad4","hrad6"],
+			["hrad3","hrad7"],
+			["hrad3","hrad6"],
+			["hrad2","hrad3"],
+			["hrad2","hrad5"],
+			["hrad5","hrad7"],
+
+			//rad to frame
+			{"beamSpring":100000,"beamDamp":160},
+			{"beamDeform":5000,"beamStrength":12000},
+			{"breakGroup":"hrad"},
+
+			["hrad6","helimidr9"],
+			["hrad6","helimidl7"],
+			["hrad6","helimidr8"],
+			["hrad6","helimidl6"],
+			["hrad3","helimidr9"],
+			["hrad3","helimidl7"],
+			["hrad3","helimidr8"],
+			["hrad3","helimidl6"],
+			["hrad2","helimidr9"],
+			["hrad2","helimidl7"],
+			["hrad2","helimidr8"],
+			["hrad2","helimidl6"],
+			["hrad4","helimidr9"],
+			["hrad4","helimidl7"],
+			["hrad4","helimidr8"],
+			["hrad4","helimidl6"],
+
+			{"breakGroup":""},
+
+			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
+			{"deformGroup":"Upper Storage Box"},
+			["hrad1","hrad4" {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hrad0","hrad6" {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"deformGroup":""}
+
+		],
+
+		"quads":[
+			["id1:", "id2:", "id3:", "id4:"],
+			{"dragCoef":5.5},
+			// core
+			["hrad1", "hrad0", "hrad5", "hrad7"],
+			["hrad1", "hrad7", "hrad6", "hrad3"],
+			["hrad7", "hrad5", "hrad4", "hrad6"],
+			["hrad5", "hrad0", "hrad2", "hrad4"],
+			["hrad2", "hrad3", "hrad6", "hrad4"],
+			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+		],
+		//Pay attention to this section in future BNG updates for liquid transport
+		//https://docs.beamng.com/modding/vehicle/sections/cargostorage/
+		//last updated 2024-01-30
+		"cargoStorage":[
+			["name","cargoTypes", "capacity","weightNodes:"],
+			["Cargo Tank",["parcel"], 4, ["heli_fueltank"]],
+		],
+
+	},
+
 }
