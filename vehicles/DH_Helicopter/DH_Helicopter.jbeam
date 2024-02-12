@@ -39,7 +39,7 @@
 			{"selfCollision":false}
 			{"collision":false}
 			{"beamSpring":37930,"beamDamp":50},
-			["Rear",   0.0, 3.29, 1.93, 90, "helimidr9","helimidl7","helimidr8","helimidl6","helimid10","helimid5"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":12}],//0,2.99,1.43
+			["Rear",   0.0, 3.29, 1.93, 90, "helimidr9","helimidl7","flowr9","flowl8","helimid10","helimid5"{"beamDeform":5000,"beamStrength":12000,"order":12,"collision":false}],//"helimidr9","helimidl7","helimidr8","helimidl6","helimid10","helimid5" 0,2.99,1.43
 			{"beamSpring":930,"beamDamp":50},
 			["pilot", 0.0, -0.46, 1.20, 90, "flowl6","flowr7","flowl4","flowr5","flowl2","flowr3"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":11}],
 			["driver", 0.0, -0.46, 1.20, 90, "flowl6","flowr7","flowl4","flowr5","flowl2","flowr3"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":11}],

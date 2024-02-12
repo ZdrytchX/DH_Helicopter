@@ -7,7 +7,7 @@
     "Derby Class":"Helicopter",
 	"Author":"Darren9",
 	"Years":{"min":1960, "max":2025},
-	"default_pc":"HeliTorque",
+	"default_pc":"torqueTraining",
     "default_color":"Lime Green",
     "colors":{
 		"Black": "0 0 0 0.9"

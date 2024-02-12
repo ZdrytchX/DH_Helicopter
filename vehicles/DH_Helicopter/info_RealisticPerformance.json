@@ -1,0 +1,32 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"Hardcore Simmer",
+    "Transmission":"Belt Drive",
+    "Description":"For the hardcore only. This helicopter comes with real-world performance characteristics with configurable parts. Some parts are still WIP, but the rotor system is otherwise set somewhat close to real-world aerodynamic values. BEWARE!: Rotor stalls are deadly!",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+  "Years":{"min":1960, "max":1975},
+    "Value":5350,
+    "Performance Class":"Payload 50kg, Speed 95mph",
+    "Top Speed":46,
+	"Torque":128,
+	"TorquePeakRPM":"3300",
+	"Power":66,
+	"PowerPeakRPM":"3550",
+	"Max RPM":"3600",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":35000
+}

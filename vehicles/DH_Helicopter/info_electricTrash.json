@@ -1,7 +1,7 @@
 {
     "Configuration":"Trashed Trainer",
     "Transmission":"Belt Drive",
-    "Description":"Looks like someone found some rusty trash on the side of the road... Maybe it still runs since it has some car batteries in it?",
+    "Description":"Looks like someone found some rusty trash on the side of the road... Maybe it still runs since it has some car batteries in it? (Side note: This helicopter has been reconfigured with realistic rotor lift/drag values)",
     "Drivetrain":"Shaft",
     "Fuel Type":"Battery",
 	"Propulsion":"Electric",

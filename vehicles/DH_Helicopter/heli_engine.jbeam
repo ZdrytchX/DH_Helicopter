@@ -346,7 +346,7 @@
 			"dynamicFriction":0.00025,//0.022
             "electricalEfficiency": 0.96,//0.96 from in-game values
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
-			"energyStorage": "mainBattery",
+			"energyStorage": ["mainBattery","fuelTankBattery"],
 			"requiredEnergyType":"electricEnergy",
 
 
@@ -464,7 +464,7 @@
 				[500,50],
 				[1000,80],
 				[2000,100],
-				[3500,100],
+				[2500,100],
 				[3000,5],//slope off for safety
 				[3500,0],
 			],
@@ -485,7 +485,7 @@
 			"dynamicFriction":0.00055,//0.022
             "electricalEfficiency": 0.87,//apparently 93% efficiency is still quite generous but this shit generates way too much heat
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
-			"energyStorage": "mainBattery",
+			"energyStorage": ["mainBattery","fuelTankBattery"],
 			"requiredEnergyType":"electricEnergy",
 
 
@@ -595,7 +595,7 @@
 				[500,50],
 				[1000,80],
 				[2000,100],
-				[3500,100],
+				[2500,100],
 				[3000,5],//slope off for safety
 				[3500,0],
 			],
@@ -616,7 +616,7 @@
 			"dynamicFriction":0.00055,//0.022
             "electricalEfficiency": 0.93,//apparently 93% efficiency is still quite generous but this shit generates way too much heat
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
-			"energyStorage": "mainBattery",
+			"energyStorage": ["mainBattery","fuelTankBattery"],
 			"requiredEnergyType":"electricEnergy",
 
 
@@ -745,11 +745,11 @@
 			"regenThrottle":0.5,
 
             "inertia": 0.03,
-            "friction": 3.2,
+            "friction": 3.9,
 			"dynamicFriction":0.00325,//0.022
             "electricalEfficiency": 0.65,
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
-			"energyStorage": "mainBattery",
+			"energyStorage": ["mainBattery","fuelTankBattery"],
 			"requiredEnergyType":"electricEnergy",
 
 
@@ -2294,8 +2294,8 @@
 			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
-
-			{"group":""},
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"selfIgnitionCoef":false,"baseTemp":false,"smokePoint":false,"conductionRadius":0},
+			{"group":"","engineGroup":false},
 
 		],
 
@@ -2424,7 +2424,8 @@
 			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
 
-			{"group":""},
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"selfIgnitionCoef":false,"baseTemp":false,"smokePoint":false},//"conductionRadius":0 is default
+			{"group":"","engineGroup":""},
 
 		],
 
@@ -2554,7 +2555,8 @@
 			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
 
-			{"group":""},
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"selfIgnitionCoef":false,"baseTemp":false,"smokePoint":false},
+			{"group":"","engineGroup":""},
 
 		],
 
@@ -2686,7 +2688,8 @@
 			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
 
-			{"group":""},
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"specHeat":false,"selfIgnitionCoef":false,"baseTemp":false,"smokePoint":false},
+			{"group":"","engineGroup":""},
 
 		],
 
@@ -2780,15 +2783,15 @@
 
 		"flexbodies": [
 			["mesh", "[group]:", "nonFlexMaterials"],
-			["heli_rad_1", ["heli_rad_1"]],
+			["heli_fueltank", ["heli_fueltank"]],
 		],
 
 		"energyStorage": [
 			["type", "name"],
-			["electricBattery", "mainBattery"],
+			["electricBattery", "fuelTankBattery"],
 		],
 
-        "mainBattery": {
+        "fuelTankBattery": {
             "energyType": "electricEnergy",
             "batteryCapacity": 0.4,//
             "startingCapacity": 0.4,
@@ -2796,104 +2799,287 @@
 
 		"nodes":[
 			["id", "posX", "posY", "posZ"],
-			{"selfCollision":false}
+			{"selfCollision":true}
 			{"collision":true}
-			{"frictionCoef":0.7},
+			{"frictionCoef":0.9},
 			{"nodeMaterial":"|NM_PLASTIC"},
-			{"nodeWeight":6},//TIL, a 200 amp hour 12V car battery weighs approximately 24kg
-			{"group":"heli_rad_1"},
-			{"engineGroup":"radiator"}
+			{"nodeWeight":3},
+			{"group":"heli_fueltank"},
 
-			["hrad0",0.183,0.209,1.134],
-			["hrad1",-0.183,0.209,1.134],
+			["hfuel1",0.096,-0.108,0.461],
+			["hfuel2",-0.096,-0.108,0.461],
+			["hfuel4",0.096,0.071,0.461],
+			["hfuel5",-0.096,0.071,0.461],
 
 			{"engineGroup":"fuel"}
-			{"chemEnergy":72,"burnRate":0.1,"flashPoint":800,"vaporPoint":97,"specHeat":2,"selfIgnitionCoef":0.1,"smokePoint":337,"containerBeam":"fuelTank","baseTemp":"thermals","conductionRadius":0.15},
-			["hrad2",0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["hrad3",-0.183,0.217,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["hrad4",0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["hrad5",0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["hrad6",-0.183,0.421,1.08 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["hrad7",-0.183,0.421,1.134 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"chemEnergy":0.2,"burnRate":1.2,"flashPoint":220,"vaporPoint":97,"specHeat":0.03,"selfIgnitionCoef":0.03,"smokePoint":220,"containerBeam":"fuelTank"},
 
+			["hfuel0",0.205,-0.108,0.701 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hfuel3",-0.205,-0.108,0.701{"flammable":60,"particleType":[26,28,29,30,31]}],
+			["hfuel6",0.205,0.145,0.701  {"flammable":40,"particleType":[25,28,29,30,31]}],
+			["hfuel7",-0.205,0.145,0.701 {"flammable":20,"particleType":[26,27,29,30,31]}],
+
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"vaporPoint":false,"specHeat":false,"selfIgnitionCoef":false,"smokePoint":false,"containerBeam":false},
 			{"group":""},
-
+			{"engineGroup":""}
 		],
 
 		"beams":[
 			["id1:", "id2:"],
-			{"breakGroupType":0},
-			{"optional":true},
-			{"beamSpring":90000,"beamDamp":160},
-			{"beamDeform":90000,"beamStrength":"FLT_MAX"},
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":300000,"beamDamp":50},
+			{"beamDeform":15000,"beamStrength":"FLT_MAX"},
 
-			["hrad1","hrad5"],
-			["hrad1","hrad6"],
-			["hrad2","hrad6"],
-			["hrad0","hrad4"],
-			["hrad0","hrad5"],
-			["hrad0","hrad7"],
-			["hrad2","hrad4"],
-			["hrad0","hrad1"],
-			["hrad1","hrad7"],
-			["hrad4","hrad7"],
-			["hrad6","hrad5"],
-			["hrad6","hrad7"],
-			["hrad2","hrad1"],
-			["hrad3","hrad4"],
-			["hrad4","hrad5"],
-			["hrad3","hrad0"],
-			["hrad3","hrad1"],
-			["hrad2","hrad0"],
-			["hrad4","hrad6"],
-			["hrad3","hrad7"],
-			["hrad3","hrad6"],
-			["hrad2","hrad3"],
-			["hrad2","hrad5"],
-			["hrad5","hrad7"],
+			["hfuel7","hfuel0"],
+			["hfuel7","hfuel4"],
+			["hfuel5","hfuel1"],
+			["hfuel2","hfuel0"],
+			["hfuel4","hfuel5"],
+			["hfuel5","hfuel0"],
+			["hfuel5","hfuel6"],
+			["hfuel2","hfuel1"],
+			["hfuel7","hfuel5"],
+			["hfuel1","hfuel6"],
+			["hfuel7","hfuel6"],
+			["hfuel2","hfuel7"],
+			["hfuel0","hfuel4"],
+			["hfuel6","hfuel0"],
+			["hfuel3","hfuel5"],
+			["hfuel3","hfuel1"],
+			["hfuel1","hfuel4"],
+			["hfuel3","hfuel7"],
+			["hfuel5","hfuel2"],
+			["hfuel0","hfuel1"],
+			["hfuel3","hfuel4"],
+			["hfuel3","hfuel6"],
+			["hfuel0","hfuel3"],
+			["hfuel2","hfuel3"],
+			["hfuel2","hfuel4"],
+			["hfuel6","hfuel4"],
 
-			//rad to frame
-			{"beamSpring":100000,"beamDamp":160},
-			{"beamDeform":5000,"beamStrength":9000},
-			{"breakGroup":"hrad"},
+			//fueltank container beams
 
-			["hrad6","helimidr9"],
-			["hrad6","helimidl7"],
-			["hrad6","helimidr8"],
-			["hrad6","helimidl6"],
-			["hrad3","helimidr9"],
-			["hrad3","helimidl7"],
-			["hrad3","helimidr8"],
-			["hrad3","helimidl6"],
-			["hrad2","helimidr9"],
-			["hrad2","helimidl7"],
-			["hrad2","helimidr8"],
-			["hrad2","helimidl6"],
-			["hrad4","helimidr9"],
-			["hrad4","helimidl7"],
-			["hrad4","helimidr8"],
-			["hrad4","helimidl6"],
-
+			{"breakGroup":"fueltank"},
+			{"beamSpring":1000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":300},
+			{"disableMeshBreaking":true,"disableTriangleBreaking":true},
+			["hfuel7","hfuel1",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hfuel2","hfuel6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"disableMeshBreaking":false,"disableTriangleBreaking":false},
 			{"breakGroup":""},
 
-			{"beamDeform":1000,"beamStrength":"FLT_MAX"},
-			{"deformGroup":"radiator_damage","deformationTriggerRatio":0.0001},
-			["hrad1","hrad4",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
-			["hrad0","hrad6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
-			{"deformGroup":""}
+			//to frame
+			{"beamSpring":100000,"beamDamp":150},
+			{"beamDeform":15000,"beamStrength":500000},
+			{"breakGroup":"ftank"},
+
+			["hfuel1","flowc"],
+			["hfuel2","flowc"],
+			["hfuel4","flowc"],
+			["hfuel5","flowc"],
+
+			["hfuel1","flowr5"],
+			["hfuel2","flowr5"],
+			["hfuel4","flowr5"],
+			["hfuel5","flowr5"],
+
+			["hfuel1","flowr7"],
+			["hfuel2","flowr7"],
+			["hfuel4","flowr7"],
+			["hfuel5","flowr7"],
+
+			["hfuel1","flowl4"],
+			["hfuel2","flowl4"],
+			["hfuel4","flowl4"],
+			["hfuel5","flowl4"],
+
+			["hfuel1","flowl6"],
+			["hfuel2","flowl6"],
+			["hfuel4","flowl6"],
+			["hfuel5","flowl6"],
+
+			["hfuel3","flowl2"],
+			["hfuel0","flowl2"],
+			["hfuel3","flowr3"],
+			["hfuel0","flowr3"],
+
+
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			{"dragCoef":5.5},
+
+			["hfuel4","hfuel6","hfuel0"],
+			["hfuel1","hfuel4","hfuel0"],
+			["hfuel0","hfuel2","hfuel1"],
+			["hfuel3","hfuel2","hfuel0"],
+			["hfuel2","hfuel3","hfuel5"],
+			["hfuel7","hfuel5","hfuel3"],
+			["hfuel5","hfuel7","hfuel4"],
+			["hfuel6","hfuel4","hfuel7"],
+			["hfuel6","hfuel3","hfuel0"],
+			["hfuel7","hfuel3","hfuel6"],
+			["hfuel1","hfuel2","hfuel4"],
+			["hfuel5","hfuel4","hfuel2"],
 
 		],
 
-		"quads":[
-			["id1:", "id2:", "id3:", "id4:"],
+	},
+
+	"heli_battery_700wh": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"700Wh AGM Car Battery (42kg)",
+			"value":120,
+		},
+
+		"slotType" : "heli_fueltank",
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_fueltank", ["heli_fueltank"]],
+		],
+
+		"energyStorage": [
+			["type", "name"],
+			["electricBattery", "fuelTankBattery"],
+		],
+
+        "fuelTankBattery": {
+            "energyType": "electricEnergy",
+            "batteryCapacity": 0.4,//
+            "startingCapacity": 0.4,
+        },
+
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.9},
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":5.25},
+			{"group":"heli_fueltank"},
+
+			["hfuel1",0.096,-0.108,0.461],
+			["hfuel2",-0.096,-0.108,0.461],
+			["hfuel4",0.096,0.071,0.461],
+			["hfuel5",-0.096,0.071,0.461],
+
+			{"engineGroup":"fuel"}
+			{"chemEnergy":0.5,"burnRate":1.2,"flashPoint":220,"vaporPoint":97,"specHeat":0.03,"selfIgnitionCoef":0.03,"smokePoint":220,"containerBeam":"fuelTank"},
+
+			["hfuel0",0.205,-0.108,0.701 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["hfuel3",-0.205,-0.108,0.701{"flammable":60,"particleType":[26,28,29,30,31]}],
+			["hfuel6",0.205,0.145,0.701  {"flammable":40,"particleType":[25,28,29,30,31]}],
+			["hfuel7",-0.205,0.145,0.701 {"flammable":20,"particleType":[26,27,29,30,31]}],
+
+			{"chemEnergy":false,"burnRate":false,"flashPoint":false,"vaporPoint":false,"specHeat":false,"selfIgnitionCoef":false,"smokePoint":false,"containerBeam":false},
+			{"group":""},
+			{"engineGroup":""}
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":300000,"beamDamp":50},
+			{"beamDeform":15000,"beamStrength":"FLT_MAX"},
+
+			["hfuel7","hfuel0"],
+			["hfuel7","hfuel4"],
+			["hfuel5","hfuel1"],
+			["hfuel2","hfuel0"],
+			["hfuel4","hfuel5"],
+			["hfuel5","hfuel0"],
+			["hfuel5","hfuel6"],
+			["hfuel2","hfuel1"],
+			["hfuel7","hfuel5"],
+			["hfuel1","hfuel6"],
+			["hfuel7","hfuel6"],
+			["hfuel2","hfuel7"],
+			["hfuel0","hfuel4"],
+			["hfuel6","hfuel0"],
+			["hfuel3","hfuel5"],
+			["hfuel3","hfuel1"],
+			["hfuel1","hfuel4"],
+			["hfuel3","hfuel7"],
+			["hfuel5","hfuel2"],
+			["hfuel0","hfuel1"],
+			["hfuel3","hfuel4"],
+			["hfuel3","hfuel6"],
+			["hfuel0","hfuel3"],
+			["hfuel2","hfuel3"],
+			["hfuel2","hfuel4"],
+			["hfuel6","hfuel4"],
+
+			//fueltank container beams
+
+			{"breakGroup":"fueltank"},
+			{"beamSpring":1000,"beamDamp":20},
+			{"beamDeform":"FLT_MAX","beamStrength":300},
+			{"disableMeshBreaking":true,"disableTriangleBreaking":true},
+			["hfuel7","hfuel1",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			["hfuel2","hfuel6",{"containerBeam": "fuelTank", "highlight":{"radius":0.005, "col":"#ff0000ff" }}],
+			{"disableMeshBreaking":false,"disableTriangleBreaking":false},
+			{"breakGroup":""},
+
+			//to frame
+			{"beamSpring":100000,"beamDamp":150},
+			{"beamDeform":15000,"beamStrength":500000},
+			{"breakGroup":"ftank"},
+
+			["hfuel1","flowc"],
+			["hfuel2","flowc"],
+			["hfuel4","flowc"],
+			["hfuel5","flowc"],
+
+			["hfuel1","flowr5"],
+			["hfuel2","flowr5"],
+			["hfuel4","flowr5"],
+			["hfuel5","flowr5"],
+
+			["hfuel1","flowr7"],
+			["hfuel2","flowr7"],
+			["hfuel4","flowr7"],
+			["hfuel5","flowr7"],
+
+			["hfuel1","flowl4"],
+			["hfuel2","flowl4"],
+			["hfuel4","flowl4"],
+			["hfuel5","flowl4"],
+
+			["hfuel1","flowl6"],
+			["hfuel2","flowl6"],
+			["hfuel4","flowl6"],
+			["hfuel5","flowl6"],
+
+			["hfuel3","flowl2"],
+			["hfuel0","flowl2"],
+			["hfuel3","flowr3"],
+			["hfuel0","flowr3"],
+
+
+			{"breakGroup":""},
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
 			{"dragCoef":5.5},
-			// core
-			["hrad1", "hrad0", "hrad5", "hrad7"],
-			["hrad1", "hrad7", "hrad6", "hrad3"],
-			["hrad7", "hrad5", "hrad4", "hrad6"],
-			["hrad5", "hrad0", "hrad2", "hrad4"],
-			["hrad2", "hrad3", "hrad6", "hrad4"],
-			["hrad0", "hrad1", "hrad3", "hrad2"],
+
+			["hfuel4","hfuel6","hfuel0"],
+			["hfuel1","hfuel4","hfuel0"],
+			["hfuel0","hfuel2","hfuel1"],
+			["hfuel3","hfuel2","hfuel0"],
+			["hfuel2","hfuel3","hfuel5"],
+			["hfuel7","hfuel5","hfuel3"],
+			["hfuel5","hfuel7","hfuel4"],
+			["hfuel6","hfuel4","hfuel7"],
+			["hfuel6","hfuel3","hfuel0"],
+			["hfuel7","hfuel3","hfuel6"],
+			["hfuel1","hfuel2","hfuel4"],
+			["hfuel5","hfuel4","hfuel2"],
 
 		],
 

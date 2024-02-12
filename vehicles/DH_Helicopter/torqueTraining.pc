@@ -50,7 +50,7 @@
     "heli_frame_mid":"heli_frame_mid",
     "heli_rad":"heli_battery_3200wh",
     "heli_missiles":"",
-    "heli_rotor":"heli_rotor_expert_fixed",
+    "heli_rotor":"heli_rotor_old",
     "heli_seat":"heli_seat",
     "heli_swash":"heli_swash3",
     "heli_tail":"heli_tail",
@@ -66,6 +66,7 @@
     "$tailrotorangle":0.085,
     "$torque1":116,
     "$torque2":130,
+    "$torque3":150,
     "$yawLeftLimit":1.035,
     "$yawRightLimit":0.965
   }
