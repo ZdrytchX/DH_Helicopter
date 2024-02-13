@@ -122,7 +122,7 @@
 		"slots": [
 			["type", "default", "description"]
 			["heli_transmission","heli_transmission", "Transmission"],
-			["heli_dh80limiter","heli_engine_limiter_dh80_4200", "Tuning Configuration",{"coreSlot":true}],
+			["heli_dh80limiter","heli_engine_limiter_dh80_4200", "Engine - DH80 Tuning Configuration",{"coreSlot":true}],
 		],
 
 		"flexbodies": [

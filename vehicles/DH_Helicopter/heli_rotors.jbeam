@@ -12,7 +12,7 @@
 		//ZdrytchX: tail rotor moved to tailboom
 		"slots": [
 			["type", "default", "description"]
-			["heli_rotor_reinforcement","", "Rotor Blade Reinforcement"],
+			["heli_rotor_reinforcement","", "Main Rotor Blade Reinforcement"],
 		],
 		
 		"props": [
@@ -527,7 +527,7 @@
 		
 		"slots": [
 			["type", "default", "description"]
-			["heli_rotor_reinforcement","", "Rotor Blade Reinforcement"],
+			["heli_rotor_reinforcement","", "Main Rotor Blade Reinforcement"],
 		],
 
 		"props": [
@@ -1073,7 +1073,7 @@
 		
 		"slots": [
 			["type", "default", "description"]
-			["heli_rotor_reinforcement","", "Rotor Blade Reinforcement"],
+			["heli_rotor_reinforcement","", "Main Rotor Blade Reinforcement"],
 		],
 		
 		"props": [
@@ -2183,7 +2183,7 @@
 
 		"slots": [
 			["type", "default", "description"]
-			["heli_rotor_reinforcement","heli_aftermarketTorsionReinforcementWeak", "Rotor Blade Reinforcement"],
+			["heli_rotor_reinforcement","heli_aftermarketTorsionReinforcementWeak", "Main Rotor Blade Reinforcement"],
 		],
 
 		"slotType" : "heli_rotor",
@@ -2764,7 +2764,7 @@
 
 		"slots": [
 			["type", "default", "description"]
-			["heli_rotor_reinforcement","heli_aftermarketTorsionReinforcementWeak", "Rotor Blade Reinforcement"],
+			["heli_rotor_reinforcement","heli_aftermarketTorsionReinforcementWeak", "Main Rotor Blade Reinforcement"],
 		],
 		
 		//ZdrytchX: tail rotor moved to tailboom
@@ -3343,7 +3343,7 @@
 		"slotType" : "heli_rotor_reinforcement",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -11.5, 11.5, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -13.5, 13.5, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
 		],
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
@@ -3365,7 +3365,7 @@
 		"slotType" : "heli_rotor_reinforcement",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -11.5, 11.5, "Main Rotor Blade Twist (Excessive value may break the spar)", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -9.5, 9.5, "Main Rotor Blade Twist (Excessive value may break the spar)", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
 		],
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
