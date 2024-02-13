@@ -13,8 +13,3 @@ I actually don't know how to contact him because his legacy is just that old so 
 
 If anyone has the full story, let me know:
 /u/ZdrytchX || youtube.com/zdrytchx?
-
-***KNOWN BUGS:***
-
-* Not all missions work according to plan, unfortunately. I've excluded them for now.
-* Blade twist at high RPM results in the helicopter flying upside down more efficiently than upright. I'd have to rework the way the swash plate works entirely to fix this.
