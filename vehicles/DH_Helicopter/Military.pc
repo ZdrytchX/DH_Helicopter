@@ -77,7 +77,7 @@
     "$colltuneNeg":0.95,
     "$fuel":15,
     "$idler":2100,
-    "$tailPlaneAngle":-0.179,
+    "$tailPlaneAngle":-10,
     "$tailrotorangle":0.091,
     "$yawLeftLimit":1.077,
     "$yawRightLimit":0.923

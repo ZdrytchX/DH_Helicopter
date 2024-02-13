@@ -746,7 +746,7 @@
 
             "inertia": 0.03,
             "friction": 3.9,
-			"dynamicFriction":0.00325,//0.022
+			"dynamicFriction":0.0325,//0.022
             "electricalEfficiency": 0.65,
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
 			"energyStorage": ["mainBattery","fuelTankBattery"],
@@ -1175,7 +1175,7 @@
 			"idleRPM":"$idler",//1000
 			"particulates":0.035,
 			"burnEfficiency":0.31,
-			"maxTorqueRating":335,//-1
+			"maxTorqueRating":465,//-1
 			"maxOverTorqueDamage":3500,//1000
 			"torque":[
 				["rpm", "torque"]
@@ -1226,7 +1226,7 @@
 			"idleRPM":"$idler",//1000
 			"particulates":0.035,
 			"burnEfficiency":0.31,
-			"maxTorqueRating":320,//-1
+			"maxTorqueRating":420,//-1
 			"maxOverTorqueDamage":2500,//1000
 			"torque":[
 				["rpm", "torque"]
@@ -1275,7 +1275,7 @@
 		"mainEngine": {
 			"maxRPM":"$maximumRPM",
 			"idleRPM":"$idler",
-			"maxTorqueRating":325,//-1
+			"maxTorqueRating":450,//-1
 			"maxOverTorqueDamage":2000,//1000
 		},
 		"clutch": {
@@ -1319,10 +1319,10 @@
 				[3500, 150],
 				[4000, 153],
 				[4200, 148],
-				[4500, 133],
-				[5000, 105],
-				[5500, 79],
-				[6000, 35],
+				[4500, 139],
+				[5000, 120],
+				[5500, 92],
+				[6000, 85],
 			],
 
 			"idleRPM":"$idler",//1000
@@ -1332,7 +1332,7 @@
 			"revLimiterRPMDrop":0,
 			"maxOverRevDamage":30,//300
 			//new values
-			"maxTorqueRating":315,//-1
+			"maxTorqueRating":365,//-1
 			"maxOverTorqueDamage":1800,//1000
 
 		},

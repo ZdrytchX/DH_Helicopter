@@ -1618,7 +1618,7 @@
 
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$torsionPreCompressionAngle", "range", "radians", "Controls", 0, -0.2, 0.2, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -11.5, 11.5, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
 		],
 
 		"slotType" : "heli_rotor",
@@ -2154,7 +2154,7 @@
 		
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
-			{"spring":10000, "damp":50, "deform":25000, "strength":100000, "precompressionAngle":"$torsionPreCompressionAngle"},
+			{"spring":10000, "damp":50, "deform":25000, "strength":100000, "precompressionAngle":"$=$torsionPreCompressionAngle/57.29578"},
 			//rigidify rotors
 			["rotor7", "rotor9", "rotor2", "rotor0"],
 			["rotor21", "rotor10", "rotor5", "rotor26"],
@@ -3337,17 +3337,17 @@
 	{
 		"information":{
 			"authors":"ZdrytchX",
-			"name":"Pre-Tensioned Rotorblade Reinforcement Spar",
+			"name":"Pre-Tensioned Rotorblade Reinforcement",
 			"value":12600,
 		},
 		"slotType" : "heli_rotor_reinforcement",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$torsionPreCompressionAngle", "range", "radians", "Controls", 0, -0.2, 0.2, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -11.5, 11.5, "Main Rotor Blade Twist", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
 		],
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
-			{"spring":5000, "damp":50, "deform":8000, "strength":5000, "precompressionAngle":"$torsionPreCompressionAngle"},
+			{"spring":5000, "damp":50, "deform":8000, "strength":5000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
 			//rigidify rotors
 			["rotor7", "rotor9", "rotor2", "rotor0"],
 			["rotor21", "rotor10", "rotor5", "rotor26"],
@@ -3365,11 +3365,11 @@
 		"slotType" : "heli_rotor_reinforcement",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$torsionPreCompressionAngle", "range", "radians", "Controls", 0, -0.2, 0.2, "Main Rotor Blade Twist (Excessive value may break the spar)", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -11.5, 11.5, "Main Rotor Blade Twist (Excessive value may break the spar)", "Adjust rotor wash-out angle.", 0.01, "Aerodynamic Balancing"]
 		],
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
-			{"spring":3000, "damp":50, "deform":5000, "strength":300, "precompressionAngle":"$torsionPreCompressionAngle"},
+			{"spring":3000, "damp":50, "deform":5000, "strength":300, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
 			//rigidify rotors
 			["rotor7", "rotor9", "rotor2", "rotor0"],
 			["rotor21", "rotor10", "rotor5", "rotor26"],
@@ -4604,10 +4604,10 @@
 		
 		"triangles":[
 			["id1:", "id2:", "id3:"],
-			["tailrotorl5","tailrotorl3","tailrotorl2", {"liftCoef":175,"dragCoef":42}],
-			["tailrotorl5","tailrotorl10","tailrotorl9",{"liftCoef":175,"dragCoef":42}],
-			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":175,"dragCoef":42}],
-			["tailrotorl5","tailrotorl0","tailrotorl1", {"liftCoef":175,"dragCoef":42}],
+			["tailrotorl5","tailrotorl3","tailrotorl2", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl10","tailrotorl9",{"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl0","tailrotorl1", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
 		],
 		
 		"powertrain" : [

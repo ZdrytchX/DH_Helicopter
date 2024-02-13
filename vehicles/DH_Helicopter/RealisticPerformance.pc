@@ -1,6 +1,6 @@
 {
   "format":2,
-  "licenseName":"7QOC476",
+  "licenseName":"8YLB717",
   "mainPartName":"DH_Helicopter",
   "model":"DH_Helicopter",
   "paints":[
@@ -77,15 +77,15 @@
     "$SkidSpring":23000,
     "$SkidTread":0.7,
     "$clutchEngage":800,
-    "$colltune":1.8,
+    "$colltune":1.93,
     "$colltuneNeg":0.87,
     "$fuel":15,
     "$swashStrengthForce":3510000,
-    "$tailHorizontalPlaneAngle":1.125,
-    "$tailPlaneAngle":-0.179,
-    "$tailrotorangle":0.113,
+    "$tailHorizontalPlaneAngle":5,
+    "$tailPlaneAngle":-10,
+    "$tailrotorangle":0.093,
     "$torsionPreCompressionAngle":-0.01,
-    "$yawLeftLimit":1.03,
+    "$yawLeftLimit":1.05,
     "$yawRightLimit":0.937
   }
 }

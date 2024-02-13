@@ -397,7 +397,7 @@
 			["flowl0","flowl8"],
 			//low frame
 			{"beamSpring":"$SkidSpring","beamDamp":100},//800000
-			{"beamDeform":"$SkidSpring - ($SkidSpring / 5)","beamStrength":30000},//4000,FLT_MAX
+			{"beamDeform":"$=$SkidSpring - ($SkidSpring / 5)","beamStrength":30000},//4000,FLT_MAX
 			
 			["flowr9","flowl8"],
 			["flowr1","flowl0"],
@@ -1753,20 +1753,20 @@
 		
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$colltune", "range", "units", "Controls", 1.975, 1.8, 2.5, "Max Collective", "Raise or lower the maximum rotor blade AoA at full collective", 0.005, "Swash Plate - Collective"],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
-			["$colltuneNeg", "range", "units", "Controls", 0.9, 0.8, 1.0, "Minimum Collective", "Raise or lower the negative pitch range of the rotor blade AoA at full down collective", 0.005, "Swash Plate - Collective"],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
+			["$colltune", "range", "units", "Controls", 1.975, 1.8, 2.5, "Max Collective", "Raise or lower the maximum rotor blade AoA at full collective", 0.005, "Swash Plate", {"subCategory":"Collective"}],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
+			["$colltuneNeg", "range", "units", "Controls", 0.9, 0.7, 1.0, "Minimum Collective", "Raise or lower the negative pitch range of the rotor blade AoA at full down collective", 0.005, "Swash Plate", {"subCategory":"Collective"}],//old default 2.155 - 1.975 avoids LTE with standard rotor and standard engine. Old min 1.8 old max 2.2
 			
-			["$CyclicPitchRate", "range", "/s", "Controls", 1.9, 0.2, 50.0, "Pitch Response", "Quickness of the Pitch Axis in (Whole Range/Second)", 0.1, "Swash Plate - Cyclic"],
-			["$CyclicPitchRateExcess", "range", "/s", "Controls", 1.9, 0.1, 25, "Extra Pitch Response", "Extra Artificial curve feel for keyboard user. If undesired set same as response rate", 0.1, "Swash Plate - Cyclic"],
-			["$CyclicRollRate", "range", "/s", "Controls", 1.9, 0.2, 50.0, "Roll Response", "Quickness of the Roll Axis in (Whole Range/Second)", 0.1, "Swash Plate - Cyclic"],
-			["$CyclicRollRateExcess", "range", "/s", "Controls", 1.9, 0.1, 25, "Extra Roll Response", "Extra Artificial curve feel for keyboard users.  If undesired set same as response rate", 0.1, "Swash Plate - Cyclic"],
+			["$CyclicPitchRate", "range", "x/s", "Controls", 1.9, 0.2, 50.0, "Pitch Response", "Quickness of the Pitch Axis in (Whole Range/Second)", 0.1, "Swash Plate", {"subCategory":"Cyclic"}],
+			["$CyclicPitchRateExcess", "range", "x/s", "Controls", 1.9, 0.1, 25, "Extra Pitch Response", "Extra Artificial curve feel for keyboard user. If undesired set same as response rate", 0.1, "Swash Plate", {"subCategory":"Cyclic"}],
+			["$CyclicRollRate", "range", "x/s", "Controls", 1.9, 0.2, 50.0, "Roll Response", "Quickness of the Roll Axis in (Whole Range/Second)", 0.1, "Swash Plate", {"subCategory":"Cyclic"}],
+			["$CyclicRollRateExcess", "range", "x/s", "Controls", 1.9, 0.1, 25, "Extra Roll Response", "Extra Artificial curve feel for keyboard users.  If undesired set same as response rate", 0.1, "Swash Plate", {"subCategory":"Cyclic"}],
 			//["$autoCenterRate", "range", "/s", "Controls", 3, 0.1, 50.0, "Cyclic Auto-Centre rate", "How quick the cyclic is to return to the centre in (Whole Range/Second)", 0.1, "Swash Plate"],
 
-			["$CyclicRangeLowerLimit", "range", "units", "Controls", 0.8, 0.5, 0.9, "Cyclic Lower Deadstop", "Lower Pitch and Roll Range", 0.005, "Swash Plate - Cyclic"],
-			["$CyclicRangeUpperLimit", "range", "units", "Controls", 1.2, 1.1, 1.5, "Cyclic Upper Deadstop", "Upper Pitch and Roll Range", 0.005, "Swash Plate - Cyclic"],
+			["$CyclicRangeLowerLimit", "range", "units", "Controls", 0.8, 0.5, 0.9, "Cyclic Lower Deadstop", "Lower Pitch and Roll Range", 0.005, "Swash Plate", {"subCategory":"Cyclic"}],
+			["$CyclicRangeUpperLimit", "range", "units", "Controls", 1.2, 1.1, 1.5, "Cyclic Upper Deadstop", "Upper Pitch and Roll Range", 0.005, "Swash Plate", {"subCategory":"Cyclic"}],
 			
-			["$CollectiveRate", "range", "/s", "Controls", 4, 0.5, 50.0, "Collective Lift Up Response", "Responsiveness of the Collective Axis in (Whole Range/Second)", 0.5, "Swash Plate - Collective"]
-			["$CollectiveRateDown", "range", "/s", "Controls", 4, 0.5, 50.0, "Collective Lift DownResponse", "Responsiveness of the Collective Axis in (Whole Range/Second)", 0.5, "Swash Plate - Collective"]
+			["$CollectiveRate", "range", "x/s", "Controls", 4, 0.5, 50.0, "Collective Lift Up Response", "Responsiveness of the Collective Axis in (Whole Range/Second)", 0.5, "Swash Plate", {"subCategory":"Collective"}]
+			["$CollectiveRateDown", "range", "x/s", "Controls", 4, 0.5, 50.0, "Collective Lift DownResponse", "Responsiveness of the Collective Axis in (Whole Range/Second)", 0.5, "Swash Plate", {"subCategory":"Collective"}]
 			["$swashStrengthForce", "range", "N", "Controls", 4500000, 210000, 4500000, "Swashplate Strength", "Adjust stiff the controls are.", 45000, "Swash Plate"]
 		],
 		
@@ -2748,8 +2748,8 @@
 		"slotType" : "heli_tail_plane",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$tailPlaneAngle", "range", "units", "Controls", -0.173, -0.2, -0.153, "Vertical Stabiliser angle", "Adjust pre-trimmed stabiliser angle. -0.153 is neutral trimmed", 0.001, "Aerodynamic Balancing"],
-			["$tailHorizontalPlaneAngle", "range", "units", "Controls", 1.203, 1.0, 1.3, "Horizontal Stabiliser angle", "Adjust pre-trimmed stabiliser angle. 1.203 is neutral trimmed. Decrease for nose-down moment while flying forwards.", 0.001, "Aerodynamic Balancing"]
+			["$tailPlaneAngle", "range", "degrees", "Controls", 0, -20, 0, "Vertical Stabiliser angle", "Adjust pre-trimmed stabiliser angle.", 0.001, "Aerodynamic Balancing"],
+			["$tailHorizontalPlaneAngle", "range", "degrees", "Controls", 0, -15, 15, "Horizontal Stabiliser angle", "Adjust pre-trimmed stabiliser angle. Decrease for nose-down moment while flying forwards.", 0.001, "Aerodynamic Balancing"]//0.046792088760250844187168355041 2.680989
 		],
 		
 		"flexbodies": [
@@ -2771,13 +2771,13 @@
 			{"selfCollision":true}
 			{"collision":true}
 			
-			["tailp0","$tailPlaneAngle",1.54,1.203],//-0.153, 1.54, 1.146
+			["tailp0","$= -0.153 + tan($tailPlaneAngle * 0.0089011779)",1.54,1.203],//-0.153, 1.54, 1.146
 			["tailp2",-0.153,2.05,0.925],
 			["tailp3",-0.153,2.05,1.555],
 			
 			//horizontal stabiliser
-			["tailh4",-0.153,1.92,"$tailHorizontalPlaneAngle"],
-			["tailh5",0,1.85,"$tailHorizontalPlaneAngle"],//1.85 makes it line up smoothly with the visual model but adjusting the vert stab changes aero surface area
+			["tailh4",-0.153,1.92,"$=1.203 + tan($tailHorizontalPlaneAngle * 0.01251400893)"],//0.01745329 deg to rad
+			["tailh5",0,1.85,"$=1.203 + tan($tailHorizontalPlaneAngle * 0.01129227863)"],//1.85 makes it line up smoothly with the visual model but adjusting the vert stab changes aero surface area
 			
 			{"group":""},
 		],

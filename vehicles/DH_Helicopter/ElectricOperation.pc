@@ -59,9 +59,5 @@
     "heli_tailrotor1":"heli_tailrotor4",
     "heli_towhtich":"",
     "heli_transmission":""
-  },
-  "vars":{
-    "$fuel":6,
-    "$tailHorizontalPlaneAngle":1.153
   }
 }
