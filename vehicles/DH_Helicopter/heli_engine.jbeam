@@ -1358,8 +1358,9 @@
 			["heli_exhaust_f", ["heli_exhaust"]],
 			["heli_airfilter", ["heli_core"]],
 		],
-
-		
+		"soundConfig": {
+			"$+mainGain":-1.5,
+		},
 	},
 
 	"heli_turbo_stage3": {
