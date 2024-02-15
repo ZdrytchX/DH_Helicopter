@@ -3129,8 +3129,8 @@
 
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$DriveShaftRatio", "range", ":1", "Controls", 8, 4, 16, "Rotor Drive Shaft Ratio", "8:1 is standard. Does not affect tail rotor speed.", 0.1, "Rotors"],
-			["$DiffRatio", "range", "x", "Controls", 1.0, 0.5, 2, "Drive Shaft Ratio", "Final Gear Ratio that affects both main and tail rotors. Higher tail rotor speed doesn't necessarily give you more tail authority due to the way torque is modelled.", 0.01, "Rotors"],
+			["$DriveShaftRatio", "range", ":1", "Controls", 8, 4, 16, "Rotor Drive Shaft Ratio", "8:1 is standard. Does not affect tail rotor speed.", 0.1, "Transmission"],
+			["$DiffRatio", "range", "x", "Controls", 1.0, 0.5, 2, "Drive Shaft Ratio", "Final Gear Ratio that affects both main and tail rotors. Higher tail rotor speed doesn't necessarily give you more tail authority due to the way torque is modelled.", 0.01, "Transmission"],
 		],
 		
 		"powertrain" : [

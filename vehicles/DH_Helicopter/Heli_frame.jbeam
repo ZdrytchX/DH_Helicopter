@@ -3222,9 +3222,8 @@
 		
 		"triangles":[
 			["id1:", "id2:", "id3:"],
-			{"dragCoef":250.5},
-			["rope_4","rope_5","rope_end"],
-			{"dragCoef":5.5},
+			["rope_4","rope_5","rope_end"{"dragCoef":250.5,"skinDragCoef":15},],
+			//{"dragCoef":25.5,"skinDragCoef":15},
 		],
 		
 	},
@@ -3232,7 +3231,7 @@
 	"heli_tow_parent": {
 		"information":{
 			"authors":"ZdrytchX",
-			"name":"Rigid and Rope Hitch Connector (Roofbars Cargo)",
+			"name":"6m Rope Hitch Connector (Roofbars Cargo) with Rigid Hitch",
 			"value":220,
 		},
 
@@ -3244,7 +3243,7 @@
 
 		"slots":[
 			["type", "default", "description"]
-			["fullsize_roof_accessory","", "Rotor Roofbar Cargo TEST"],
+			["fullsize_roof_accessory","heli_roofbars", "Rotor Roofbar Cargo TEST"],
 			//["fullsize_roof_accessory2","", "Rotor Roofbar Cargo TEST2"],
 		]
 		
@@ -3252,11 +3251,11 @@
 			["func", "mesh",       "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
 			//ropes
 			["rpm", "heli_rope_1", "rope_1","rope_start","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_rope_2", "rope_2","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_rope_3", "rope_3","rope_2","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_rope_4", "rope_4","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_rope_5", "rope_5","rope_4","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
-			["rpm", "heli_rope_6", "rope_end","rope_5","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_3","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_5","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_7","rope_5","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_9","rope_7","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end","rope_9","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
 		],
 		
 		"flexbodies": [
@@ -3271,11 +3270,18 @@
 			{"frictionCoef":0.7},//0.7
 			{"nodeMaterial":"|NM_PLASTIC"},
 			{"nodeWeight":0.2},//0.2
+			["rope_0", 0.0, 0.5, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
 			["rope_1", 0.0, 1.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["rope_2", 0.0, 2.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["rope_3", 0.0, 3.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["rope_4", 0.0, 4.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
-			["rope_5", 0.0, 5.0, 0.545, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_2", 0.0, 1.5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_3", 0.0, 2.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_4", 0.0, 2.5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_5", 0.0, 3.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_6", 0.0, 3.5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_7", 0.0, 4.0, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_8", 0.0, 4.5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_9", 0.0, 5.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_10", 0.0, 5.5, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"nodeWeight":0.3},//0.3
 			{"nodeWeight":0.3},//0.3
 			
 			["rope_end", 0.0, 6.0, 0.545, {"couplerTag":"tow_bobsUrUncle","couplerStrength":1001000,"couplerRadius":5}],
@@ -3292,26 +3298,31 @@
 			["id1:", "id2:"],
 			{"breakGroupType":0},
 			{"optional":true},
+			{"beamType":"|ANISOTROPIC"},
 			{"beamSpring":400000,"beamDamp":20},//400000, 20
 			{"beamDeform":400000,"beamStrength":70000},
 			{"breakGroup":"rope"},
 			
-			["rope_start","rope_1"{"name":"Rope"}]
+			["rope_start","rope_0"{"name":"Rope","springExpansion":400000,"transitionZone":1.15}]
 			
-			//{"beamType":"|LBEAM"},//
 			
 			{"breakGroup":""},
-			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamSpring":200,"beamDamp":50},//400000, 20
 			{"beamDeform":400000,"beamStrength":350000},//400000,350000
+			["rope_0","rope_1" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_1","rope_2" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_2","rope_3" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_3","rope_4" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_4","rope_5" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_5","rope_6" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_6","rope_7" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_7","rope_8" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_8","rope_9" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_9","rope_10" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_10","rope_end" {"springExpansion":400000,"transitionZone":1.15}],
 			
-			["rope_1","rope_2"],//look up LBEAM,{"id3:","rope_2"}
-			["rope_2","rope_3"],
-			["rope_3","rope_4"],
-			["rope_4","rope_5"],
-			["rope_5","rope_end"],
-			
-			//pre stiffness
-			{"beamSpring":350,"beamDamp":20},
+			//pre stiffness - look up LBEAM,{"id3:","rope_2"}
+			{"beamSpring":150,"beamDamp":20},
 			{"beamPrecompression":1.02},
 			{"breakGroup":"rope"},
 			
@@ -3319,10 +3330,16 @@
 			
 			{"breakGroup":""},
 			
+			["rope_0","rope_2"],
 			["rope_1","rope_3"],
 			["rope_2","rope_4"],
 			["rope_3","rope_5"],
-			["rope_4","rope_end"],
+			["rope_4","rope_6"],
+			["rope_5","rope_7"],
+			["rope_6","rope_8"],
+			["rope_7","rope_9"],
+			["rope_8","rope_10"],
+			["rope_9","rope_end"],
 			
 			//to frame
 			{"beamSpring":800000,"beamDamp":20},//20
@@ -3335,25 +3352,530 @@
 			["flowr7","rope_start"],
 			["flowc","rope_start"],
 			
+			{"beamPrecompression":1.0, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":700000,"beamDamp":5},//50
+			{"beamDeform":100000,"beamStrength":70000},
+			{"breakGroup":"rope"},
+			["rope_start", "rope_0",{"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":2.5}],
+			{"breakGroup":""},
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["rope_4","rope_5","rope_end"{"dragCoef":250.5,"skinDragCoef":15},],
+			//{"dragCoef":25.5,"skinDragCoef":15},
+		],
+		
+	},
+
+	"heli_tow_parent_long": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"12m Long Rope Hitch Connector (Roofbars Cargo) with Rigid Hitch",
+			"value":250,
+		},
+
+		"slotType" : "heli_towhtich",
+		/*
+		"slots": [//TODO cargo slots for career mode wooo
+		["roofroackshithackTODO","", "Roof Accessory"],
+		]*/
+
+		"slots":[
+			["type", "default", "description"]
+			["fullsize_roof_accessory_long","heli_roofbars_long", "Rotor Roofbar Cargo TEST"],
+		]
+		
+		"props": [
+			["func", "mesh",       "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//ropes
+			["rpm", "heli_rope_1", "rope_0","rope_start","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_1","rope_0","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_2","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_3","rope_2","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_4","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_5","rope_4","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_6","rope_5","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_7","rope_6","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_8","rope_7","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_9","rope_8","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_10","rope_9","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end","rope_10","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rope_attach", ["heli_rope_attach"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},//0.7
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.2},//0.2
+			["rope_0", 0.0, 1, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_1", 0.0, 2.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_2", 0.0, 3, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_3", 0.0, 4, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_4", 0.0, 5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_5", 0.0, 6, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_6", 0.0, 7, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_7", 0.0, 8, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_8", 0.0, 9, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_9", 0.0, 10, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_10", 0.0, 11, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"nodeWeight":0.3},//0.3
+			{"nodeWeight":0.3},//0.3
+			
+			["rope_end", 0.0, 12, 0.545, {"couplerTag":"tow_bobsUrUncle","couplerStrength":1001000,"couplerRadius":5}],
+			
+			{"nodeWeight":0.5},//0.5
+			{"group":"heli_rope_attach"},
+			{"nodeWeight":1.5},//0.5
+			["rope_start", 0.0, 0.0, 0.32, {"couplerTag":"tow_hitch","couplerStrength":501000,"couplerRadius":5,"forceAutoCoupling":true,"couplerStartRadius":1}],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"breakGroup":"rope"},
+			
+			{"beamType":"|ANISOTROPIC"},
+			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamDeform":400000,"beamStrength":70000},
+			{"breakGroup":"rope"},
+			["rope_start","rope_0"{"name":"Rope","springExpansion":400000,"transitionZone":1.15}]
+			
+			{"breakGroup":""},
+			{"beamSpring":200,"beamDamp":50},//400000, 20
+			{"beamDeform":400000,"beamStrength":350000},//400000,350000
+			["rope_0","rope_1" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_1","rope_2" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_2","rope_3" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_3","rope_4" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_4","rope_5" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_5","rope_6" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_6","rope_7" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_7","rope_8" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_8","rope_9" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_9","rope_10" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_10","rope_end" {"springExpansion":400000,"transitionZone":1.15}],
+			
+			//pre stiffness - look up LBEAM,{"id3:","rope_2"}
+			{"beamSpring":150,"beamDamp":20,"beamStrength":262000},
+			{"beamPrecompression":1.02},
+			{"breakGroup":"rope"},
+			
+			["rope_start","rope_1"],
+			
+			{"breakGroup":""},
+			
+			["rope_0","rope_2"],
+			["rope_1","rope_3"],
+			["rope_2","rope_4"],
+			["rope_3","rope_5"],
+			["rope_4","rope_6"],
+			["rope_5","rope_7"],
+			["rope_6","rope_8"],
+			["rope_7","rope_9"],
+			["rope_8","rope_10"],
+			["rope_9","rope_end"],
+			
+			//to frame
+			{"beamSpring":800000,"beamDamp":20},//20
+			{"beamDeform":60000,"beamStrength":170000},
+			{"beamPrecompression":1.0},
+			
+			["flowl4","rope_start"],
+			["flowr5","rope_start"],
+			["flowl6","rope_start"],
+			["flowr7","rope_start"],
+			["flowc","rope_start"],
+			
+			{"beamPrecompression":1.0, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
 		],
 		
 		"hydros": [
 			["id1:","id2:"],
 			{"beamSpring":700000,"beamDamp":5},//50
 			{"beamDeform":100000,"beamStrength":150000},
+			["rope_start", "rope_0",{"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":1.5}],
 			{"breakGroup":"rope"},
-			["rope_start", "rope_1",{"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":1.5}],
 			{"breakGroup":""},
 		],
 		
 		"triangles":[
 			["id1:", "id2:", "id3:"],
-			{"dragCoef":250.5,"skinDragCoef":15},
-			["rope_4","rope_5","rope_end"],
-			{"dragCoef":25.5,"skinDragCoef":15},
+			["rope_9","rope_10","rope_end",{"dragCoef":250.5,"skinDragCoef":15}],
+			//{"dragCoef":25.5,"skinDragCoef":15},
 		],
 		
 	},
+
+	"heli_tow_sling_long": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"12m Long Rope Hitch Connector (Sling Cargo) with Rigid Hitch",
+			"value":250,
+		},
+
+		"slotType" : "heli_towhtich",
+		/*
+		"slots": [//TODO cargo slots for career mode wooo
+		["roofroackshithackTODO","", "Roof Accessory"],
+		]*/
+
+		"slots":[
+			["type", "default", "description"]
+			["heli_sling_load_long","heli_cargo_load_box_XL_12m", "Sling Cargo"],
+		]
+		
+		"props": [
+			["func", "mesh",       "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//ropes
+			["rpm", "heli_rope_1", "rope_0","rope_start","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_1","rope_0","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_2","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_3","rope_2","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_4","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_5","rope_4","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_6","rope_5","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_7","rope_6","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_8","rope_7","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_9","rope_8","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_10","rope_9","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			//quadpod mount for cargo
+			["rpm", "heli_rope_6", "rope_end0","rope_10","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end2","rope_10","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end9","rope_10","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end15","rope_10","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rope_attach", ["heli_rope_attach"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},//0.7
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.2},//0.2
+			["rope_0", 0.0, 1, 0.42, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_1", 0.0, 2, 0.52, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_2", 0.0, 3, 0.73 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_3", 0.0, 4, 0.93 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_4", 0.0, 5, 1.14 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_5", 0.0, 6, 1.35, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_6", 0.0, 7, 1.55 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_7", 0.0, 8, 1.76 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_8", 0.0, 9, 1.86 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_9", 0.0, 10, 2.07, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_10", 0.0, 11, 2.27, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"nodeWeight":0.3},//0.3
+			{"nodeWeight":0.3},//0.3
+			
+			["rope_end0", 0.5, 10.41, 1.5, {"couplerTag":"tow_bobsUrUncle0","couplerStrength":1001000,"couplerRadius":5}],
+			["rope_end2", -0.5, 10.41, 1.5, {"couplerTag":"tow_bobsUrUncle2","couplerStrength":1001000,"couplerRadius":5}],
+			["rope_end9", -0.5, 11.49, 1.5, {"couplerTag":"tow_bobsUrUncle9","couplerStrength":1001000,"couplerRadius":5}],
+			["rope_end15", 0.5, 11.49, 1.5, {"couplerTag":"tow_bobsUrUncle15","couplerStrength":1001000,"couplerRadius":5}],
+
+			
+			{"nodeWeight":0.5},//0.5
+			{"group":"heli_rope_attach"},
+			{"nodeWeight":1.5},//0.5
+			["rope_start", 0.0, 0.0, 0.32, {"couplerTag":"tow_hitch","couplerStrength":501000,"couplerRadius":5,"forceAutoCoupling":true,"couplerStartRadius":1}],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"breakGroup":"rope"},
+
+			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamDeform":400000,"beamStrength":70000},//70000
+			{"breakGroup":"rope"},
+			["rope_start","rope_0"{"name":"Rope"}]//,"springExpansion":400000,"transitionZone":1.15
+						
+			{"beamType":"|ANISOTROPIC"},
+			{"breakGroup":""},
+			{"beamSpring":200,"beamDamp":50},//400000, 20
+			{"beamDeform":400000,"beamStrength":350000},//400000,350000
+			["rope_0","rope_1" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_1","rope_2" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_2","rope_3" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_3","rope_4" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_4","rope_5" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_5","rope_6" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_6","rope_7" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_7","rope_8" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_8","rope_9" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_9","rope_10" {"springExpansion":400000,"transitionZone":1.15}],
+			//hitch to cargo
+			{"beamSpring":15000,"beamDamp":30},//400000, 20
+			["rope_10","rope_end0" {"springExpansion":400000,"transitionZone":1.05}],
+			["rope_10","rope_end2" {"springExpansion":400000,"transitionZone":1.05}],
+			["rope_10","rope_end9" {"springExpansion":400000,"transitionZone":1.05}],
+			["rope_10","rope_end15" {"springExpansion":400000,"transitionZone":1.05}],
+			
+			//pre stiffness - look up LBEAM,{"id3:","rope_2"}
+			{"beamSpring":150,"beamDamp":20,"beamStrength":262000},
+			{"beamPrecompression":1.01},
+			{"breakGroup":"rope"},
+			
+			["rope_start","rope_1"],
+			
+			{"breakGroup":""},
+			
+			["rope_0","rope_2"],
+			["rope_1","rope_3"],
+			["rope_2","rope_4"],
+			["rope_3","rope_5"],
+			["rope_4","rope_6"],
+			["rope_5","rope_7"],
+			["rope_6","rope_8"],
+			["rope_7","rope_9"],
+			["rope_8","rope_10"],
+			["rope_9","rope_end"],
+			
+			//to frame
+			{"beamSpring":800000,"beamDamp":20},//20
+			{"beamDeform":60000,"beamStrength":170000},
+			{"beamPrecompression":1.0},
+			
+			["flowl4","rope_start"],
+			["flowr5","rope_start"],
+			["flowl6","rope_start"],
+			["flowr7","rope_start"],
+			["flowc","rope_start"],
+			
+			{"beamPrecompression":1.0, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":700000,"beamDamp":50},//700000,50
+			{"beamDeform":100000,"beamStrength":150000},//100000,150000
+			{"breakGroup":"rope"},
+			["rope_start", "rope_0",{"beamLongBound":0.1,"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":1.5}],
+			{"breakGroup":""},
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["rope_end2","rope_10","rope_end0",{"dragCoef":5,"skinDragCoef":15}],
+			["rope_end2","rope_10","rope_end9",{"dragCoef":5,"skinDragCoef":15}],
+			["rope_end15","rope_10","rope_end9",{"dragCoef":5,"skinDragCoef":15}],
+			["rope_end15","rope_10","rope_end0",{"dragCoef":5,"skinDragCoef":15}],
+			["rope_8","rope_9","rope_10"{"dragCoef":25.5,"skinDragCoef":15}],
+			//["rope_9","rope_end"{"dragCoef":25.5,"skinDragCoef":15}],
+		],
+		
+	},
+
+	"heli_tow_parent_verylong": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"22m Long Rope Hitch Connector (Roofbars Cargo) with Rigid Hitch",
+			"value":280,
+		},
+
+		"slotType" : "heli_towhtich",
+		/*
+		"slots": [//TODO cargo slots for career mode wooo
+		["roofroackshithackTODO","", "Roof Accessory"],
+		]*/
+
+		"slots":[
+			["type", "default", "description"]
+			["fullsize_roof_accessory_verylong","heli_roofbars_verylong", "Rotor Roofbar Cargo TEST"],
+		]
+		
+		"props": [
+			["func", "mesh",       "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]   
+			//ropes
+			["rpm", "heli_rope_1", "rope_0","rope_start","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_1","rope_0","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_2","rope_1","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_3","rope_2","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_4","rope_3","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_5","rope_4","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_6","rope_5","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_7","rope_6","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_8","rope_7","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_9","rope_8","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_10","rope_9","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_11","rope_10","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_12","rope_11","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_13","rope_12","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_14","rope_13","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_5", "rope_15","rope_14","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_16","rope_15","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_1", "rope_17","rope_16","flowr9",{"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_2", "rope_18","rope_17","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_3", "rope_19","rope_18","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_4", "rope_20","rope_19","flowr9",    {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_rope_6", "rope_end","rope_20","flowr9",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+		
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_rope_attach", ["heli_rope_attach"]],
+		],
+		
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true}
+			{"collision":true}
+			{"frictionCoef":0.7},//0.7
+			{"nodeMaterial":"|NM_PLASTIC"},
+			{"nodeWeight":0.2},//0.2
+			["rope_0", 0.0, 1, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_1", 0.0, 2.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_2", 0.0, 3, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_3", 0.0, 4, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_4", 0.0, 5, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_5", 0.0, 6, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_6", 0.0, 7, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_7", 0.0, 8, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_8", 0.0, 9, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_9", 0.0, 10, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_10", 0.0, 11, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_11", 0.0, 12.0, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_12", 0.0, 13, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_13", 0.0, 14, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_14", 0.0, 15, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_15", 0.0, 16, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_16", 0.0, 17, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_17", 0.0, 18, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_18", 0.0, 19, 0.32 {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_19", 0.0, 20, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			["rope_20", 0.0, 21, 0.32, {"flammable":80,"particleType":[26,28,29,30,31]}],
+			{"nodeWeight":0.3},//0.3
+			{"nodeWeight":0.3},//0.3
+			
+			["rope_end", 0.0, 22, 0.545, {"couplerTag":"tow_bobsUrUncle","couplerStrength":1001000,"couplerRadius":5}],
+			
+			{"nodeWeight":0.5},//0.5
+			{"group":"heli_rope_attach"},
+			{"nodeWeight":1.5},//0.5
+			["rope_start", 0.0, 0.0, 0.32, {"couplerTag":"tow_hitch","couplerStrength":501000,"couplerRadius":5,"forceAutoCoupling":true,"couplerStartRadius":1}],
+			
+			{"group":""},
+		],
+		
+		"beams":[
+			["id1:", "id2:"],
+			{"breakGroupType":0},
+			{"optional":true},
+			{"breakGroup":"rope"},
+			
+			{"beamType":"|ANISOTROPIC"},
+			{"beamSpring":400000,"beamDamp":20},//400000, 20
+			{"beamDeform":400000,"beamStrength":70000},
+			{"breakGroup":"rope"},
+			["rope_start","rope_0"{"name":"Rope","springExpansion":400000,"transitionZone":1.15}]
+			
+			{"breakGroup":""},
+			{"beamSpring":200,"beamDamp":50},//400000, 20
+			{"beamDeform":400000,"beamStrength":350000},//400000,350000
+			["rope_0","rope_1" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_1","rope_2" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_2","rope_3" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_3","rope_4" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_4","rope_5" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_5","rope_6" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_6","rope_7" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_7","rope_8" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_8","rope_9" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_9","rope_10" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_10","rope_11" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_11","rope_12" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_12","rope_13" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_13","rope_14" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_14","rope_15" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_15","rope_16" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_16","rope_17" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_17","rope_18" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_18","rope_19" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_19","rope_20" {"springExpansion":400000,"transitionZone":1.15}],
+			["rope_20","rope_end" {"springExpansion":400000,"transitionZone":1.15}],
+			
+			//pre stiffness - look up LBEAM,{"id3:","rope_2"}
+			{"beamSpring":150,"beamDamp":20,"beamStrength":262000},
+			{"beamPrecompression":1.02},
+			{"breakGroup":"rope"},
+			
+			["rope_start","rope_1"],
+			
+			{"breakGroup":""},
+			
+			["rope_0","rope_2"],
+			["rope_1","rope_3"],
+			["rope_2","rope_4"],
+			["rope_3","rope_5"],
+			["rope_4","rope_6"],
+			["rope_5","rope_7"],
+			["rope_6","rope_8"],
+			["rope_7","rope_9"],
+			["rope_8","rope_10"],
+			["rope_10","rope_12"],
+			["rope_11","rope_13"],
+			["rope_12","rope_14"],
+			["rope_13","rope_15"],
+			["rope_14","rope_16"],
+			["rope_15","rope_17"],
+			["rope_16","rope_18"],
+			["rope_17","rope_19"],
+			["rope_18","rope_20"],
+			["rope_19","rope_end"],
+			
+			//to frame
+			{"beamSpring":800000,"beamDamp":20},//20
+			{"beamDeform":60000,"beamStrength":170000},
+			{"beamPrecompression":1.0},
+			
+			["flowl4","rope_start"],
+			["flowr5","rope_start"],
+			["flowl6","rope_start"],
+			["flowr7","rope_start"],
+			["flowc","rope_start"],
+			
+			{"beamPrecompression":1.0, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
+		],
+		
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":700000,"beamDamp":5},//50
+			{"beamDeform":100000,"beamStrength":150000},
+			["rope_start", "rope_0",{"inputSource":"rope", "inputFactor":-1.0,"inRate":4,"outRate":4,"inLimit":0.5,"outLimit":1.5}],
+			{"breakGroup":"rope"},
+			{"breakGroup":""},
+		],
+		
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["rope_19","rope_20","rope_end",{"dragCoef":250.5,"skinDragCoef":15}],
+			//{"dragCoef":25.5,"skinDragCoef":15},
+		],
+		
+	},
+
+
 	"heli_tow_parent_noRope": {
 		"information":{
 			"authors":"ZdrytchX",

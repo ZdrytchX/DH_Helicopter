@@ -184,4 +184,375 @@
 
     ],
 },
+
+"heli_roofbars_long": {
+    "information":{
+        "authors":"BeamNG",
+        "name":"Cargo Mount for Long Tow Cable (Hacked Roof Bars)",
+        "value":150,
+    },
+    "slotType" : "fullsize_roof_accessory_long",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["roofbar_rail",    ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.0,   "y":12, "z":0.55}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_F"],[],{"pos":{"x":-0.08, "y":12, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.08,  "y":12, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_rail",    ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.0,   "y":12.9, "z":0.55}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_R"],[],{"pos":{"x":-0.08, "y":12.9, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.08,  "y":12.9, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+		 
+		 /*
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["roofbar_rail",    ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.0,   "y":0.2, "z":1.52}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_F"],[],{"pos":{"x":-0.08, "y":0.2, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.08,  "y":0.2, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_rail",    ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.0,   "y":1.1, "z":1.52}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_R"],[],{"pos":{"x":-0.08, "y":1.1, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.08,  "y":1.1, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+		 */
+    ],
+    "slots": [
+        ["type", "default", "description"],
+        ["roofbars_load","roofbars_cargo_load_box_XL","Roof Bars Load", {"nodeOffset":{"x":0.0, "y":12.45, "z":0.565}}],//{"x":0.0, "y":0.65, "z":1.535}
+    ],
+    "rails": {
+        "roofbar_F":{"links:":["rfb1rr", "rfb1ll"], "broken:":[], "looped":false, "capped":true},
+        "roofbar_R":{"links:":["rfb2rr", "rfb2ll"], "broken:":[], "looped":false, "capped":true},
+    },
+    "slidenodes": [
+        ["id:", "railName", "attached", "fixToRail", "tolerance", "spring", "strength", "capStrength"],
+        ["rfb1r", "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb1",  "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],//hitch point
+        ["rfb1l", "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],
+
+        ["rfb2r", "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb2",  "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb2l", "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+    ],
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"collision":true},
+         {"frictionCoef":0.5},
+         {"selfCollision":true},
+         {"nodeMaterial":"|NM_METAL"},
+
+         {"nodeWeight":1.2},
+         {"group":"roofbar_F"},
+         ["rfb1rr",-0.6 12, 0.545, {"nodeWeight":1.7}],
+         ["rfb1r", -0.3 12, 0.545],
+         ["rfb1",   0.0,12, 0.545, {"tag":"tow_bobsUrUncle","couplerStrength":201000,"forceAutoCoupling":true,"couplerStartRadius":1}],//artificial hitch
+         ["rfb1l",  0.3 12, 0.545],
+         ["rfb1ll", 0.6 12, 0.545, {"nodeWeight":1.7}],
+		 
+		 /*
+		 ["rfb1rr",-0.6 0.2, 1.515, {"nodeWeight":1.7}],
+         ["rfb1r", -0.3 0.2, 1.515],
+         ["rfb1",   0.0, 0.2, 1.515],
+         ["rfb1l",  0.3 0.2, 1.515],
+         ["rfb1ll", 0.6 0.2, 1.515, {"nodeWeight":1.7}],
+		 */
+
+         {"group":"roofbar_R"},
+         ["rfb2rr",-0.6 12.9, 0.545, {"nodeWeight":1.7}],
+         ["rfb2r", -0.3 12.9, 0.545],
+         ["rfb2",   0.0, 12.9, 0.545],
+         ["rfb2l",  0.3 12.9, 0.545],
+         ["rfb2ll", 0.6 12.9, 0.545, {"nodeWeight":1.7}],
+		 /*
+		 ["rfb2rr",-0.6 1.1, 1.515, {"nodeWeight":1.7}],
+         ["rfb2r", -0.3 1.1, 1.515],
+         ["rfb2",   0.0, 1.1, 1.515],
+         ["rfb2l",  0.3 1.1, 1.515],
+         ["rfb2ll", 0.6 1.1, 1.515, {"nodeWeight":1.7}],
+		 */
+         {"nodeOffset":""},
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+
+          //roof bars
+          {"beamSpring":1201000,"beamDamp":150},
+          {"beamDeform":13000,"beamStrength":"FLT_MAX"},
+          {"deformLimitExpansion":1.1},
+          ["rfb2ll", "rfb2l"],
+          ["rfb2l", "rfb2"],
+          ["rfb2", "rfb2r"],
+          ["rfb2r", "rfb2rr"],
+
+          ["rfb1ll", "rfb1l"],
+          ["rfb1l", "rfb1"],
+          ["rfb1", "rfb1r"],
+          ["rfb1r", "rfb1rr"],
+
+          //attach
+          {"beamSpring":501000,"beamDamp":50},
+          {"beamDeform":5000,"beamStrength":"FLT_MAX"},
+          ["rfb1rr", "rf2r"],
+          ["rfb1rr", "rf1r"],
+          ["rfb1rr", "rf2", {"beamSpring":301000}],
+          ["rfb1rr", "rf1", {"beamSpring":301000}],
+
+          ["rfb2rr", "rf3r"],
+          ["rfb2rr", "rf4r"],
+          ["rfb2rr", "rf3", {"beamSpring":301000}],
+          ["rfb2rr", "rf4", {"beamSpring":301000}],
+
+          ["rfb1ll", "rf2l"],
+          ["rfb1ll", "rf1l"],
+          ["rfb1ll", "rf2", {"beamSpring":301000}],
+          ["rfb1ll", "rf1", {"beamSpring":301000}],
+
+          ["rfb2ll", "rf3l"],
+          ["rfb2ll", "rf4l"],
+          ["rfb2ll", "rf3", {"beamSpring":301000}],
+          ["rfb2ll", "rf4", {"beamSpring":301000}],
+
+          //pillar anti invert
+          {"beamSpring":401000,"beamDamp":50},
+          {"beamDeform":3000,"beamStrength":"FLT_MAX"},
+          ["rfb2rr", "p10r"],
+          ["rfb2rr", "p9r"],
+
+          ["rfb1rr", "p8r"],
+          ["rfb1rr", "p7r"],
+
+          ["rfb1ll", "p8l"],
+          ["rfb1ll", "p7l"],
+
+          ["rfb2ll", "p10l"],
+          ["rfb2ll", "p9l"],
+
+          //damper
+          {"beamSpring":0,"beamDamp":250},
+          ["rf2", "rfb1l"],
+          ["rf2", "rfb1"],
+          ["rf2", "rfb1r"],
+
+          ["rf3", "rfb2"],
+          ["rf3", "rfb2r"],
+          ["rf3", "rfb2l"],
+    ],
+    "triangles": [
+            ["id1:","id2:","id3:"],
+            {"group":"roofbar"},
+            {"dragCoef":0},
+            ["rfb1rr", "rf2r", "rf1r"],
+            ["rfb1ll", "rf1l", "rf2l"],
+            ["rfb1ll", "rf2l", "rfb1l"],
+            ["rfb1l", "rf2", "rfb1"],
+            ["rfb1l", "rf2l", "rf2"],
+            ["rfb1", "rf2", "rfb1r"],
+            ["rfb1r", "rf2r", "rfb1rr"],
+            ["rfb1r", "rf2", "rf2r"],
+            ["rfb1rr", "rf1r", "rfb1r"],
+            ["rfb1r", "rf1", "rfb1"],
+            ["rfb1r", "rf1r", "rf1"],
+            ["rfb1", "rf1", "rfb1l"],
+            ["rfb1l", "rf1l", "rfb1ll"],
+            ["rfb1l", "rf1", "rf1l"],
+
+            ["rfb2ll", "rf3l", "rf4l"],
+            ["rfb2rr", "rf4r", "rf3r"],
+            ["rfb2l", "rf3l", "rfb2ll"],
+            ["rfb2", "rf3", "rfb2l"],
+            ["rfb2l", "rf3", "rf3l"],
+            ["rfb2r", "rf3", "rfb2"],
+            ["rfb2r", "rfb2rr", "rf3r"],
+            ["rf3r", "rf3", "rfb2r"],
+            ["rfb2l", "rfb2ll", "rf4l"],
+            ["rfb2l", "rf4", "rfb2"],
+            ["rfb2l", "rf4l", "rf4"],
+            ["rfb2", "rf4", "rfb2r"],
+            ["rfb2r", "rf4r", "rfb2rr"],
+            ["rfb2r", "rf4", "rf4r"],
+
+    ],
+},
+"heli_roofbars_verylong": {
+    "information":{
+        "authors":"BeamNG",
+        "name":"Cargo Mount for Very Long Tow Cable (Hacked Roof Bars)",
+        "value":150,
+    },
+    "slotType" : "fullsize_roof_accessory_verylong",
+    "flexbodies": [
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["roofbar_rail",    ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.0,   "y":22, "z":0.55}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_F"],[],{"pos":{"x":-0.08, "y":22, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.08,  "y":22, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_rail",    ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.0,   "y":22.9, "z":0.55}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_R"],[],{"pos":{"x":-0.08, "y":22.9, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.08,  "y":22.9, "z":0.55}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+		 
+		 /*
+         ["mesh", "[group]:", "nonFlexMaterials"],
+         ["roofbar_rail",    ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.0,   "y":0.2, "z":1.52}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_F"],[],{"pos":{"x":-0.08, "y":0.2, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_F"],[],{"pos":{"x":0.08,  "y":0.2, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_rail",    ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.0,   "y":1.1, "z":1.52}, "scale":{"x":1.15,"y":1.0,"z":1.0}}],
+         ["roofbar_mount_R", ["rotor_center", "roofbar_R"],[],{"pos":{"x":-0.08, "y":1.1, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+         ["roofbar_mount_L", ["rotor_center", "roofbar_R"],[],{"pos":{"x":0.08,  "y":1.1, "z":1.52}, "scale":{"x":1.0,"y":1.0,"z":1.11}}],
+		 */
+    ],
+    "slots": [
+        ["type", "default", "description"],
+        ["roofbars_load","roofbars_cargo_load_box_XL","Roof Bars Load", {"nodeOffset":{"x":0.0, "y":22.45, "z":0.565}}],//{"x":0.0, "y":0.65, "z":1.535}
+    ],
+    "rails": {
+        "roofbar_F":{"links:":["rfb1rr", "rfb1ll"], "broken:":[], "looped":false, "capped":true},
+        "roofbar_R":{"links:":["rfb2rr", "rfb2ll"], "broken:":[], "looped":false, "capped":true},
+    },
+    "slidenodes": [
+        ["id:", "railName", "attached", "fixToRail", "tolerance", "spring", "strength", "capStrength"],
+        ["rfb1r", "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb1",  "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],//hitch point
+        ["rfb1l", "roofbar_F", true, true, 0.0, 2001000, 500000, 500000],
+
+        ["rfb2r", "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb2",  "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+        ["rfb2l", "roofbar_R", true, true, 0.0, 2001000, 500000, 500000],
+    ],
+    "nodes": [
+         ["id", "posX", "posY", "posZ"],
+         {"collision":true},
+         {"frictionCoef":0.5},
+         {"selfCollision":true},
+         {"nodeMaterial":"|NM_METAL"},
+
+         {"nodeWeight":1.2},
+         {"group":"roofbar_F"},
+         ["rfb1rr",-0.6 22, 0.545, {"nodeWeight":1.7}],
+         ["rfb1r", -0.3 22, 0.545],
+         ["rfb1",   0.0,22, 0.545, {"tag":"tow_bobsUrUncle","couplerStrength":201000,"forceAutoCoupling":true,"couplerStartRadius":1}],//artificial hitch
+         ["rfb1l",  0.3 22, 0.545],
+         ["rfb1ll", 0.6 22, 0.545, {"nodeWeight":1.7}],
+		 
+		 /*
+		 ["rfb1rr",-0.6 0.2, 1.515, {"nodeWeight":1.7}],
+         ["rfb1r", -0.3 0.2, 1.515],
+         ["rfb1",   0.0, 0.2, 1.515],
+         ["rfb1l",  0.3 0.2, 1.515],
+         ["rfb1ll", 0.6 0.2, 1.515, {"nodeWeight":1.7}],
+		 */
+
+         {"group":"roofbar_R"},
+         ["rfb2rr",-0.6 22.9, 0.545, {"nodeWeight":1.7}],
+         ["rfb2r", -0.3 22.9, 0.545],
+         ["rfb2",   0.0, 22.9, 0.545],
+         ["rfb2l",  0.3 22.9, 0.545],
+         ["rfb2ll", 0.6 22.9, 0.545, {"nodeWeight":1.7}],
+		 /*
+		 ["rfb2rr",-0.6 1.1, 1.515, {"nodeWeight":1.7}],
+         ["rfb2r", -0.3 1.1, 1.515],
+         ["rfb2",   0.0, 1.1, 1.515],
+         ["rfb2l",  0.3 1.1, 1.515],
+         ["rfb2ll", 0.6 1.1, 1.515, {"nodeWeight":1.7}],
+		 */
+         {"nodeOffset":""},
+         {"group":""},
+    ],
+    "beams": [
+          ["id1:", "id2:"],
+          {"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+
+          //roof bars
+          {"beamSpring":1201000,"beamDamp":150},
+          {"beamDeform":13000,"beamStrength":"FLT_MAX"},
+          {"deformLimitExpansion":1.1},
+          ["rfb2ll", "rfb2l"],
+          ["rfb2l", "rfb2"],
+          ["rfb2", "rfb2r"],
+          ["rfb2r", "rfb2rr"],
+
+          ["rfb1ll", "rfb1l"],
+          ["rfb1l", "rfb1"],
+          ["rfb1", "rfb1r"],
+          ["rfb1r", "rfb1rr"],
+
+          //attach
+          {"beamSpring":501000,"beamDamp":50},
+          {"beamDeform":5000,"beamStrength":"FLT_MAX"},
+          ["rfb1rr", "rf2r"],
+          ["rfb1rr", "rf1r"],
+          ["rfb1rr", "rf2", {"beamSpring":301000}],
+          ["rfb1rr", "rf1", {"beamSpring":301000}],
+
+          ["rfb2rr", "rf3r"],
+          ["rfb2rr", "rf4r"],
+          ["rfb2rr", "rf3", {"beamSpring":301000}],
+          ["rfb2rr", "rf4", {"beamSpring":301000}],
+
+          ["rfb1ll", "rf2l"],
+          ["rfb1ll", "rf1l"],
+          ["rfb1ll", "rf2", {"beamSpring":301000}],
+          ["rfb1ll", "rf1", {"beamSpring":301000}],
+
+          ["rfb2ll", "rf3l"],
+          ["rfb2ll", "rf4l"],
+          ["rfb2ll", "rf3", {"beamSpring":301000}],
+          ["rfb2ll", "rf4", {"beamSpring":301000}],
+
+          //pillar anti invert
+          {"beamSpring":401000,"beamDamp":50},
+          {"beamDeform":3000,"beamStrength":"FLT_MAX"},
+          ["rfb2rr", "p10r"],
+          ["rfb2rr", "p9r"],
+
+          ["rfb1rr", "p8r"],
+          ["rfb1rr", "p7r"],
+
+          ["rfb1ll", "p8l"],
+          ["rfb1ll", "p7l"],
+
+          ["rfb2ll", "p10l"],
+          ["rfb2ll", "p9l"],
+
+          //damper
+          {"beamSpring":0,"beamDamp":250},
+          ["rf2", "rfb1l"],
+          ["rf2", "rfb1"],
+          ["rf2", "rfb1r"],
+
+          ["rf3", "rfb2"],
+          ["rf3", "rfb2r"],
+          ["rf3", "rfb2l"],
+    ],
+    "triangles": [
+            ["id1:","id2:","id3:"],
+            {"group":"roofbar"},
+            {"dragCoef":0},
+            ["rfb1rr", "rf2r", "rf1r"],
+            ["rfb1ll", "rf1l", "rf2l"],
+            ["rfb1ll", "rf2l", "rfb1l"],
+            ["rfb1l", "rf2", "rfb1"],
+            ["rfb1l", "rf2l", "rf2"],
+            ["rfb1", "rf2", "rfb1r"],
+            ["rfb1r", "rf2r", "rfb1rr"],
+            ["rfb1r", "rf2", "rf2r"],
+            ["rfb1rr", "rf1r", "rfb1r"],
+            ["rfb1r", "rf1", "rfb1"],
+            ["rfb1r", "rf1r", "rf1"],
+            ["rfb1", "rf1", "rfb1l"],
+            ["rfb1l", "rf1l", "rfb1ll"],
+            ["rfb1l", "rf1", "rf1l"],
+
+            ["rfb2ll", "rf3l", "rf4l"],
+            ["rfb2rr", "rf4r", "rf3r"],
+            ["rfb2l", "rf3l", "rfb2ll"],
+            ["rfb2", "rf3", "rfb2l"],
+            ["rfb2l", "rf3", "rf3l"],
+            ["rfb2r", "rf3", "rfb2"],
+            ["rfb2r", "rfb2rr", "rf3r"],
+            ["rf3r", "rf3", "rfb2r"],
+            ["rfb2l", "rfb2ll", "rf4l"],
+            ["rfb2l", "rf4", "rfb2"],
+            ["rfb2l", "rf4l", "rf4"],
+            ["rfb2", "rf4", "rfb2r"],
+            ["rfb2r", "rf4r", "rfb2rr"],
+            ["rfb2r", "rf4", "rf4r"],
+
+    ],
+},
 }

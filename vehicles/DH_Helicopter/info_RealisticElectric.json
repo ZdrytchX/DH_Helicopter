@@ -1,0 +1,32 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"Hardcore Simmer - Electric",
+    "Transmission":"Belt Drive",
+    "Description":"For the hardcore only. This helicopter comes with real-world performance characteristics with configurable parts. Some parts are still WIP, but the rotor system is otherwise set somewhat close to real-world aerodynamic values and is highly customisable. BEWARE!: Rotor tail strikes are deadly!",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Battery",
+	"Propulsion":"Electric",
+	"Years":{"min":2005, "max":2010},
+    "Value":18350,
+    "Performance Class":"Payload 150kg, Speed 120mph",
+    "Top Speed":46,
+	"Torque":248,
+	"TorquePeakRPM":"0",
+	"Power":112,
+	"PowerPeakRPM":"3300",
+	"Max RPM":"3600",
+	"Weight":370,
+    "Config Type":"Custom",
+	"Population":15200
+}
