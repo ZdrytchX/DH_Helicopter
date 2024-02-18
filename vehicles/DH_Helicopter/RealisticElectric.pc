@@ -1,6 +1,6 @@
 {
   "format":2,
-  "licenseName":"EOL-6290",
+  "licenseName":">|KoR|<Frisqy.ViruS (ZdrytchX)",
   "mainPartName":"DH_Helicopter",
   "model":"DH_Helicopter",
   "paints":[
@@ -69,18 +69,20 @@
     "$CyclicRangeUpperLimit":1.25,
     "$CyclicRollRate":3,
     "$CyclicRollRateExcess":1,
+    "$HeadSupportDamp":230,
     "$SkidFriction":0.8,
     "$SkidSlide":0.7,
     "$SkidSpring":23000,
     "$SkidTread":0.7,
     "$clutchEngage":800,
     "$colltune":2.175,
-    "$colltuneNeg":0.87,
+    "$colltuneNeg":0.9,
+    "$headMastSupportDamp":130,
     "$swashStrengthForce":3960000,
     "$tailHorizontalPlaneAngle":-5,
     "$tailPlaneAngle":-10,
     "$tailrotorangle":0.095,
-    "$torsionPreCompressionAngle":1.9,
+    "$torsionPreCompressionAngle":1.37,
     "$yawLeftLimit":1.05,
     "$yawRightLimit":0.937
   }

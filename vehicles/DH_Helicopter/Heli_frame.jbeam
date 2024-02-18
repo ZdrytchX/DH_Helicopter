@@ -2750,7 +2750,7 @@
 		"slotType" : "heli_tail_plane",
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
-			["$tailPlaneAngle", "range", "degrees", "Controls", 0, -20, 0, "Vertical Stabiliser angle", "Adjust pre-trimmed stabiliser angle.", 0.001, "Aerodynamic Balancing"],
+			["$tailPlaneAngle", "range", "degrees", "Controls", 0, -20, 0, "Vertical Stabiliser angle", "Adjust pre-trimmed stabiliser angle. P.S. it stalls at 20 degrees.", 0.001, "Aerodynamic Balancing"],
 			["$tailHorizontalPlaneAngle", "range", "degrees", "Controls", 0, -15, 15, "Horizontal Stabiliser angle", "Adjust pre-trimmed stabiliser angle. Decrease for nose-down moment while flying forwards.", 0.001, "Aerodynamic Balancing"]//0.046792088760250844187168355041 2.680989
 		],
 		
@@ -2773,12 +2773,15 @@
 			{"selfCollision":true}
 			{"collision":true}
 			
-			["tailp0","$= -0.153 + tan($tailPlaneAngle * 0.0089011779)",1.54,1.203],//-0.153, 1.54, 1.146
-			["tailp2",-0.153,2.05,0.925],
-			["tailp3",-0.153,2.05,1.555],
+			["tailp0","$= -0.15 + tan($tailPlaneAngle * 0.00464409281739)",1.76,1.203],//-0.153, 1.54, 1.146 tannumber 0.0089011779
+			["tailp2",-0.150,2.0,0.93],
+			["tailp3",-0.150,2.0,1.557],
+			//small section protuding for collisions sake
+			["tailp2_end",-0.150,2.06,0.93],
+			["tailp3_end",-0.150,2.11,1.557],
 			
 			//horizontal stabiliser
-			["tailh4",-0.153,1.92,"$=1.203 + tan($tailHorizontalPlaneAngle * 0.01251400893)"],//0.01745329 deg to rad
+			["tailh4",-0.15,1.92,"$=1.203 + tan($tailHorizontalPlaneAngle * 0.01251400893)"],//0.01745329 deg to rad
 			["tailh5",0,1.85,"$=1.203 + tan($tailHorizontalPlaneAngle * 0.01129227863)"],//1.85 makes it line up smoothly with the visual model but adjusting the vert stab changes aero surface area
 			
 			{"group":""},
@@ -2815,30 +2818,51 @@
 			["tailp1","tailr5"],
 			["tailp2","tailr5"],
 			["tailp3","tailr5"],
-			["tailh4","tailr5"],
+			["tailh4","tailr5",{"precompressionRange":"$=0.0001*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1}],
 			["tailh5","tailr5"],
 			
 			["tailp0","tail6"],
 			["tailp1","tail6"],
 			["tailp2","tail6"],
 			["tailp3","tail6"],
-			["tailh4","tail6"],
 			["tailh5","tail6"],
 			
-			["tailp0","tail7"],
+			["tailp0","tail7",{"precompressionRange":"$=0.00001*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1}],
 			["tailp1","tail7"],
 			["tailp2","tail7"],
 			["tailp3","tail7"],
-			["tailh4","tail7"],
 			["tailh5","tail7"],
 			
+			["tailh4","tail6",{"precompressionRange":"$=0.0002*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1}],
+			["tailh4","tail7",{"precompressionRange":"$=0.0002*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1}],
+
+			{"breakGroup":""},
+			["tailp3","tailh4"],
+			["tailp2","tailh4"],
+			["tailh5","tailh4",{"precompressionRange":"$=0.0003*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1}],
+
+			{"beamStrength":18000},
+			["tailp3_end","tailh4",{"precompressionRange":"$=-0.000003*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":38000}],
+			["tailp2_end","tailh4",{"precompressionRange":"$=-0.000003*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":38000}],
+			["tailp3_end","tailp3",{"beamStrength":"FLT_MAX"}],
+			["tailp2_end","tailp2",{"beamStrength":"FLT_MAX"}],
+			["tailp3_end","tailp0",{"precompressionRange":"$=-0.00001*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
+			["tailp2_end","tailp0",{"precompressionRange":"$=-0.00001*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
+
+			["tailp3_end","tailp1",{"precompressionRange":"$=0.0013*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
+			["tailp2_end","tailp1",{"precompressionRange":"$=0.0010*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
+			["tailp3_end","tailh5",{"precompressionRange":"$=0.0011*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
+			["tailp2_end","tailh5",{"precompressionRange":"$=0.00095*$tailPlaneAngle","beamDamp":30,"beamPrecompressionTime":0.1,"beamStrength":18000}],
 			{"breakGroup":""},
 		],
 
 		"triangles":[
 			["id1:", "id2:", "id3:"],
 			//vertical stab
-			["tailp0", "tailp2", "tailp3",{"liftCoef":230,"stallAngle": 0.38,"dragCoef":10.5}],
+			["tailp0", "tailh4", "tailp3",{"liftCoef":165,"stallAngle": 0.38,"dragCoef":10.5}],
+			["tailp0", "tailp2", "tailh4",{"liftCoef":160,"stallAngle": 0.35,"dragCoef":31.5}],
+			["tailp3", "tailh4", "tailp3_end",{"liftCoef":165,"stallAngle": 0.38,"dragCoef":10.5}],
+			["tailp2_end", "tailp2", "tailh4",{"liftCoef":160,"stallAngle": 0.35,"dragCoef":31.5}],
 			//horizontal stabiliser
 			["tailp0", "tailh4", "tailh5",{"liftCoef":175,"stallAngle": 0.5,"dragCoef":9}],//29deg aoa stall
 		],

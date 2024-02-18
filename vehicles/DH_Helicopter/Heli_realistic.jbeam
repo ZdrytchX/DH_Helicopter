@@ -286,7 +286,7 @@
 		
 		"nodes":[
 			["id", "posX", "posY", "posZ"],
-			{"selfCollision":false},
+			{"selfCollision":true},
 			{"collision":false},
 			{"frictionCoef":0.0},
 			{"nodeMaterial":"|NM_METAL"},
@@ -401,6 +401,7 @@
 			["rotord20u",-1.988,0.0,1.78],
 			["rotord20l",-1.988,0.0,1.68],
 			
+			{"selfCollision":false},
 			
 		],
 		
@@ -408,15 +409,15 @@
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category", "subCategory"],
 			["$rotorCircumferenceSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Rotor Circumference Support", "Circumference rigidity support", 100, "Main Rotor","Main Tip"],
 			["$CircumferenceSupportDamp", "range", "N/m/s", "Controls", 50, 0, 300, "Rotor Circumference Damping", "Makes your helicopter appear possessed", 10, "Rotor","Main Tip"],
-			["$TipSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Cross-Rotor Tip Support", "Limits Rotor Disc Stretching", 10000, "Rotor","Main Tip"],
+			["$TipSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Cross-Rotor Tip Support", "Limits Rotor Disc Stretching", 1000, "Rotor","Main Tip"],
 			["$TipSupportDamp", "range", "N/m/s", "Controls", 0, 0, 950, "Rotor Tip Support Damp", "Reduces Flapping", 10, "Rotor","Main Tip"],
 
-			["$leadingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Leading Edge Support", "Reduces Lateral Movement", 10000, "Rotor","Main Root"],
-			["$trailingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Trailing Edge Support", "Reduces Lateral Movement", 10000, "Rotor","Main Root"],
+			["$leadingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Leading Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
+			["$trailingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Trailing Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
 			["$HeadSupportDamp", "range", "N/m/s", "Controls", 200, 0, 950, "Rotor Root Damping", "Reduces Lateral Flapping", 10, "Rotor","Main Root"],
 			["$TorqueLinkDamp", "range", "N/m/s", "Controls", 360, 0, 950, "Torque Link Dampening", "Use this if you have collective vibration", 10, "Rotor","Main Root"],
 
-			["$headMastSupport", "range", "N/m", "Controls", 7000, 0, 1500000, "Rotor Mast Support", "Reduces Vertical Flapping and adds rigidity", 10000, "Rotor","Main Root"],
+			["$headMastSupport", "range", "N/m", "Controls", 7000, 0, 1500000, "Rotor Mast Support", "Reduces Vertical Flapping and adds rigidity", 1000, "Rotor","Main Root"],
 			["$headMastSupportDamp", "range", "N/m/s", "Controls", 180, 0, 950, "Rotor Mast Damping", "TBH I don't think this helps at all because gyro precession negates it", 10, "Rotor","Main Root"],
 			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -13.5, 13.5, "Main Rotor Blade Wash-out Twist", "High wash-out angle is more efficient at low speeds but negative is better at high speed", 0.01, "Aerodynamic Balancing",""],
 		],
@@ -856,7 +857,7 @@
 
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
-			{"spring":25000, "damp":70, "deform":8000, "strength":15000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
+			{"spring":29000, "damp":50, "deform":8000, "strength":15000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
 			//rigidify rotors
 			["rotor7", "rotor9", "rotor2", "rotor0"],
 			["rotor21", "rotor10", "rotor5", "rotor26"],
