@@ -1,0 +1,32 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"Hardcore Simmer - Trainer",
+    "Transmission":"Belt Drive",
+    "Description":"For the hardcore only. This is the Gold Standard Realistic Performance Trainer for all pilots, keyboard and stick users alike! - Featuring dampened limited controls to limit the severity of LTE (Loss of Tail Control) and rotor blade stalls, this will help you transition onto the other hardcore configurations.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+	"Years":{"min":1958, "max":1975},
+    "Value":11350,
+    "Performance Class":"Payload 100kg, Speed 56mph",
+    "Top Speed":25,
+	"Torque":95,
+	"TorquePeakRPM":"3400",
+	"Power":46,
+	"PowerPeakRPM":"3600",
+	"Max RPM":"3600",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":35000
+}

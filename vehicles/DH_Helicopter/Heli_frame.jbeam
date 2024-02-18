@@ -891,7 +891,7 @@
 			["heli_tail","heli_tail", "Tail Boom"],
 			["heli_swash","heli_swash", "Swash Plate"],
 			["heli_engine","heli_engine", "Engine", {"coreSlot":true}],
-			["heli_missiles","heli_missiles", "Tactical"],
+			["heli_missiles","", "Tactical"],
 			["heli_rad","heli_rad", "Upper Storage"],
 		],
 		
@@ -1112,7 +1112,7 @@
 			["heli_tail","heli_tail", "Tail Boom"],
 			["heli_swash","heli_swash", "Swash Plate"],
 			["heli_engine","heli_engine", "Engine", {"coreSlot":true}],
-			["heli_missiles","heli_missiles", "Tactical"],
+			["heli_missiles","", "Tactical"],
 			["heli_rad","heli_rad", "Upper Storage"],
 		],
 		
@@ -2054,6 +2054,8 @@
 		"variables": [
 			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"],
 			["$swashStrengthForce", "range", "N", "Controls", 450000, 210000, 4500000, "Cyclic Strength", "Adjust strong your pilot's arms are", 45000, "Swash Plate"]
+			["$swashOffset", "range", "units", "Controls", 0.87, 0.7, 1.5, "Minimum Collective", "Adjust the collective pich neutral point", 0.01, "Swash Plate"]
+			["$swashLimit", "range", "units", "Controls", 1.5, 1.5, 2, "Maximum Collective", "Adjust the collective pich maximum point", 0.01, "Swash Plate"]
 		],
 		
 		"slots": [
@@ -2256,14 +2258,14 @@
 			["collr","swashr8",{"inputSource":"elevator",  "inputFactor":-1.0,"inRate":0.3,"outRate":0.1,"inLimit":0.87,"outLimit":1.13}],
 			["colll","swashl2",{"inputSource":"elevator",  "inputFactor": 1.0,"inRate":0.3,"outRate":0.1,"inLimit":0.87,"outLimit":1.13}],
 			
-			{"beamPrecompression":0.87}//limited negative G loading 1.38
+			{"beamPrecompression":"$swashOffset"}//limited negative G loading 1.38
 			
 			{"beamSpring":4500000},
-			["collf","rollf1", {"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":1.5}],
-			["collb","rollr1" ,{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":1.5}],
+			["collf","rollf1", {"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":"$swashLimit"}],
+			["collb","rollr1" ,{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":"$swashLimit"}],
 			
-			["collr","pitchr1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":1.5}],
-			["colll","pitchl1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":1.5}],
+			["collr","pitchr1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":"$swashLimit"}],
+			["colll","pitchl1",{"inputSource":"collective","inputFactor":1.0, "inRate":0.5,"outRate":0.3,"inLimit":1.0,"outLimit":"$swashLimit"}],
 			
 			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1, "beamShortBound":1},
 			

@@ -862,7 +862,13 @@
 			"inertia":0.09,
 			"friction":5.2//5
 			"dynamicFriction":0.023//0.022
-			"burnEfficiency":0.27//0.28
+			"burnEfficiency":[
+				[0, 0.15],
+				[0.05, 0.23],
+				[0.4, 0.29],
+				[0.7, 0.31],
+				[1, 0.25],
+			],
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
 			"particulates":0.019
 			"energyStorage": "mainTank",
@@ -982,6 +988,14 @@
 			"friction":5.2//5
 			"dynamicFriction":0.023//0.022
 			"burnEfficiency":0.27//0.28
+			
+			"burnEfficiency":[
+				[0, 0.16],
+				[0.05, 0.25],
+				[0.4, 0.35],
+				[0.7, 0.46],
+				[1, 0.27],
+			],
 			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
 			"particulates":0.019
 			"energyStorage": "mainTank",
@@ -1174,7 +1188,14 @@
 			"maxRPM":"$maximumRPM",
 			"idleRPM":"$idler",//1000
 			"particulates":0.035,
-			"burnEfficiency":0.31,
+			//"burnEfficiency":0.31,
+			"burnEfficiency":[
+				[0, 0.16],
+				[0.05, 0.21],
+				[0.4, 0.31],
+				[0.7, 0.39],
+				[1, 0.30],
+			],
 			"maxTorqueRating":465,//-1
 			"maxOverTorqueDamage":3500,//1000
 			"torque":[
@@ -1202,7 +1223,7 @@
 	"heli_engine_limiter_dh80_flat": {
 		"information":{
 			"authors":"Darren9, ZdrytchX",
-			"name":"DH80-4200 Flat Torque Configuration",
+			"name":"DH80-4200 Flat Torque Efficient Configuration",
 			"value":19,
 		},
 		
@@ -1225,7 +1246,13 @@
 			"maxRPM":"$maximumRPM",
 			"idleRPM":"$idler",//1000
 			"particulates":0.035,
-			"burnEfficiency":0.31,
+			"burnEfficiency":[
+				[0, 0.14],
+				[0.05, 0.23],
+				[0.4, 0.33],
+				[0.7, 0.45],
+				[1, 0.36],
+			],
 			"maxTorqueRating":420,//-1
 			"maxOverTorqueDamage":2500,//1000
 			"torque":[
@@ -1335,6 +1362,13 @@
 			"maxTorqueRating":365,//-1
 			"maxOverTorqueDamage":1800,//1000
 
+			"burnEfficiency":[
+				[0, 0.11],
+				[0.05, 0.18],
+				[0.4, 0.27],
+				[0.7, 0.36],
+				[1, 0.32],
+			],
 		},
 		"clutch": {
 			"engageStartRPM":"$clutchRPM",
@@ -1359,7 +1393,28 @@
 			["heli_airfilter", ["heli_core"]],
 		],
 		"soundConfig": {
-			"$+mainGain":-1.5,
+			"$+mainGain":-2.5,
+		},
+		/*
+		"$+burnEfficiency":[
+			[0, 0.03],
+			[0.05, 0.05],
+			[0.4, 0.06],
+			[0.7, 0.02],
+			[1, 0.01],
+		],
+		*/
+		"$+burnEfficiency":-0.01,
+		"mainEngine": {
+			"torqueModMult":[
+				["rpm", "torque"],
+				[0,    1],
+				[1000, 0.97],
+				[2000, 0.92],
+				[3000, 0.96],
+				[4000, 1.01],
+				[5000, 1.02],
+			],
 		},
 	},
 
@@ -1410,7 +1465,15 @@
 		},
 		
 		"mainEngine": {
-			"burnEfficiency":0.24,
+
+			"$+burnEfficiency":0.01,
+			/*[
+				[0, -0.03],
+				[0.05, -0.05],
+				[0.4, 0.01],
+				[0.7, 0.02],
+				[1, 0.01],
+			],*/
 			//engine durability
 			"cylinderWallTemperatureDamageThreshold":180
 			//turbocharger name
@@ -1480,7 +1543,15 @@
 		},
 		
 		"mainEngine": {
-			"burnEfficiency":0.25,
+			"$+burnEfficiency":-0.01,
+			/*[
+				[0, -0.1],
+				[0.05, -0.03],
+				[0.4, 0.02],
+				[0.7, 0.01],
+				[1, -0.01],
+			],*/
+			//"burnEfficiency":0.25,
 			//turbocharger name
 			"turbocharger":"turbocharger",
 		},
@@ -1540,7 +1611,15 @@
 		},
 		
 		"mainEngine": {
-			"burnEfficiency":0.21,
+
+			"$+burnEfficiency":0.03,
+			/*[
+				[0, -0.03],
+				[0.05, -0.05],
+				[0.4, 0.03],
+				[0.7, 0.02],
+				[1, -0.06],
+			],*/
 			//turbocharger name
 			"turbocharger":"turbocharger",
 		},
@@ -1967,8 +2046,8 @@
 		"slotType" : "heli_radiator_mods",
 		
 		"mainEngine":{
-			"radiatorArea":0.35,//so mathematically front cross section of the radiator only covers like 0.000432 m^2 but the top-down view covers much more and its complicated
-			"coolantVolume":7,
+			"$+radiatorArea":0.03,//0.35,//so mathematically front cross section of the radiator only covers like 0.000432 m^2 but the top-down view covers much more and its complicated
+			"$+coolantVolume":2,
         },
 		//drag penalty for additional cooling surface, recycled radiator nodes
 		/*

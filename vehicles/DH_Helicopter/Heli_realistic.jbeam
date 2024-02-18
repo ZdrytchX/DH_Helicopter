@@ -14,7 +14,7 @@
 			["heli_tail","heli_tail", "Tail Boom"],
 			["heli_swash","heli_swash", "Swash Plate"],
 			["heli_engine","heli_engine", "Engine", {"coreSlot":true}],
-			["heli_missiles","heli_missiles", "Tactical"],
+			["heli_missiles","", "Weapon"],
 			["heli_rad","heli_rad", "Upper Storage"],
 		],
 		
@@ -835,14 +835,14 @@
 			//horrizontal
 			//Yes these values are actually realistic lol
 			{"dragCoef":36},
-			["rotor26","rotor21","rotor5", {"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor10","rotor5","rotor21", {"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor0","rotor7","rotor2",   {"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor9","rotor2","rotor7",   {"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor27","rotor6","rotor11", {"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor11","rotor22","rotor27",{"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor32","rotor25","rotor30",{"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
-			["rotor25","rotor23","rotor30",{"liftCoef":150,"stallAngle": 0.31,"skinDragCoef":0.1}],
+			["rotor26","rotor21","rotor5", {"liftCoef":150,"stallAngle": 0.31}],
+			["rotor10","rotor5","rotor21", {"liftCoef":150,"stallAngle": 0.31}],
+			["rotor0","rotor7","rotor2",   {"liftCoef":150,"stallAngle": 0.31}],
+			["rotor9","rotor2","rotor7",   {"liftCoef":150,"stallAngle": 0.31}],
+			["rotor27","rotor6","rotor11", {"liftCoef":150,"stallAngle": 0.31}],
+			["rotor11","rotor22","rotor27",{"liftCoef":150,"stallAngle": 0.31}],
+			["rotor32","rotor25","rotor30",{"liftCoef":150,"stallAngle": 0.31}],
+			["rotor25","rotor23","rotor30",{"liftCoef":150,"stallAngle": 0.31}],
 			
 			//vertical
 			{"dragCoef":3},
@@ -856,7 +856,7 @@
 
 		"torsionbars": [
 			["id1:", "id2:", "id3:", "id4:"],
-			{"spring":15000, "damp":70, "deform":8000, "strength":5000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
+			{"spring":25000, "damp":70, "deform":8000, "strength":15000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
 			//rigidify rotors
 			["rotor7", "rotor9", "rotor2", "rotor0"],
 			["rotor21", "rotor10", "rotor5", "rotor26"],
@@ -1154,4 +1154,185 @@
 		
 	},
 
+	"heli_tailrotor7": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"Realistic Low Drag/Lift Tuneable Tail Rotor",
+			"value":250,
+		},
+
+		"slotType" : "heli_tailrotor1",
+
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]
+			// tail blades
+			["rpm", "heli_tailblade_1", "tailrotorl9","tailrotorl5","tailrotorl10", {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_2", "tailrotorl2","tailrotorl5","tailrotorl3",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_3", "tailrotorl1","tailrotorl5","tailrotorl0",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_4", "tailrotorl8","tailrotorl5","tailrotorl7",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			// tail center
+			["rpm", "heli_tailrotor_center", "tailrotorl5","tailrotorr6","tailrotorl9", {"x":0,"y":180, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$tailrotorangle", "range", "units", "Controls", 0.089, 0.061, 0.120, "Tail Rotor Blade Pitch", "Adjust pre-trimmed rotor neutral angle. 0.061 is neutral trimmed.", 0.001, "Aerodynamic Balancing"]
+			["$yawLeftLimit", "range", "units", "Controls", 1.07, 1.00, 1.13, "Yaw Left Limit", "Adjust left yaw bias. 1.0 has no left yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRightLimit", "range", "units", "Controls", 0.93, 0.87, 1.00, "Yaw Right Limit", "Adjust right yaw bias. 1.0 has no right yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRateLimit", "range", "units/s", "Controls", 1.9, 0.01, 8, "Yaw Rate Responsiveness", "Adjust yaw rate. 1.0 has no right yaw control.", 0.01, "Aerodynamic Balancing"]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			//["Chassis2", ["body"]],
+
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.2},
+			{"group":"tail"},
+
+			["tailrotorl0", "$tailrotorangle",1.631,1.012],
+			["tailrotorl3", "$tailrotorangle",1.788,1.453],
+			["tailrotorl7", "$tailrotorangle",2.071,0.855],
+			["tailrotorl10","$tailrotorangle",2.228,1.296],
+
+			{"collision":false}
+
+			["tailrotorl4",0.19,1.93,1.154],
+			["tailrotorr6",-0.319,1.93,1.154],
+
+			{"collision":true}
+
+			["tailrotorl5",0.061,1.93,1.154],
+
+			{"group":"tail_rotor"},
+
+			["tailrotorl1",0.061,1.696,0.92],
+			["tailrotorl2",0.061,1.696,1.388],
+			["tailrotorl8",0.061,2.163,0.92],
+			["tailrotorl9",0.061,2.163,1.388],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":2500000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			["tailrotorl8","tailrotorr6"],
+			["tailrotorl9","tailrotorr6"],
+			["tailrotorl9","tailrotorl5"],
+			["tailrotorl9","tailrotorl4"],
+			["tailrotorl8","tailrotorl9"],
+			["tailrotorl8","tailrotorl4"],
+			["tailrotorl5","tailrotorl4"],
+			["tailrotorl2","tailrotorl8"],
+			["tailrotorl5","tailrotorr6"],
+			["tailrotorl1","tailrotorl9"],
+			["tailrotorl1","tailrotorl8"],
+			["tailrotorl9","tailrotorl2"],
+			["tailrotorl2","tailrotorl4"],
+			["tailrotorl1","tailrotorr6"],
+			["tailrotorl1","tailrotorl4"],
+			["tailrotorl2","tailrotorl1"],
+			["tailrotorr6","tailrotorl4"],
+			["tailrotorl2","tailrotorr6"],
+			["tailrotorl5","tailrotorl3"],
+			["tailrotorl2","tailrotorl5"],
+			["tailrotorl5","tailrotorl10"],
+			["tailrotorl5","tailrotorl7"],
+			["tailrotorl8","tailrotorl5"],
+			["tailrotorl5","tailrotorl0"],
+			["tailrotorl1","tailrotorl5"],
+
+			{"breakGroup":"tail_rotor"},
+			{"beamDeform":10000,"beamStrength":9000},
+
+			["tailrotorl10","tailrotorl9"],
+			["tailrotorl3","tailrotorl2"],
+			["tailrotorl0","tailrotorl1"],
+			["tailrotorl7","tailrotorl8"],
+
+			//tailrotor to tail
+			{"beamSpring":800000,"beamDamp":100},
+			{"beamDeform":200000,"beamStrength":200000},
+
+			["tail7", "tailrotorr6",{"name":"tailshaft"}],
+			["tail6", "tailrotorr6"],
+			["tailr5","tailrotorr6"],
+			["taill4","tailrotorr6"],
+
+			["tail7", "tailrotorl5"],
+			["tail6", "tailrotorl5"],
+			["tailr5","tailrotorl5"],
+			["taill4","tailrotorl5"],
+
+			["tail7", "tailrotorl4"],
+			["tail6", "tailrotorl4"],
+			["tailr5","tailrotorl4"],
+			["taill4","tailrotorl4"],
+
+			{"breakGroupType":1},
+			{"breakGroup":["tail_rotor","tail"]},
+
+			//was stabilised to low frame
+			/*
+			["flowr9","tailrotorr6"],
+			["flowl8","tailrotorr6"],
+			["flowr9","tailrotorl4"],
+			["flowl8","tailrotorl4"],
+			*/
+			//but change:
+			["helimidr8","tailrotorr6"],
+			["helimidl6","tailrotorr6"],
+			["helimidr8","tailrotorl4"],
+			["helimidl6","tailrotorl4"],
+
+			{"breakGroupType":0},
+			{"breakGroup":""},
+		],
+
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":1000000,"beamDamp":150},
+			{"beamDeform":100000,"beamStrength":150000},
+
+			["tailrotorl7", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl10","tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl3", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl0", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["tailrotorl5","tailrotorl3","tailrotorl2", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl10","tailrotorl9",{"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+			["tailrotorl5","tailrotorl0","tailrotorl1", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "tail_rotor", "heli_diff", 2, {"connectedWheel":"tail_rotor1", "breakTriggerBeam":"tailshaft", "electricsName":"tail_rotor", "gearRatio":2, "friction":1}]
+		],
+
+		"rotators": [
+			["name","[group]:","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+			{"radius":0.233},
+			{"brakeTorque":0},
+			{"parkingTorque":0},
+			{"propulsed":1},
+			["tail_rotor1", ["tail_rotor"], "tailrotorl4", "tailrotorr6", 9999, "tailrotorl4", -1,{"speedo":false}],
+		]
+	}
 }
