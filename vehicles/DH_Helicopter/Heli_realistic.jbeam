@@ -240,7 +240,7 @@
 	"heli_rotor_oldrealisticLiftCoef": {
 		"information":{
 			"authors":"Darren9",
-			"name":"Experimental Rotor (Realistic Lift and Drag testing)",
+			"name":"HC Experimental CL-150 CD36 Rotor",
 			"value":1500,
 		},
 
@@ -490,7 +490,7 @@
 			["rotor31","rotor16"],
 			["rotor24","rotor31"],
 			
-			{"breakGroup":"blade3"},
+			{"breakGroup":"blade4"},
 			["rotor20","rotor16"],
 			["rotor17","rotor20"],
 			
@@ -1158,7 +1158,7 @@
 	"heli_tailrotor7": {
 		"information":{
 			"authors":"Darren9, ZdrytchX",
-			"name":"Realistic Low Drag/Lift Tuneable Tail Rotor",
+			"name":"HC CL-175 CD-42 Tuneable Tail Rotor",
 			"value":250,
 		},
 
@@ -1180,7 +1180,7 @@
 			["$tailrotorangle", "range", "units", "Controls", 0.089, 0.061, 0.120, "Tail Rotor Blade Pitch", "Adjust pre-trimmed rotor neutral angle. 0.061 is neutral trimmed.", 0.001, "Aerodynamic Balancing"]
 			["$yawLeftLimit", "range", "units", "Controls", 1.07, 1.00, 1.13, "Yaw Left Limit", "Adjust left yaw bias. 1.0 has no left yaw control.", 0.001, "Aerodynamic Balancing"]
 			["$yawRightLimit", "range", "units", "Controls", 0.93, 0.87, 1.00, "Yaw Right Limit", "Adjust right yaw bias. 1.0 has no right yaw control.", 0.001, "Aerodynamic Balancing"]
-			["$yawRateLimit", "range", "units/s", "Controls", 1.9, 0.01, 8, "Yaw Rate Responsiveness", "Adjust yaw rate. 1.0 has no right yaw control.", 0.01, "Aerodynamic Balancing"]
+			["$yawRateLimit", "range", "units/s", "Controls", 1.9, 0.01, 8, "Yaw Rate Responsiveness", "Adjust yaw rate.", 0.01, "Aerodynamic Balancing"]
 		],
 
 		"flexbodies": [
@@ -1320,6 +1320,1458 @@
 			["tailrotorl5","tailrotorl10","tailrotorl9",{"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
 			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
 			["tailrotorl5","tailrotorl0","tailrotorl1", {"liftCoef":175,"dragCoef":42,"stallAngle": 0.33}],
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "tail_rotor", "heli_diff", 2, {"connectedWheel":"tail_rotor1", "breakTriggerBeam":"tailshaft", "electricsName":"tail_rotor", "gearRatio":2, "friction":1}]
+		],
+
+		"rotators": [
+			["name","[group]:","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+			{"radius":0.233},
+			{"brakeTorque":0},
+			{"parkingTorque":0},
+			{"propulsed":1},
+			["tail_rotor1", ["tail_rotor"], "tailrotorl4", "tailrotorr6", 9999, "tailrotorl4", -1,{"speedo":false}],
+		],
+	},
+
+	"heli_rotor_realisticLiftCoef2": {
+		"information":{
+			"authors":"Darren9",
+			"name":"HC Experimental CL-136 CD-28 Rotor",
+			"value":1500,
+		},
+
+		"slotType" : "heli_rotor",
+
+		//ZdrytchX: tail rotor moved to tailboom
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"],
+			// center
+			["rpm", "heli_blade_inner_1", "rotor8","rotor24","rotor7",    {"x":270,"y":90, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_inner_2", "rotor15","rotor17","rotor21",  {"x":90, "y":0,  "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_inner_3", "rotor24","rotor8","rotor25",   {"x":90, "y":90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_inner_4", "rotor17","rotor15","rotor11",  {"x":270,"y":0,  "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// outer
+			["rpm", "heli_blade_outer_1", "rotor0","rotor7","rotor2",     {"x":270,"y":90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_outer_2", "rotor26","rotor21","rotor5",   {"x":90, "y":180,"z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_outer_3", "rotor32","rotor25","rotor30",  {"x":90, "y":90, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_outer_4", "rotor6","rotor11","rotor27",   {"x":90, "y":0,  "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// swash links
+			/*
+			["rpm", "heli_swash_link_1",  "swash1","rotor7","swash9",     {"x":204,"y":66,  "z":231},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_2",  "swashl3","rotor21","swashr7",  {"x":0, "y":270, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			//["rpm", "heli_swash_link_1",  "swash9","rotor25","swash1",    {"x":204,"y":66,  "z":231}, {"x":0, "y":0, "z":180}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_4",  "swashr7","rotor11","swashl3",  {"x":0, "y":270, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			*/
+
+			["rpm", "heli_swash_link_1",  "swash1","rotor7","swash9",     {"x":270,"y":0,  "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_2",  "swashl3","rotor21","swashr7",  {"x":0, "y":270, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_3",  "swash9","rotor25","swash1",    {"x":90,"y":0,   "z":90}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_4",  "swashr7","rotor11","swashl3",  {"x":0, "y":270, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+
+			//shaft
+			["rpm", "heli_rotor_center",  "helimid5","helimid4","rotor8", {"x":0, "y":90, "z":90},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_torquelink_u", ["torquelink_u"]],
+			["heli_torquelink_l", ["torquelink_l"]],
+			["heli_torquelink2_u", ["torquelink2_u"]],
+			["heli_torquelink2_l", ["torquelink2_l"]],
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":false},
+			{"frictionCoef":0.0},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":1.8},
+			{"group":"rotor_center"},
+
+			["rotor8",0.0,-0.137,1.73, {"group":["rotor_center","torquelink_u"]}],
+			["rotor17",-0.137,0.0,1.73,{"group":["rotor_center","torquelink_u"]}],
+			["rotor15",0.137,0.0,1.73, {"group":["rotor_center","torquelink2_u"]}],
+			["rotor24",0.0,0.137,1.73, {"group":["rotor_center","torquelink2_u"]}],
+			["rotor16",0.0,0.0,1.73],
+
+			{"group":""},
+
+			["rotor9",-0.1,-0.137,1.73],
+			["rotor10",0.137,-0.1,1.73],
+			["rotor22",-0.137,0.1,1.73],
+			["rotor23",0.1,0.137,1.73],
+
+			{"collision":true},
+			{"frictionCoef":0.8},
+
+			["rotor2",-0.1,-1.988,1.73,{"collision":true}],
+			["rotor5",1.988,-0.1,1.73],
+			["rotor27",-1.988,0.1,1.73],
+			["rotor30",0.1,1.988,1.73],
+
+			//blade stiffners
+			{"nodeWeight":1.8},
+
+			//magic fix here
+			{"collision":false},
+			/*
+
+			["rotor3",0.15,-0.9,1.50],
+			["rotor13",0.9,0.15,1.50],
+			["rotor18",-0.9,-0.15,1.50],
+			["rotor28",-0.15,0.9,1.50],
+			*/
+			["rotor3",0,-0.9,1.50],
+			["rotor13",0.9,0,1.50],
+			["rotor18",-0.9,0,1.50],
+			["rotor28",0,0.9,1.50],
+			{"collision":true},
+
+			//swash links
+			{"nodeWeight":2.8},
+
+			["rotor0",0.1,-1.988,1.73],
+			["rotor26",1.988,0.1,1.73],
+			["rotor32",-0.1,1.988,1.73],
+			["rotor6",-1.988,-0.1,1.73],
+
+			{"collision":false},
+			{"frictionCoef":0.0},
+
+			["rotor7",0.1,-0.137,1.73,{"collision":true}],
+			["rotor21",0.137,0.1,1.73],
+			["rotor11",-0.137,-0.1,1.73],
+			["rotor25",-0.1,0.137,1.73],
+
+			//rotator group
+			{"frictionCoef":0.8},
+			{"nodeWeight":2.2},
+			{"group":"main_rotor"},
+
+			["rotor1",0.0,-1.988,1.73],
+			["rotor12",1.988,0.0,1.73],
+			["rotor20",-1.988,0.0,1.73],
+			["rotor31",0.0,1.988,1.73],
+
+			{"group":""},
+
+			//torque lock rotor to swash
+			//causes instability if too close to the centre so i gotta hack it out
+			{"collision":true},
+			{"frictionCoef":0.0},
+			{"nodeWeight":0.6},
+			{"group":"torquelink_u"},
+
+			["torq0",-0.072,-0.188,1.56,{"group":["torquelink_l","torquelink_u"]}],//-0.052,-0.188
+			["torq1",-0.188,-0.072,1.56,{"group":["torquelink_l","torquelink_u"]}],
+			["torq4",0.0,0.0,1.6],
+
+			{"group":"torquelink2_u"},
+
+			["torq2",0.188,0.072,1.56,{"group":["torquelink2_l","torquelink2_u"]}],
+			["torq3",0.052,0.188,1.56,{"group":["torquelink2_l","torquelink2_u"]}],
+			["torq5",0.0,0.0,1.6],
+
+			{"group":""},
+
+			//Torque reaction holder
+			{"collision":false},
+			{"nodeWeight":8.0},
+
+			["diff" ,0.0,0.0,1.03],
+			["diff1",-0.3,0.5,1.03],
+
+			//horrizontal blade drag hacked in afterwards
+			{"nodeWeight":0.6},
+
+			["rotord1u",0.0,-1.988,1.78],
+			["rotord1l",0.0,-1.988,1.68],
+
+			["rotord12u",1.988,0.0,1.78],
+			["rotord12l",1.988,0.0,1.68],
+
+			["rotord31u",0.0,1.988,1.78],
+			["rotord31l",0.0,1.988,1.68],
+
+			["rotord20u",-1.988,0.0,1.78],
+			["rotord20l",-1.988,0.0,1.68],
+
+			{"selfCollision":false},
+
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category", "subCategory"],
+			["$rotorCircumferenceSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Rotor Circumference Support", "Circumference rigidity support", 100, "Main Rotor","Main Tip"],
+			["$CircumferenceSupportDamp", "range", "N/m/s", "Controls", 50, 0, 300, "Rotor Circumference Damping", "Makes your helicopter appear possessed", 10, "Rotor","Main Tip"],
+			["$TipSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Cross-Rotor Tip Support", "Limits Rotor Disc Stretching", 1000, "Rotor","Main Tip"],
+			["$TipSupportDamp", "range", "N/m/s", "Controls", 0, 0, 950, "Rotor Tip Support Damp", "Reduces Flapping", 10, "Rotor","Main Tip"],
+
+			["$leadingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Leading Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
+			["$trailingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Trailing Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
+			["$HeadSupportDamp", "range", "N/m/s", "Controls", 200, 0, 950, "Rotor Root Damping", "Reduces Lateral Flapping", 10, "Rotor","Main Root"],
+			["$TorqueLinkDamp", "range", "N/m/s", "Controls", 360, 0, 950, "Torque Link Dampening", "Use this if you have collective vibration", 10, "Rotor","Main Root"],
+
+			["$headMastSupport", "range", "N/m", "Controls", 7000, 0, 1500000, "Rotor Mast Support", "Reduces Vertical Flapping and adds rigidity", 1000, "Rotor","Main Root"],
+			["$headMastSupportDamp", "range", "N/m/s", "Controls", 180, 0, 950, "Rotor Mast Damping", "TBH I don't think this helps at all because gyro precession negates it", 10, "Rotor","Main Root"],
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -13.5, 13.5, "Main Rotor Blade Wash-out Twist", "High wash-out angle is more efficient at low speeds but negative is better at high speed", 0.01, "Aerodynamic Balancing",""],
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":"$rotorCircumferenceSupport","beamDamp":"$CircumferenceSupportDamp"},//2500000, 100
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			// main ring
+			["rotor20","rotor31"],
+			["rotor1","rotor20"],
+			["rotor12","rotor1"],
+			["rotor31","rotor12"],
+
+			{"beamSpring":"$TipSupport","beamDamp":"$TipSupportDamp"},
+			//rotor tension across symmetric ends
+			["rotor20","rotor12"],
+			["rotor1","rotor31"],
+
+			//rotor reinforcement to impart torque to main blades
+			//leading edge
+			{"beamSpring":"$leadingEdgeSupportHead","beamDamp":"$HeadSupportDamp"},
+			["rotor16","rotor21", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor25", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor11", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor7", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			//trailing edge
+			{"beamSpring":"$trailingEdgeSupportHead"},
+			["rotor16","rotor23", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor22", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor9", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor10", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+
+			{"beamSpring":2500000,"beamDamp":100},
+
+			["rotor24","rotor23"],
+			["rotor15","rotor21"],
+			["rotor23","rotor25"],
+			["rotor24","rotor15"],
+			["rotor8","rotor24"],
+			["rotor17","rotor24"],
+			["rotor17","rotor11"],
+			["rotor8","rotor17"],
+			["rotor15","rotor10"],
+			["rotor24","rotor25"],
+			["rotor22","rotor11"],
+			["rotor8","rotor16"],
+			["rotor17","rotor16"],
+			["rotor15","rotor16"],
+			["rotor24","rotor16"],
+			["rotor17","rotor15"],
+			["rotor15","rotor8"],
+			["rotor17","rotor22"],
+			["rotor21","rotor10"],
+			["rotor8","rotor9",{"breakGroup":"blade1"}],
+			["rotor8","rotor9",{"breakGroup":"blade1"}],
+			["rotor8","rotor7",{"breakGroup":"blade1"}],
+			["rotor7","rotor9",{"breakGroup":"blade1"}],
+
+			{"breakGroup":"blade1"},
+			["rotor1","rotor16"],
+			["rotor8","rotor1"],
+
+			{"breakGroup":"blade2"},
+			["rotor12","rotor16"],
+			["rotor15","rotor12"],
+
+			{"breakGroup":"blade3"},
+			["rotor31","rotor16"],
+			["rotor24","rotor31"],
+
+			{"breakGroup":"blade4"},
+			["rotor20","rotor16"],
+			["rotor17","rotor20"],
+
+			//blabe 1 breakoff
+			{"breakGroup":"blade1"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor2","rotor0",{"name":"main_rotor","breakGroup":""}],
+			["rotor1","rotor0"],
+			["rotor1","rotor2"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor7","rotor0",{"breakGroup":""}],
+			["rotor9","rotor0"],
+			["rotor2","rotor7",{"breakGroup":""}],
+			["rotor9","rotor2"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor9","rotor3"],
+			["rotor7","rotor3"],
+			["rotor8","rotor3"],
+			["rotor1","rotor3"],
+			["rotor0","rotor3"],
+			["rotor2","rotor3"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor7",{"breakGroup":"blade1"}],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+
+			//blade 2 breakoff
+			{"breakGroup":"blade2"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor12","rotor5"],
+			["rotor12","rotor26"],
+			["rotor5","rotor26"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor26","rotor21"],
+			["rotor10","rotor26"],
+			["rotor21","rotor5"],
+			["rotor10","rotor5"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor5","rotor13"],
+			["rotor15","rotor13"],
+			["rotor21","rotor13"],
+			["rotor10","rotor13"],
+			["rotor12","rotor13"],
+			["rotor26","rotor13"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor21"],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+
+			//blade 3 breakoff
+			{"breakGroup":"blade3"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor32","rotor30"],
+			["rotor31","rotor32"],
+			["rotor31","rotor30"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor32","rotor25"],
+			["rotor23","rotor32"],
+			["rotor23","rotor30"],
+			["rotor25","rotor30"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor31","rotor28"],
+			["rotor30","rotor28"],
+			["rotor32","rotor28"],
+			["rotor23","rotor28"],
+			["rotor24","rotor28"],
+			["rotor25","rotor28"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor25"],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+
+			//blade 4 breakoff
+			{"breakGroup":"blade4"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor27","rotor6"],
+			["rotor20","rotor6"],
+			["rotor20","rotor27"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor11","rotor6"],
+			["rotor22","rotor6"],
+			["rotor27","rotor11"],
+			["rotor22","rotor27"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor17","rotor18"],
+			["rotor22","rotor18"],
+			["rotor11","rotor18"],
+			["rotor20","rotor18"],
+			["rotor6","rotor18"],
+			["rotor27","rotor18"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor11"],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+
+			{"breakGroup":""},
+
+			//blade to frame
+
+			{"beamSpring":"$headMastSupport","beamDamp":"$headMastSupportDamp"},//1500000
+			{"beamDeform":"FLT_MAX","beamStrength":"$=$headMastSupport/4"},
+
+			{"breakGroup":"blade1"},
+			["rotor1","helimid4"],//1200000
+			["rotor1","helimid5"],
+			["helimidMast","rotor1"],
+			["rotor3","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":"blade2"},
+			["rotor12","helimid4"],
+			["rotor12","helimid5"],
+			["helimidMast","rotor12"],
+			["rotor13","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":"blade4"},
+			["rotor20","helimid4"],
+			["rotor20","helimid5"],
+			["helimidMast","rotor20"],
+			["rotor18","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":"blade3"},
+			["rotor31","helimid4"],
+			["rotor31","helimid5"],
+			["helimidMast","rotor31"],
+			["rotor28","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":""},
+
+			//blade root
+			{"beamSpring":2500000,"beamStrength":15000000,"beamDamp":50},
+			["rotor8","helimid4"],
+			["rotor15","helimid4"],
+			["rotor17","helimid4"],
+			["rotor24","helimid4"],
+			["rotor8","helimid5"],
+			["rotor15","helimid5"],
+			["rotor17","helimid5"],
+			["rotor24","helimid5"],
+
+			//blade to low frame
+			//helimid10 -> helimidMast
+			/*
+			{"beamSpring":1000,"beamDamp":300},//1000000
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			{"breakGroup":"blade1"},
+			["helimid10" ,"rotor1"],
+
+			{"breakGroup":"blade2"},
+			["helimid10" ,"rotor12"],
+
+			{"breakGroup":"blade4"},
+			["helimid10" ,"rotor20"],
+
+			{"breakGroup":"blade3"},
+			["helimid10" ,"rotor31"],
+			*/
+			{"breakGroup":""},
+
+			{"beamSpring":1500000,"beamDamp":200},//1000000
+			//center shaft
+			["rotor16","helimid5"],
+			["rotor16","helimid4"],
+
+			//torque link dampening
+			["torq4","torq5",{"beamSpring":0,"beamDamp":"$TorqueLinkDamp","dampCutoffHz":200}],
+
+			//swash links
+			{"breakGroupType":1},
+			{"beamSpring":12000000,"beamDamp":70},//4500000, 100
+
+			["rotor7","swash1", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade1"},
+			//["rotor0","swash1"{"beamSpring":120}],
+			{"breakGroup":""},
+			["rotor21","swashl3", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade2"},
+			//["rotor26","swashl3"{"beamSpring":120}],
+			{"breakGroup":""},
+			["rotor25","swash9", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade3"},
+			//["rotor32","swash9"{"beamSpring":120}],
+			{"breakGroup":""},
+			["rotor11","swashr7", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade4"},
+			//["rotor6","swashr7"{"beamSpring":120}],
+			{"breakGroup":""},
+			{"breakGroupType":0},
+
+			//torque lock rotor to swash
+			{"beamSpring":1500000,"beamDamp":100},
+
+			["torq2","torq3",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.40,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.8,"maxStress":10000}],
+			["torq0","torq1",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.45,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.0,"maxStress":12000}],
+
+			["torq0","rotor8"],
+			["torq0","rotor17"],
+			["torq1","rotor8"],
+			["torq1","rotor17"],
+
+			["torq0","swash1"],
+			["torq1","swash1"],
+
+			["torq0","torq4"],
+			["torq1","torq4"],
+			["rotor8","torq4"],
+			["rotor17","torq4"],
+
+			["torq2","rotor15"],
+			["torq2","rotor24"],
+			["torq3","rotor15"],
+			["torq3","rotor24"],
+
+			["torq2","swash9"],
+			["torq3","swash9"],
+
+			["torq2","torq5"],
+			["torq3","torq5"],
+			["rotor15","torq5"],
+			["rotor24","torq5"],
+
+			//torque reaction holders
+			{"beamSpring":800000,"beamDamp":50},
+
+			["diff","helimidl6"],
+			["diff","helimidl0"],
+			["diff","helimidr8"],
+			["diff","helimidr2"],
+			["diff","helimidl7"],
+			["diff","helimidl1"],
+			["diff","helimidr9"],
+			["diff","helimidr3"],
+
+			["diff1","helimidl6"],
+			["diff1","helimidl0"],
+			["diff1","helimidr8"],
+			["diff1","helimidr2"],
+			["diff1","helimidl7"],
+			["diff1","helimidl1"],
+			["diff1","helimidr9"],
+			["diff1","helimidr3"],
+
+			["diff","diff1"],
+
+			//horrizontal blade drag hacked in afterwards
+			{"beamSpring":1000000,"beamDamp":70},//damp 50
+
+			{"breakGroup":"blade1"},
+			["rotord1u","rotord1l"],
+			["rotord1l","rotor1"],
+			["rotord1u","rotor1"],
+			["rotord1l","rotor0"],
+			["rotord1u","rotor0"],
+			["rotord1l","rotor2"],
+			["rotord1u","rotor2"],
+			["rotord1l","rotor8"],
+			["rotord1u","rotor8"],
+			["rotord1l","rotor7"],
+			["rotord1u","rotor7"],
+			["rotord1l","rotor9"],
+			["rotord1u","rotor9"],
+
+			{"breakGroup":"blade2"},
+			["rotord12u","rotord12l"],
+			["rotord12l","rotor12"],
+			["rotord12u","rotor12"],
+			["rotord12l","rotor5"],
+			["rotord12u","rotor5"],
+			["rotord12l","rotor26"],
+			["rotord12u","rotor26"],
+			["rotord12l","rotor15"],
+			["rotord12u","rotor15"],
+			["rotord12l","rotor10"],
+			["rotord12u","rotor10"],
+			["rotord12l","rotor21"],
+			["rotord12u","rotor21"],
+
+			{"breakGroup":"blade3"},
+			["rotord31u","rotord31l"],
+			["rotord31l","rotor31"],
+			["rotord31u","rotor31"],
+			["rotord31l","rotor30"],
+			["rotord31u","rotor30"],
+			["rotord31l","rotor32"],
+			["rotord31u","rotor32"],
+			["rotord31l","rotor24"],
+			["rotord31u","rotor24"],
+			["rotord31l","rotor23"],
+			["rotord31u","rotor23"],
+			["rotord31l","rotor25"],
+			["rotord31u","rotor25"],
+
+			{"breakGroup":"blade4"},
+			["rotord20u","rotord20l"],
+			["rotord20l","rotor20"],
+			["rotord20u","rotor20"],
+			["rotord20l","rotor6"],
+			["rotord20u","rotor6"],
+			["rotord20l","rotor27"],
+			["rotord20u","rotor27"],
+			["rotord20l","rotor11"],
+			["rotord20u","rotor11"],
+			["rotord20l","rotor17"],
+			["rotord20u","rotor17"],
+			["rotord20l","rotor22"],
+			["rotord20u","rotor22"],
+
+			{"breakGroup":""},
+
+		],
+
+		"rails": {
+			//blades
+			"blade1a": {"links:":["rotor0", "rotor2"],  "looped":false, "capped":true},
+			"blade1b": {"links:":["rotor9", "rotor7"],  "looped":false, "capped":true},
+			"blade2a": {"links:":["rotor5", "rotor26"], "looped":false, "capped":true},
+			"blade2b": {"links:":["rotor10", "rotor21"],"looped":false, "capped":true},
+			"blade3a": {"links:":["rotor30", "rotor32"],"looped":false, "capped":true},
+			"blade3b": {"links:":["rotor23", "rotor25"],"looped":false, "capped":true},
+			"blade4a": {"links:":["rotor27", "rotor6"], "looped":false, "capped":true},
+			"blade4b": {"links:":["rotor22", "rotor11"],"looped":false, "capped":true},
+		},
+
+		"slidenodes": [
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			//blades
+			["rotor1", "blade1a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor8", "blade1b",true, true, 0, 1000000, 1000000, 345435],
+			["rotor12","blade2a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor15","blade2b",true, true, 0, 1000000, 1000000, 345435],
+			["rotor31","blade3a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor24","blade3b",true, true, 0, 1000000, 1000000, 345435],
+			["rotor20","blade4a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor17","blade4b",true, true, 0, 1000000, 1000000, 345435],
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			//horrizontal
+			{"dragCoef":28},
+			["rotor26","rotor21","rotor5", {"liftCoef":136,"stallAngle": 0.35}],
+			["rotor10","rotor5","rotor21", {"liftCoef":136,"stallAngle": 0.35}],
+			["rotor0","rotor7","rotor2",   {"liftCoef":136,"stallAngle": 0.35}],
+			["rotor9","rotor2","rotor7",   {"liftCoef":136,"stallAngle": 0.35}],
+			["rotor27","rotor6","rotor11", {"liftCoef":136,"stallAngle": 0.35}],
+			["rotor11","rotor22","rotor27",{"liftCoef":136,"stallAngle": 0.35}],
+			["rotor32","rotor25","rotor30",{"liftCoef":136,"stallAngle": 0.35}],
+			["rotor25","rotor23","rotor30",{"liftCoef":136,"stallAngle": 0.35}],
+
+			//vertical
+			{"dragCoef":2.5},
+			["rotord1u","rotord1l","rotor8",{"liftCoef":2.5}],
+			["rotord12u","rotord12l","rotor15",{"liftCoef":2.5}],
+			["rotord31u","rotord31l","rotor24",{"liftCoef":2.5}],
+			["rotord20u","rotord20l","rotor17",{"liftCoef":2.5}],
+
+			{"dragCoef":5.5},
+		],
+
+		"torsionbars": [
+			["id1:", "id2:", "id3:", "id4:"],
+			{"spring":29000, "damp":50, "deform":8000, "strength":15000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
+			//rigidify rotors
+			["rotor7", "rotor9", "rotor2", "rotor0"],
+			["rotor21", "rotor10", "rotor5", "rotor26"],
+			["rotor25", "rotor23", "rotor30", "rotor32"],
+			["rotor11", "rotor22", "rotor27", "rotor6"],
+		],
+
+		"rotators": [
+			["name","[group]:","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+			{"radius":0.00000001},
+			{"brakeTorque":0},
+			{"parkingTorque":0},
+			{"propulsed":1},
+			["main_rotor1", ["main_rotor"], "helimid5", "helimid4", 9999, "helimid5", -1,{"speedo":true, "torqueArm:":"diff1", "torqueCoupling:":"diff"}],
+		],
+	},
+
+	"heli_tailrotor8": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"HC CL-162 CD-30 Tuneable Tail Rotor",
+			"value":250,
+		},
+
+		"slotType" : "heli_tailrotor1",
+
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]
+			// tail blades
+			["rpm", "heli_tailblade_1", "tailrotorl9","tailrotorl5","tailrotorl10", {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_2", "tailrotorl2","tailrotorl5","tailrotorl3",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_3", "tailrotorl1","tailrotorl5","tailrotorl0",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_4", "tailrotorl8","tailrotorl5","tailrotorl7",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			// tail center
+			["rpm", "heli_tailrotor_center", "tailrotorl5","tailrotorr6","tailrotorl9", {"x":0,"y":180, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$tailrotorangle", "range", "units", "Controls", 0.089, 0.061, 0.120, "Tail Rotor Blade Pitch", "Adjust pre-trimmed rotor neutral angle. 0.061 is neutral trimmed.", 0.001, "Aerodynamic Balancing"]
+			["$yawLeftLimit", "range", "units", "Controls", 1.07, 1.00, 1.13, "Yaw Left Limit", "Adjust left yaw bias. 1.0 has no left yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRightLimit", "range", "units", "Controls", 0.93, 0.87, 1.00, "Yaw Right Limit", "Adjust right yaw bias. 1.0 has no right yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRateLimit", "range", "units/s", "Controls", 1.9, 0.01, 8, "Yaw Rate Responsiveness", "Adjust yaw rate.", 0.01, "Aerodynamic Balancing"]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			//["Chassis2", ["body"]],
+
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.2},
+			{"group":"tail"},
+
+			["tailrotorl0", "$tailrotorangle",1.631,1.012],
+			["tailrotorl3", "$tailrotorangle",1.788,1.453],
+			["tailrotorl7", "$tailrotorangle",2.071,0.855],
+			["tailrotorl10","$tailrotorangle",2.228,1.296],
+
+			{"collision":false}
+
+			["tailrotorl4",0.19,1.93,1.154],
+			["tailrotorr6",-0.319,1.93,1.154],
+
+			{"collision":true}
+
+			["tailrotorl5",0.061,1.93,1.154],
+
+			{"group":"tail_rotor"},
+
+			["tailrotorl1",0.061,1.696,0.92],
+			["tailrotorl2",0.061,1.696,1.388],
+			["tailrotorl8",0.061,2.163,0.92],
+			["tailrotorl9",0.061,2.163,1.388],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":2500000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			["tailrotorl8","tailrotorr6"],
+			["tailrotorl9","tailrotorr6"],
+			["tailrotorl9","tailrotorl5"],
+			["tailrotorl9","tailrotorl4"],
+			["tailrotorl8","tailrotorl9"],
+			["tailrotorl8","tailrotorl4"],
+			["tailrotorl5","tailrotorl4"],
+			["tailrotorl2","tailrotorl8"],
+			["tailrotorl5","tailrotorr6"],
+			["tailrotorl1","tailrotorl9"],
+			["tailrotorl1","tailrotorl8"],
+			["tailrotorl9","tailrotorl2"],
+			["tailrotorl2","tailrotorl4"],
+			["tailrotorl1","tailrotorr6"],
+			["tailrotorl1","tailrotorl4"],
+			["tailrotorl2","tailrotorl1"],
+			["tailrotorr6","tailrotorl4"],
+			["tailrotorl2","tailrotorr6"],
+			["tailrotorl5","tailrotorl3"],
+			["tailrotorl2","tailrotorl5"],
+			["tailrotorl5","tailrotorl10"],
+			["tailrotorl5","tailrotorl7"],
+			["tailrotorl8","tailrotorl5"],
+			["tailrotorl5","tailrotorl0"],
+			["tailrotorl1","tailrotorl5"],
+
+			{"breakGroup":"tail_rotor"},
+			{"beamDeform":10000,"beamStrength":9000},
+
+			["tailrotorl10","tailrotorl9"],
+			["tailrotorl3","tailrotorl2"],
+			["tailrotorl0","tailrotorl1"],
+			["tailrotorl7","tailrotorl8"],
+
+			//tailrotor to tail
+			{"beamSpring":800000,"beamDamp":100},
+			{"beamDeform":200000,"beamStrength":200000},
+
+			["tail7", "tailrotorr6",{"name":"tailshaft"}],
+			["tail6", "tailrotorr6"],
+			["tailr5","tailrotorr6"],
+			["taill4","tailrotorr6"],
+
+			["tail7", "tailrotorl5"],
+			["tail6", "tailrotorl5"],
+			["tailr5","tailrotorl5"],
+			["taill4","tailrotorl5"],
+
+			["tail7", "tailrotorl4"],
+			["tail6", "tailrotorl4"],
+			["tailr5","tailrotorl4"],
+			["taill4","tailrotorl4"],
+
+			{"breakGroupType":1},
+			{"breakGroup":["tail_rotor","tail"]},
+
+			//was stabilised to low frame
+			/*
+			["flowr9","tailrotorr6"],
+			["flowl8","tailrotorr6"],
+			["flowr9","tailrotorl4"],
+			["flowl8","tailrotorl4"],
+			*/
+			//but change:
+			["helimidr8","tailrotorr6"],
+			["helimidl6","tailrotorr6"],
+			["helimidr8","tailrotorl4"],
+			["helimidl6","tailrotorl4"],
+
+			{"breakGroupType":0},
+			{"breakGroup":""},
+		],
+
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":1000000,"beamDamp":150},
+			{"beamDeform":100000,"beamStrength":150000},
+
+			["tailrotorl7", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl10","tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl3", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl0", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["tailrotorl5","tailrotorl3","tailrotorl2", {"liftCoef":162,"dragCoef":30,"stallAngle": 0.36}],
+			["tailrotorl5","tailrotorl10","tailrotorl9",{"liftCoef":162,"dragCoef":30,"stallAngle": 0.36}],
+			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":162,"dragCoef":30,"stallAngle": 0.36}],
+			["tailrotorl5","tailrotorl0","tailrotorl1", {"liftCoef":162,"dragCoef":30,"stallAngle": 0.36}],
+		],
+
+		"powertrain" : [
+			["type", "name", "inputName", "inputIndex"]
+			["shaft", "tail_rotor", "heli_diff", 2, {"connectedWheel":"tail_rotor1", "breakTriggerBeam":"tailshaft", "electricsName":"tail_rotor", "gearRatio":2, "friction":1}]
+		],
+
+		"rotators": [
+			["name","[group]:","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+			{"radius":0.233},
+			{"brakeTorque":0},
+			{"parkingTorque":0},
+			{"propulsed":1},
+			["tail_rotor1", ["tail_rotor"], "tailrotorl4", "tailrotorr6", 9999, "tailrotorl4", -1,{"speedo":false}],
+		],
+	},
+
+	"heli_rotor_realisticLiftCoef2bladed": {
+		"information":{
+			"authors":"Darren9",
+			"name":"HR Experimental CL-377 CD-68 Rotor",
+			"value":1500,
+		},
+
+		"slotType" : "heli_rotor",
+
+		//ZdrytchX: tail rotor moved to tailboom
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"],
+			// center
+			["rpm", "heli_blade_inner_1", "rotor8","rotor24","rotor7",    {"x":270,"y":90, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_inner_3", "rotor24","rotor8","rotor25",   {"x":90, "y":90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			// outer
+			["rpm", "heli_blade_outer_1", "rotor0","rotor7","rotor2",     {"x":270,"y":90, "z":180},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_blade_outer_3", "rotor32","rotor25","rotor30",  {"x":90, "y":90, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+
+			["rpm", "heli_swash_link_1",  "swash1","rotor7","swash9",     {"x":270,"y":0,  "z":270},{"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+			["rpm", "heli_swash_link_3",  "swash9","rotor25","swash1",    {"x":90,"y":0,   "z":90}, {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+
+			//shaft
+			["rpm", "heli_rotor_center",  "helimid5","helimid4","rotor8", {"x":0, "y":90, "z":90},   {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_torquelink_u", ["torquelink_u"]],
+			["heli_torquelink_l", ["torquelink_l"]],
+			["heli_torquelink2_u", ["torquelink2_u"]],
+			["heli_torquelink2_l", ["torquelink2_l"]],
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":true},
+			{"collision":false},
+			{"frictionCoef":0.0},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":1.8},
+			{"group":"rotor_center"},
+
+			["rotor8",0.0,-0.137,1.73, {"group":["rotor_center","torquelink_u"]}],
+			["rotor17",-0.137,0.0,1.73,{"group":["rotor_center","torquelink_u"]}],
+			["rotor15",0.137,0.0,1.73, {"group":["rotor_center","torquelink2_u"]}],
+			["rotor24",0.0,0.137,1.73, {"group":["rotor_center","torquelink2_u"]}],
+			["rotor16",0.0,0.0,1.73],
+
+			{"group":""},
+
+			["rotor9",-0.1,-0.137,1.73],
+			["rotor23",0.1,0.137,1.73],
+
+			{"collision":true},
+			{"frictionCoef":0.8},
+
+			["rotor2",-0.1,-1.988,1.73,{"collision":true}],
+			["rotor30",0.1,1.988,1.73],
+
+			//blade stiffners
+			{"nodeWeight":1.8},
+
+			//magic fix here
+			{"collision":false},
+			["rotor3",0,-0.9,1.50],
+			["rotor28",0,0.9,1.50],
+			{"collision":true},
+
+			//swash links
+			{"nodeWeight":2.8},
+
+			["rotor0",0.1,-1.988,1.73],
+			["rotor32",-0.1,1.988,1.73],
+
+			{"collision":false},
+			{"frictionCoef":0.0},
+
+			["rotor7",0.1,-0.137,1.73,{"collision":true}],
+			["rotor25",-0.1,0.137,1.73],
+
+			//rotator group
+			{"frictionCoef":0.8},
+			{"nodeWeight":2.2},
+			{"group":"main_rotor"},
+
+			["rotor1",0.0,-1.988,1.73],
+			["rotor31",0.0,1.988,1.73],
+
+			{"group":""},
+
+			//torque lock rotor to swash
+			//causes instability if too close to the centre so i gotta hack it out
+			{"collision":true},
+			{"frictionCoef":0.0},
+			{"nodeWeight":0.6},
+			{"group":"torquelink_u"},
+
+			["torq0",-0.072,-0.188,1.56,{"group":["torquelink_l","torquelink_u"]}],//-0.052,-0.188
+			["torq1",-0.188,-0.072,1.56,{"group":["torquelink_l","torquelink_u"]}],
+			["torq4",0.0,0.0,1.6],
+
+			{"group":"torquelink2_u"},
+
+			["torq2",0.188,0.072,1.56,{"group":["torquelink2_l","torquelink2_u"]}],
+			["torq3",0.052,0.188,1.56,{"group":["torquelink2_l","torquelink2_u"]}],
+			["torq5",0.0,0.0,1.6],
+
+			{"group":""},
+
+			//Torque reaction holder
+			{"collision":false},
+			{"nodeWeight":8.0},
+
+			["diff" ,0.0,0.0,1.03],
+			["diff1",-0.15,0.25,1.03],
+
+			//horrizontal blade drag hacked in afterwards
+			{"nodeWeight":0.6},
+
+			["rotord1u",0.0,-1.988,1.78],
+			["rotord1l",0.0,-1.988,1.68],
+
+			["rotord31u",0.0,1.988,1.78],
+			["rotord31l",0.0,1.988,1.68],
+
+			{"selfCollision":false},
+
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category", "subCategory"],
+			["$TipSupport", "range", "N/m", "Controls", 0, 0, 2500000, "Cross-Rotor Tip Support", "Limits Rotor Disc Stretching", 1000, "Rotor","Main Tip"],
+			["$TipSupportDamp", "range", "N/m/s", "Controls", 0, 0, 950, "Rotor Tip Support Damp", "Reduces Flapping", 10, "Rotor","Main Tip"],
+
+			["$leadingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Leading Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
+			["$trailingEdgeSupportHead", "range", "N/m", "Controls", 2500, 0, 2500000, "Rotor Root Trailing Edge Support", "Reduces Lateral Movement", 500, "Rotor","Main Root"],
+			["$HeadSupportDamp", "range", "N/m/s", "Controls", 200, 0, 950, "Rotor Root Damping", "Reduces Lateral Flapping", 10, "Rotor","Main Root"],
+			["$TorqueLinkDamp", "range", "N/m/s", "Controls", 360, 0, 950, "Torque Link Dampening", "Use this if you have collective vibration", 10, "Rotor","Main Root"],
+
+			["$headMastSupport", "range", "N/m", "Controls", 7000, 0, 1500000, "Rotor Mast Support", "Reduces Vertical Flapping and adds rigidity", 1000, "Rotor","Main Root"],
+			["$headMastSupportDamp", "range", "N/m/s", "Controls", 180, 0, 950, "Rotor Mast Damping", "TBH I don't think this helps at all because gyro precession negates it", 10, "Rotor","Main Root"],
+			["$torsionPreCompressionAngle", "range", "degrees", "Controls", 0, -13.5, 13.5, "Main Rotor Blade Wash-out Twist", "High wash-out angle is more efficient at low speeds but negative is better at high speed", 0.01, "Aerodynamic Balancing",""],
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			{"beamSpring":"$TipSupport","beamDamp":"$TipSupportDamp"},
+			//rotor tension across symmetric ends
+			["rotor1","rotor31"],
+
+			//rotor reinforcement to impart torque to main blades
+			//leading edge
+			{"beamSpring":"$leadingEdgeSupportHead","beamDamp":"$HeadSupportDamp"},
+			["rotor16","rotor25", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor7", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			//trailing edge
+			{"beamSpring":"$trailingEdgeSupportHead"},
+			["rotor16","rotor23", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+			["rotor16","rotor9", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":500}],
+
+			{"beamSpring":2500000,"beamDamp":100},
+
+			["rotor24","rotor23"],
+			["rotor23","rotor25"],
+			["rotor24","rotor15"],
+			["rotor8","rotor24"],
+			["rotor17","rotor24"],
+			["rotor8","rotor17"],
+			["rotor24","rotor25"],
+			["rotor8","rotor16"],
+			["rotor17","rotor16"],
+			["rotor15","rotor16"],
+			["rotor24","rotor16"],
+			["rotor17","rotor15"],
+			["rotor15","rotor8"],
+			["rotor8","rotor9",{"breakGroup":"blade1"}],
+			["rotor8","rotor9",{"breakGroup":"blade1"}],
+			["rotor8","rotor7",{"breakGroup":"blade1"}],
+			["rotor7","rotor9",{"breakGroup":"blade1"}],
+
+			{"breakGroup":"blade1"},
+			["rotor1","rotor16"],
+			["rotor8","rotor1"],
+
+			{"breakGroup":"blade3"},
+			["rotor31","rotor16"],
+			["rotor24","rotor31"],
+
+			//blabe 1 breakoff
+			{"breakGroup":"blade1"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor2","rotor0",{"name":"main_rotor","breakGroup":""}],
+			["rotor1","rotor0"],
+			["rotor1","rotor2"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor7","rotor0",{"breakGroup":""}],
+			["rotor9","rotor0"],
+			["rotor2","rotor7",{"breakGroup":""}],
+			["rotor9","rotor2"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor9","rotor3"],
+			["rotor7","rotor3"],
+			["rotor8","rotor3"],
+			["rotor1","rotor3"],
+			["rotor0","rotor3"],
+			["rotor2","rotor3"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor7",{"breakGroup":"blade1"}],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+
+			//blade 3 breakoff
+			{"breakGroup":"blade3"},
+			{"beamDeform":8500,"beamStrength":13500,"beamDamp":120},
+			["rotor32","rotor30"],
+			["rotor31","rotor32"],
+			["rotor31","rotor30"],
+			{"beamDeform":19500,"beamStrength":26500},
+			["rotor32","rotor25"],
+			["rotor23","rotor32"],
+			["rotor23","rotor30"],
+			["rotor25","rotor30"],
+			{"beamStrength":"FLT_MAX", "beamSpring":2000000,"beamDamp":120},
+			["rotor31","rotor28"],
+			["rotor30","rotor28"],
+			["rotor32","rotor28"],
+			["rotor23","rotor28"],
+			["rotor24","rotor28"],
+			["rotor25","rotor28"],
+
+			//rotorhead bumping
+			{"beamStrength":"FLT_MAX","beamSpring":0, "deformLimitExpansion":1.02},
+			["helimidMast","rotor25"],
+			{"beamSpring":2500000,"beamPrecompression":1, "deformLimitExpansion":false},
+			{"breakGroup":""},
+
+			//blade to frame
+
+			{"beamSpring":"$headMastSupport","beamDamp":"$headMastSupportDamp"},//1500000
+			{"beamDeform":"FLT_MAX","beamStrength":"$=$headMastSupport/4"},
+
+			{"breakGroup":"blade1"},
+			["rotor1","helimid4"],//1200000
+			["rotor1","helimid5"],
+			["helimidMast","rotor1"],
+			["rotor3","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":"blade3"},
+			["rotor31","helimid4"],
+			["rotor31","helimid5"],
+			["helimidMast","rotor31"],
+			["rotor28","rotor16", {"beamDamp":50}],
+
+			{"breakGroup":""},
+
+			//blade root
+			{"beamSpring":2500000,"beamStrength":15000000,"beamDamp":50},
+			["rotor8","helimid4"],
+			["rotor15","helimid4"],
+			["rotor17","helimid4"],
+			["rotor24","helimid4"],
+			["rotor8","helimid5"],
+			["rotor15","helimid5"],
+			["rotor17","helimid5"],
+			["rotor24","helimid5"],
+
+			//blade to low frame
+			//helimid10 -> helimidMast
+			/*
+			{"beamSpring":1000,"beamDamp":300},//1000000
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			{"breakGroup":"blade1"},
+			["helimid10" ,"rotor1"],
+
+			{"breakGroup":"blade3"},
+			["helimid10" ,"rotor31"],
+			*/
+			{"breakGroup":""},
+
+			{"beamSpring":1500000,"beamDamp":200},//1000000
+			//center shaft
+			["rotor16","helimid5"],
+			["rotor16","helimid4"],
+
+			//torque link dampening
+			["torq4","torq5",{"beamSpring":0,"beamDamp":"$TorqueLinkDamp","dampCutoffHz":200}],
+
+			//swash links
+			{"breakGroupType":1},
+			{"beamSpring":12000000,"beamDamp":70},//4500000, 100
+
+			["rotor7","swash1", {"breakGroup":"blade1","beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade1"},
+			//["rotor0","swash1"{"beamSpring":120}],
+			{"breakGroup":""},
+			["rotor25","swash9", {"beamType":"|BOUNDED", "beamLongBound":1.0, "beamShortBound":1.0, "beamDampVelocitySplit":0.1,"beamDampFast":1000,"dampCutoffHz":20}],
+			{"breakGroup":"blade3"},
+			//["rotor32","swash9"{"beamSpring":120}],
+			{"breakGroup":""},
+			{"breakGroupType":0},
+
+			//torque lock rotor to swash
+			{"beamSpring":1500000,"beamDamp":100},
+
+			["torq2","torq3",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak2.ogg","volumeFactor":0.40,"decayMode":1,"decayFactor":4.5,"pitchFactor":0.8,"maxStress":10000}],
+			["torq0","torq1",{"soundFile":"vehicles/DH_Helicopter/sounds/spring_creak.ogg", "volumeFactor":0.45,"decayMode":1,"decayFactor":1.5,"pitchFactor":1.0,"maxStress":12000}],
+
+			["torq0","rotor8"],
+			["torq0","rotor17"],
+			["torq1","rotor8"],
+			["torq1","rotor17"],
+
+			["torq0","swash1"],
+			["torq1","swash1"],
+
+			["torq0","torq4"],
+			["torq1","torq4"],
+			["rotor8","torq4"],
+			["rotor17","torq4"],
+
+			["torq2","rotor15"],
+			["torq2","rotor24"],
+			["torq3","rotor15"],
+			["torq3","rotor24"],
+
+			["torq2","swash9"],
+			["torq3","swash9"],
+
+			["torq2","torq5"],
+			["torq3","torq5"],
+			["rotor15","torq5"],
+			["rotor24","torq5"],
+
+			//torque reaction holders
+			{"beamSpring":800000,"beamDamp":50},
+
+			["diff","helimidl6"],
+			["diff","helimidl0"],
+			["diff","helimidr8"],
+			["diff","helimidr2"],
+			["diff","helimidl7"],
+			["diff","helimidl1"],
+			["diff","helimidr9"],
+			["diff","helimidr3"],
+
+			["diff1","helimidl6"],
+			["diff1","helimidl0"],
+			["diff1","helimidr8"],
+			["diff1","helimidr2"],
+			["diff1","helimidl7"],
+			["diff1","helimidl1"],
+			["diff1","helimidr9"],
+			["diff1","helimidr3"],
+
+			["diff","diff1"],
+
+			//horrizontal blade drag hacked in afterwards
+			{"beamSpring":1000000,"beamDamp":70},//damp 50
+
+			{"breakGroup":"blade1"},
+			["rotord1u","rotord1l"],
+			["rotord1l","rotor1"],
+			["rotord1u","rotor1"],
+			["rotord1l","rotor0"],
+			["rotord1u","rotor0"],
+			["rotord1l","rotor2"],
+			["rotord1u","rotor2"],
+			["rotord1l","rotor8"],
+			["rotord1u","rotor8"],
+			["rotord1l","rotor7"],
+			["rotord1u","rotor7"],
+			["rotord1l","rotor9"],
+			["rotord1u","rotor9"],
+
+			{"breakGroup":"blade3"},
+			["rotord31u","rotord31l"],
+			["rotord31l","rotor31"],
+			["rotord31u","rotor31"],
+			["rotord31l","rotor30"],
+			["rotord31u","rotor30"],
+			["rotord31l","rotor32"],
+			["rotord31u","rotor32"],
+			["rotord31l","rotor24"],
+			["rotord31u","rotor24"],
+			["rotord31l","rotor23"],
+			["rotord31u","rotor23"],
+			["rotord31l","rotor25"],
+			["rotord31u","rotor25"],
+
+			{"breakGroup":""},
+
+		],
+
+		"rails": {
+			//blades
+			"blade1a": {"links:":["rotor0", "rotor2"],  "looped":false, "capped":true},
+			"blade1b": {"links:":["rotor9", "rotor7"],  "looped":false, "capped":true},
+			"blade3a": {"links:":["rotor30", "rotor32"],"looped":false, "capped":true},
+			"blade3b": {"links:":["rotor23", "rotor25"],"looped":false, "capped":true},
+		},
+
+		"slidenodes": [
+			["id:","railName","attached","fixToRail","tolerance","spring","strength","capStrength"],
+			//blades
+			["rotor1", "blade1a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor8", "blade1b",true, true, 0, 1000000, 1000000, 345435],
+			["rotor31","blade3a",true, true, 0, 1000000, 1000000, 345435],
+			["rotor24","blade3b",true, true, 0, 1000000, 1000000, 345435],
+		],
+
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			//horrizontal
+			//DH ~4 ~= 12.56637 R-22 7.67 ~= 46.20411m^2 ratio 3.67680642859 * 1.1012987013 RPM difference = 4.04926214474
+			//following based on R-22 equivalent performance http://airfoiltools.com/airfoil/details?airfoil=n63015a-il
+			{"dragCoef":67.55},//93.23 * sqrt(~900 for R-22 equivalent performance/~480) ~= *1.9 ~= 177
+			["rotor0","rotor7","rotor2",   {"liftCoef":377.5,"stallAngle": 0.1701696}],//9.75deg
+			["rotor9","rotor2","rotor7",   {"liftCoef":377.5,"stallAngle": 0.1701696}],
+			["rotor32","rotor25","rotor30",{"liftCoef":377.5,"stallAngle": 0.1701696}],
+			["rotor25","rotor23","rotor30",{"liftCoef":377.5,"stallAngle": 0.1701696}],
+
+			//vertical
+			{"dragCoef":3.51},
+			["rotord1u","rotord1l","rotor8",{"liftCoef":3.5}],
+			["rotord31u","rotord31l","rotor24",{"liftCoef":3.5}],
+
+			{"dragCoef":5.5},
+		],
+
+		"torsionbars": [
+			["id1:", "id2:", "id3:", "id4:"],
+			{"spring":29000, "damp":50, "deform":8000, "strength":15000, "precompressionAngle":"$=$torsionPreCompressionAngle * 0.01745329"},
+			//rigidify rotors
+			["rotor7", "rotor9", "rotor2", "rotor0"],
+			["rotor25", "rotor23", "rotor30", "rotor32"],
+		],
+
+		"rotators": [
+			["name","[group]:","node1:","node2:","nodeS","nodeArm:","wheelDir"],
+			{"radius":0.00000001},
+			{"brakeTorque":0},
+			{"parkingTorque":0},
+			{"propulsed":1},
+			["main_rotor1", ["main_rotor"], "helimid5", "helimid4", 9999, "helimid5", -1,{"speedo":true, "torqueArm:":"diff1", "torqueCoupling:":"diff"}],
+		],
+	},
+
+
+	"heli_tailrotor2bladed": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"HR CL-512 CD-122 Tuneable Tail Rotor",
+			"value":250,
+		},
+
+		"slotType" : "heli_tailrotor1",
+
+		"props": [
+			["func"      , "mesh"            , "idRef:", "idX:", "idY:",      "baseRotation"        , "rotation"            , "translation"    ,"min","max","offset","multiplier"]
+			// tail blades
+			["rpm", "heli_tailblade_2", "tailrotorl2","tailrotorl5","tailrotorl3",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			["rpm", "heli_tailblade_4", "tailrotorl8","tailrotorl5","tailrotorl7",  {"x":0,"y":0, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+			// tail center
+			["rpm", "heli_tailrotor_center", "tailrotorl5","tailrotorr6","tailrotorl9", {"x":0,"y":180, "z":0},  {"x":0, "y":0, "z":0}, {"x":0, "y":0, "z":0}, 0,0,0,1{"baseTranslation":{"x":0, "y":0, "z":0}}],
+		],
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$tailrotorangle", "range", "units", "Controls", 0.089, 0.061, 0.120, "Tail Rotor Blade Pitch", "Adjust pre-trimmed rotor neutral angle. 0.061 is neutral trimmed.", 0.001, "Aerodynamic Balancing"]
+			["$yawLeftLimit", "range", "units", "Controls", 1.07, 1.00, 1.13, "Yaw Left Limit", "Adjust left yaw bias. 1.0 has no left yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRightLimit", "range", "units", "Controls", 0.93, 0.87, 1.00, "Yaw Right Limit", "Adjust right yaw bias. 1.0 has no right yaw control.", 0.001, "Aerodynamic Balancing"]
+			["$yawRateLimit", "range", "units/s", "Controls", 1.9, 0.01, 8, "Yaw Rate Responsiveness", "Adjust yaw rate", 0.01, "Aerodynamic Balancing"]
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			//["Chassis2", ["body"]],
+
+		],
+
+		"nodes":[
+			["id", "posX", "posY", "posZ"],
+			{"selfCollision":false}
+			{"collision":true}
+			{"frictionCoef":0.7},
+			{"nodeMaterial":"|NM_METAL"},
+			{"nodeWeight":2.2},
+			{"group":"tail"},
+
+			["tailrotorl3", "$tailrotorangle",1.788,1.453],
+			["tailrotorl7", "$tailrotorangle",2.071,0.855],
+
+			{"collision":false}
+
+			["tailrotorl4",0.19,1.93,1.154],
+			["tailrotorr6",-0.319,1.93,1.154],
+
+			{"collision":true}
+
+			["tailrotorl5",0.061,1.93,1.154],
+
+			{"group":"tail_rotor"},
+
+			["tailrotorl2",0.061,1.696,1.388],
+			["tailrotorl8",0.061,2.163,0.92],
+			["tailrotorl1",0.061,1.83,1.054, {"nodeWeight":1.2,"collision":false}],
+			["tailrotorl9",0.061,2.03,1.254, {"nodeWeight":1.2,"collision":false}],
+
+			{"group":""},
+
+		],
+
+		"beams":[
+			["id1:", "id2:"],
+			{"beamPrecompression":1, "beamType":"|NORMAL", "beamLongBound":1.0, "beamShortBound":1.0},
+			{"beamSpring":2500000,"beamDamp":100},
+			{"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX"},
+
+			["tailrotorl8","tailrotorr6"],
+			["tailrotorl8","tailrotorl4"],
+			["tailrotorl5","tailrotorl4"],
+			["tailrotorl2","tailrotorl8"],
+			["tailrotorl5","tailrotorr6"],
+			["tailrotorl2","tailrotorl4"],
+			["tailrotorr6","tailrotorl4"],
+			["tailrotorl2","tailrotorr6"],
+			["tailrotorl5","tailrotorl3"],
+			["tailrotorl2","tailrotorl5"],
+			["tailrotorl5","tailrotorl7"],
+			["tailrotorl8","tailrotorl5"],
+
+
+			{"beamSpring":2500000,"beamDamp":20,"beamStrength":"FLT_MAX"},
+			["tailrotorl8","tailrotorl9"],
+			["tailrotorl4","tailrotorl9"],
+			["tailrotorl1","tailrotorl9"],
+			["tailrotorl2","tailrotorl9"],
+			["tailrotorl6","tailrotorl9"],
+			["tailrotorl8","tailrotorl1"],
+			["tailrotorl4","tailrotorl1"],
+			["tailrotorl1","tailrotorl1"],
+			["tailrotorl2","tailrotorl1"],
+			["tailrotorl6","tailrotorl1"],
+
+			["tailrotorl5","tailrotorl1"],
+			["tailrotorl5","tailrotorl9"],
+
+			{"breakGroup":"tail_rotor"},
+			{"beamDeform":10000,"beamStrength":9000},
+
+			["tailrotorl3","tailrotorl2"],
+			["tailrotorl7","tailrotorl8"],
+
+			//tailrotor to tail
+			{"beamSpring":800000,"beamDamp":100},
+			{"beamDeform":200000,"beamStrength":200000},
+
+			["tail7", "tailrotorr6",{"name":"tailshaft"}],
+			["tail6", "tailrotorr6"],
+			["tailr5","tailrotorr6"],
+			["taill4","tailrotorr6"],
+
+			["tail7", "tailrotorl5"],
+			["tail6", "tailrotorl5"],
+			["tailr5","tailrotorl5"],
+			["taill4","tailrotorl5"],
+
+			["tail7", "tailrotorl4"],
+			["tail6", "tailrotorl4"],
+			["tailr5","tailrotorl4"],
+			["taill4","tailrotorl4"],
+
+			{"breakGroupType":1},
+			{"breakGroup":["tail_rotor","tail"]},
+
+			//was stabilised to low frame
+			/*
+			["flowr9","tailrotorr6"],
+			["flowl8","tailrotorr6"],
+			["flowr9","tailrotorl4"],
+			["flowl8","tailrotorl4"],
+			*/
+			//but change:
+			["helimidr8","tailrotorr6"],
+			["helimidl6","tailrotorr6"],
+			["helimidr8","tailrotorl4"],
+			["helimidl6","tailrotorl4"],
+
+			{"breakGroupType":0},
+			{"breakGroup":""},
+		],
+
+		"hydros": [
+			["id1:","id2:"],
+			{"beamSpring":1000000,"beamDamp":150},
+			{"beamDeform":100000,"beamStrength":150000},
+
+			["tailrotorl7", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+			["tailrotorl3", "tailrotorr6",{"inputSource":"rudder", "inputFactor":-1.0,"inRate":"$yawRateLimit","outRate":"$yawRateLimit","inLimit":"$yawRightLimit","outLimit":"$yawLeftLimit"}],
+
+		],
+		//diameter = 0.66185194719 ~= 0.34404 m^2, R-22 1.07 ~= 0.79643 m^2
+		//DH tail rotor speed = 1925, R-22 tail rotor speed = 3396 RPM, RPM diff = 1.76415584416
+		//NACA 63-415 http://airfoiltools.com/polar/details?polar=xf-n63415-il-50000 max lift coefficient 1.254 at 11.6deg
+		//multiplication sum = 4.08390489177
+		"triangles":[
+			["id1:", "id2:", "id3:"],
+			["tailrotorl5","tailrotorl3","tailrotorl2", {"liftCoef":512,"dragCoef":122,"stallAngle": 0.2025}],
+			["tailrotorl5","tailrotorl7","tailrotorl8", {"liftCoef":512,"dragCoef":122,"stallAngle": 0.2025}],
 		],
 
 		"powertrain" : [

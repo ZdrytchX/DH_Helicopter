@@ -235,7 +235,7 @@
 			*/
 			
 			"sampleName": "B4S", // I4,V6,B4S,V10,V8,V8_2,B4
-			"mainGain": -13,
+			"mainGain": -3,
 			"maxLoadMix": 0.65,
 			"minLoadMix": 0.45,
 			"onLoadGain":1,
@@ -245,6 +245,10 @@
 			//"eqLowWidth": 0,
 			"eqHighGain": -5,
 			"eqHighFreq": 6000,
+			"eqLowShelfFreq": 320,
+			"eqLowShelfGain": 5,
+			"eqHighShelfFreq": 720,
+			"eqHighShelfGain": 20,
 			"fundamentalFrequencyCylinderCount":2
 			"eqFundamentalGain": 10
 		},
@@ -1197,7 +1201,7 @@
 				[1, 0.30],
 			],
 			"maxTorqueRating":465,//-1
-			"maxOverTorqueDamage":3500,//1000
+			"maxOverTorqueDamage":13500,//1000
 			"torque":[
 				["rpm", "torque"]
 				[0, 0],
@@ -1254,7 +1258,7 @@
 				[1, 0.36],
 			],
 			"maxTorqueRating":420,//-1
-			"maxOverTorqueDamage":2500,//1000
+			"maxOverTorqueDamage":12500,//1000
 			"torque":[
 				["rpm", "torque"]
 				[0, 0],

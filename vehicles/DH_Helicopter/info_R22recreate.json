@@ -1,0 +1,32 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"HR-TwinBlade",
+    "Transmission":"Belt Drive",
+    "Description":"A nimble 2 bladed helicopter with realistic rotors and performance characteristics reflecting the R-22, albeit compensating for the smaller radius and slower rotation rate. The rotors on this helicopter are special, low-AoA stalling blades that generate high lift with very low drag.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+	"Years":{"min":1960, "max":1975},
+    "Value":20150,
+    "Performance Class":"Payload 400kg, Speed 85mph",
+    "Top Speed":38,
+	"Torque":125,
+	"TorquePeakRPM":"3600",
+	"Power":66,
+	"PowerPeakRPM":"3850",
+	"Max RPM":"3850",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":35000
+}

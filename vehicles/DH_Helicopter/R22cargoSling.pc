@@ -6,15 +6,15 @@
   "paints":[
     {
       "baseColor":[
-        0.58,
-        0.34,
-        0.15,
-        2
+        0,
+        0,
+        0,
+        0.02
       ],
-      "clearcoat":0.4,
-      "clearcoatRoughness":0.26,
-      "metallic":0.19,
-      "roughness":0.71
+      "clearcoat":0.8,
+      "clearcoatRoughness":0,
+      "metallic":0.2,
+      "roughness":0.58
     },
     {
       "baseColor":[
@@ -23,10 +23,10 @@
         0.25,
         0.1
       ],
-      "clearcoat":0.4,
-      "clearcoatRoughness":0.26,
-      "metallic":0.19,
-      "roughness":0.71
+      "clearcoat":0.8,
+      "clearcoatRoughness":0,
+      "metallic":0.2,
+      "roughness":0.58
     },
     {
       "baseColor":[
@@ -35,10 +35,10 @@
         0.4,
         2
       ],
-      "clearcoat":0.4,
-      "clearcoatRoughness":0.26,
-      "metallic":0.19,
-      "roughness":0.71
+      "clearcoat":0.8,
+      "clearcoatRoughness":0,
+      "metallic":0.2,
+      "roughness":0.58
     }
   ],
   "parts":{
@@ -54,41 +54,34 @@
     "heli_missiles":"",
     "heli_rad":"heli_rad_scrapyard",
     "heli_radiator_mods":"",
-    "heli_rotor":"heli_rotor_oldrealisticLiftCoef",
+    "heli_rotor":"heli_rotor_realisticLiftCoef2bladed",
     "heli_seat":"heli_seat",
     "heli_swash":"heli_swash_responsive2",
     "heli_tail":"heli_tail",
     "heli_tail_plane":"heli_tail_plane_racing",
-    "heli_tailrotor1":"heli_tailrotor7",
-    "heli_towhtich":"",
+    "heli_tailrotor1":"heli_tailrotor2bladed",
+    "heli_towhtich":"heli_tow_sling_long",
     "heli_transmission":"heli_transmission"
   },
   "vars":{
-    "$CollectiveRate":5,
-    "$CollectiveRateDown":5,
-    "$CyclicPitchRate":3,
-    "$CyclicPitchRateExcess":3,
-    "$CyclicRangeLowerLimit":0.75,
-    "$CyclicRangeUpperLimit":1.25,
-    "$CyclicRollRate":3,
-    "$CyclicRollRateExcess":3,
-    "$HeadSupportDamp":230,
+    "$CyclicRangeLowerLimit":0.85,
+    "$CyclicRangeUpperLimit":1.15,
+    "$CyclicRollRateExcess":1,
     "$SkidFriction":0.8,
     "$SkidSlide":0.7,
     "$SkidSpring":23000,
     "$SkidTread":0.7,
-    "$clutchEngage":800,
-    "$colltune":2.175,
-    "$colltuneNeg":1,
+    "$clutchEngage":1000,
+    "$clutchRPM":2000,
     "$fuel":15,
-    "$leadingEdgeSupportHead":3500,
+    "$rbcweight":353,
     "$swashStrengthForce":3510000,
-    "$tailHorizontalPlaneAngle":-5.324,
-    "$tailPlaneAngle":-10,
-    "$tailrotorangle":0.095,
-    "$torsionPreCompressionAngle":1.5,
-    "$trailingEdgeSupportHead":3500,
-    "$yawLeftLimit":1.05,
-    "$yawRightLimit":0.937
+    "$tailHorizontalPlaneAngle":-3,
+    "$tailPlaneAngle":-3,
+    "$tailrotorangle":0.076,
+    "$torsionPreCompressionAngle":0,
+    "$yawLeftLimit":1.07,
+    "$yawRateLimit":1.9,
+    "$yawRightLimit":0.935
   }
 }
