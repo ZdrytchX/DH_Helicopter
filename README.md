@@ -1,7 +1,7 @@
 # DH Super Gnat
  A fork of Darren9's DH Super Gnat
 
-INSTALLATION: Don't extract the files, leave them in the zip. Move the zip to your BeamNG's mod folder (e.g. BeamNG.drive\0.31\mods at this time)
+INSTALLATION: Don't extract the files, leave them in the zip. Move the zip to your BeamNG's mod folder (e.g. `BeamNG.drive\0.33\mods` at this time)
 
 Hi, ZdrytchX here.
 
