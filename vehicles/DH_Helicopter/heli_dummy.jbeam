@@ -8,14 +8,14 @@
 		"slotType" : "heli_dummy",
 		"camerasInternal":[
 			["type", "x", "y", "z", "fov", "id1:", "id2:", "id3:", "id4:", "id5:", "id6:"],
-			["pilot", 0.0, -0.39, 1.20, 90, "driver67","driver68","driver61","driver60","driver104","driver105"
+			["driver", 0.0, -0.39, 1.20, 90, "driver67","driver68","driver61","driver60","driver104","driver105"
 				{"nodeWeight":0.3,"selfCollision":false,"collision":false,"beamSpring":37930,"beamDamp":50,"beamDeform":"FLT_MAX","beamStrength":"FLT_MAX","order":10,"idRef":"driver61"}]
 				//following gives string expected number error output for unknown reason "idBack":"driver105","idUp":"driver68"
 		],
 		"cargoStorage":[
-			["name","cargoTypes", "capacity","weightNodes:"],
-			["Left Pocket",["parcel"], 1, ["driver65","driver83","driver52","driver69","driver88"]],
-			["Right Pocket",["parcel"], 1, ["driver66","driver84","driver53","driver70","driver89"]],
+			["groupId","name","cargoTypes", "capacity","weightNodes:"],
+			["pocket1","Left Pocket",["parcel"], 1, ["driver65","driver83","driver52","driver69","driver88"]],
+			["pocket2","Right Pocket",["parcel"], 1, ["driver66","driver84","driver53","driver70","driver89"]],
 		],
 		
 		"flexbodies": [

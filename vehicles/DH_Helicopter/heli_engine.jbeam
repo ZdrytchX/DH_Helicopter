@@ -316,7 +316,7 @@
 				[4000, "$torque9"],
 			],
 			//TODO doesnt work
-			/*
+			
 			"regenTorque":[
 				["rpm","torque",],
 				[0,0],
@@ -326,13 +326,13 @@
 				[1000,80],
 				[2000,100],
 				[3500,100],
-				[3000,5],//slope off for safety
-				[3500,0],
+				[4000,5],//slope off for safety
+				[4500,0],
 			],
-			*/
+			
 
 			"electricsThrottleName": "heli_throttleToEngine",
-			"electricsRegenThrottleName": "regenThrottle"
+			"electricsRegenThrottleName": "heli_regenThrottle"
 			"maximumWantedRegenTorque":100,
 
 			"revLimiterRPMDrop":0,
@@ -343,7 +343,6 @@
             //"maximumWantedRegenTorque": 100,
 			"defaultRegen":1.0,
 			"onePedalRegenCoef": 0.85
-			"regenThrottle":0.5,
 
             "inertia": 0.02,
             "friction": 2,
@@ -363,7 +362,6 @@
 			"regenActive":true,
 			"regenThrottleNeutralPoint":0.5,
 			"regenSlowSpeedDropOff":10
-			"regenThrottle":0.5,
 			"regenFadeRPM":10
 
 			"soundConfig": "soundConfig",
@@ -482,7 +480,7 @@
 			//"maxOverTorqueDamage":5000,//1000
             //"maximumWantedRegenTorque": 100,
 			"defaultRegen":1.0,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
 
             "inertia": 0.02,
             "friction": 2,
@@ -511,7 +509,7 @@
 
             "defaultRegen": 1.0,
             "brakeRegenCoef": 1,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
         },*/
 
         "soundConfig": {
@@ -613,7 +611,7 @@
 			//"maxOverTorqueDamage":5000,//1000
             //"maximumWantedRegenTorque": 100,
 			"defaultRegen":1.0,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
 
             "inertia": 0.02,
             "friction": 2,
@@ -642,7 +640,7 @@
 
             "defaultRegen": 1.0,
             "brakeRegenCoef": 1,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
         },*/
 
         "soundConfig": {
@@ -746,7 +744,7 @@
 			//"maxOverTorqueDamage":5000,//1000
             //"maximumWantedRegenTorque": 100,
 			"defaultRegen":1.0,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
 
             "inertia": 0.03,
             "friction": 3.9,
@@ -775,7 +773,7 @@
 
             "defaultRegen": 1.0,
             "brakeRegenCoef": 1,
-			"regenThrottle":0.5,
+			"heli_regenThrottle":0.5,
         },*/
 
         "soundConfig": {
@@ -939,6 +937,7 @@
 			["heli_exhaust","heli_exhaust", "Exhaust"],
 			["heli_transmission","heli_transmission", "Transmission"],
 			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+			["heli_engine_dh50","", "WEP Upgrade"],
 		],
 
 		"flexbodies": [
@@ -959,7 +958,7 @@
 			["$maximumRPM", "range", "RPM", "Controls", 3600, 3300, 3650, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
 			["$idler", "range", "RPM", "Controls", 650, 620, 2000, "Idler", "Adjust Idle RPM", 100, "Engine"],
 			["$clutchRPM", "range", "RPM", "Controls", 1200, 1000, 2500, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
-			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 1000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1000, 800, 2000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
 		],
 		
 		"mainEngine": {
@@ -1048,6 +1047,247 @@
 		"clutch": {
 			"engageStartRPM":"$clutchRPM",
 			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_dh50_upgrade": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"War Emergency Power Upgrade",
+			"value":3500,
+		},
+
+		"slotType" : "heli_engine_dh50",
+		
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[400, 45],
+				[800, 62],
+				[1200, 80]
+				[2000, 95],
+				[2500, 100],
+				[3000, 105],
+				[3300, 108],
+				[3400, 107],
+				[3500, 105],
+				[3600, 101],
+				[3700, 90],
+				[3800, 86],
+				[3900, 75],
+				[4000, 10],
+
+			],
+			//new values
+			"maxTorqueRating":200,//-1
+			"maxOverTorqueDamage":9000,//1000
+
+			"inertia":0.1,
+			"friction":5.3//5
+			"dynamicFriction":0.025//0.022
+			
+			"burnEfficiency":[
+				[0, 0.18],
+				[0.05, 0.35],
+				[0.4, 0.42],
+				[0.7, 0.49],
+				[1, 0.26],
+			],
+			"particulates":0.02,
+			"engineBlockAirflowCoef":1.0,
+			"oilVolume":4
+		},
+
+	},
+
+	"heli_engine_dh30": {
+		"information":{
+			"authors":"Darren9, ZdrytchX",
+			"name":"DH32-4500 Aero Engine",
+			"value":3500,
+		},
+
+		"slotType" : "heli_engine",
+
+		"slots": [
+			["type", "default", "description"]
+			["heli_exhaust","heli_exhaust", "Exhaust"],
+			["heli_transmission","heli_transmission", "Transmission"],
+			["heli_driveshaft","heli_driveshaft", "Drive Shaft"],
+			["heli_engine_dh30","", "WEP Upgrade"],
+		],
+
+		"flexbodies": [
+			["mesh", "[group]:", "nonFlexMaterials"],
+			["heli_engine", ["heli_core"],[],{"scale":{"x":0.7, "y":0.7, "z":0.7}}],
+			["heli_gearbox", ["heli_core"]],
+			["heli_waterpump", ["heli_core"]],
+		],
+
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$maximumRPM", "range", "RPM", "Controls", 4500, 4000, 4500, "RPM Limiter", "Adjust RPM limit", 10, "Engine"],
+			["$idler", "range", "RPM", "Controls", 950, 1620, 4000, "Idler", "Adjust Idle RPM", 100, "Engine"],
+			["$clutchRPM", "range", "RPM", "Controls", 2800, 1600, 3500, "Clutch Target Speed", "Adjust Centrifugal Clutch Target RPM", 100, "Engine"],
+			["$clutchEngage", "range", "RPM", "Controls", 1200, 800, 2000, "Clutch Speed Range", "Adjust Centrifugal Clutch RPM Range", 200, "Engine"],
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[400, 20],
+				[800, 35],
+				[1200, 45]
+				[2000, 52],
+				[2500, 55],
+				[3000, 57],
+				[3500, 58],
+				[4000, 59],
+				[4500, 57],
+				[5000, 50],
+				[5500, 15],
+			],
+
+			"electricsThrottleName": "heli_throttleToEngine",
+			"revLimiterRPMDrop":0,
+			"idleRPM":"$idler",//1000
+			"maxRPM":"$maximumRPM",//3850
+			"maxOverRevDamage":300
+			//new values
+			"maxTorqueRating":60,//-1
+			"maxOverTorqueDamage":800,//1000
+
+			"inertia":0.09,
+			"friction":1.2//5
+			"dynamicFriction":0.013//0.022
+			"burnEfficiency":0.27//0.28
+			
+			"burnEfficiency":[
+				[0, 0.06],
+				[0.05, 0.15],
+				[0.4, 0.23],
+				[0.7, 0.27],
+				[1, 0.18],
+			],
+			"torqueReactionNodes:":["helimidl6","helimidl0","helimidr8"]
+			"particulates":0.019
+			"energyStorage": "mainTank",
+			"requiredEnergyType":"gasoline",
+
+			//cooling and oil system
+			"hasOilStarvingDamage":true,
+			"thermalsEnabled":true,
+			"engineBlockMaterial":"aluminum",
+			"engineBlockAirflowCoef":0.7,
+			"engineBlockAirCoolingEfficiency":10,
+			"oilVolume":1.5
+
+			//engine durability
+			"engineBlockTemperatureDamageThreshold":135,
+			"cylinderWallTemperatureDamageThreshold":170,
+			"headGasketDamageThreshold":1000000,
+			"pistonRingDamageThreshold":1000000,
+			"connectingRodDamageThreshold":1000000,
+
+			//node beam interface
+			"waterDamage": {"[engineGroup]:":["engine_intake"]},
+			"radiator": {"[engineGroup]:":["radiator"]},
+			"engineBlock": {"[engineGroup]:":["engine_block"]},
+			"breakTriggerBeam":"engine",
+
+			"soundConfig": "soundConfig",
+
+		},
+
+		"soundConfig": {
+			"sampleName": "I3_engine",
+			"mainGain": -6,
+			"maxLoadMix": 0.65,
+			"minLoadMix": 0.05,
+			"onLoadGain":3,
+			"offLoadGain":0.6,
+			"eqLowGain": 10,
+			"eqLowFreq": 400,
+			//"eqLowWidth": 0,
+			"eqHighGain": -9,
+			"eqHighFreq": 6000,
+			"fundamentalFrequencyCylinderCount":2
+			"eqFundamentalGain": 10
+		},
+		"clutch": {
+			"engageStartRPM":"$clutchRPM",
+			"engagementRPM":"$clutchEngage",
+		},
+
+	},
+
+	"heli_engine_dh30_upgrade": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"War Emergency Power Upgrade",
+			"value":3500,
+		},
+
+		"slotType" : "heli_engine_dh30",
+		
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["combustionEngine", "mainEngine", "dummy", 0],
+			["centrifugalFrictionClutch", "clutch", "mainEngine", 1],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":1, "friction":2}]
+		],
+		
+		"mainEngine": {
+			"torque":[
+				["rpm", "torque"]
+				[0, 0],
+				[400, 22],
+				[800, 36],
+				[1200, 45]
+				[2000, 52],
+				[2500, 55],
+				[3000, 57],
+				[3500, 59],
+				[4000, 61],
+				[4250, 63],
+				[4500, 62],
+				[4750, 57],
+				[5000, 50],
+				[5500, 15],
+			],
+			//new values
+			"maxTorqueRating":120,//-1
+			"maxOverTorqueDamage":7500,//1000
+			"inertia":0.1,
+			"friction":1.3//5
+			"dynamicFriction":0.015//0.022
+			
+			"burnEfficiency":[
+				[0, 0.18],
+				[0.05, 0.35],
+				[0.4, 0.42],
+				[0.7, 0.49],
+				[1, 0.26],
+			],
+			"particulates":0.02,
+			"engineBlockAirflowCoef":1.0,
+			"oilVolume":4
 		},
 
 	},
@@ -1502,15 +1742,16 @@
 		"slotType" : "heli_intake",
 
 		"turbocharger": {
-			"volumePer10kRPM":0.19//0.07
-			"wastegateStart":33.5,
-			"wastegateLimit":33.9,
-			"maxExhaustPower": 13300,
+			"volumePer10kRPM":0.39,//0.07
+			"wastegateStart":35,
+			"wastegateLimit":39,
+			"maxExhaustPower": 25550//13300,
 			"backPressureCoef": 0.000039,
 			"frictionCoef": 7.5,
-			"pressureRatePSI":27,//default 30
-			"inertia":7.5,
-			"damageThresholdTemperature": 750,
+			"pressureRatePSI":2.5,//default 30
+			"inertia":100,//7.5,
+			"damageThresholdTemperature": 730,
+			"whineLoopEvent":"event:>Vehicle>Forced_Induction>Turbo_03>turbo_spin",
 			"pressurePSI":[
 				//turbineRPM, pressure(PSI)
 				[0,         -13.5],
@@ -1520,10 +1761,30 @@
 				[150000,    29],
 				[200000,    35],
 				[250000,    37],
-				[300000,    38],
+				[300000,    38.5],
+				[350000,    39],
 			],
 			"engineDef":[
 				//engineRPM, efficiency, exhaustFactor
+				[0,     -0.65,    0.0],
+				[650,   -0.25,   0.05],
+				[1400,  -0.15,   0.13],
+				[1700,  -0.03,    0.20],
+				[2000,  0.20,    0.28],
+				[2150,  0.39,    0.39],
+				[2350,  0.57,    0.52],
+				[2550,  0.7,    0.65],
+				[2700,  0.78,    0.73],
+				[3000,  0.85,    0.87],
+				[3300,  0.88,    0.95],
+				[3700,  0.9,    0.97],//peak torque DH30
+				[4000,  0.87,    0.98],
+				[4200,  0.8,    0.99],//peak power DH30
+				[4500,  0.73,    0.99],
+				[5000,  0.65,    0.99],
+				[6000,  0.53,    0.98],
+				[7000,  0.43,    0.97],
+				/*
 				[0,     -0.65,    0.0],
 				[650,   -0.25,   0.05],
 				[1400,  -0.15,   0.13],
@@ -1542,7 +1803,7 @@
 				[5000,  0.35,    0.90],
 				[6000,  0.25,    0.86],
 				[7000,  0.20,    0.85],
-
+*/
 			],
 		},
 		
@@ -1585,7 +1846,7 @@
 			"backPressureCoef": 0.000095,
 			"frictionCoef": 37.3,
 			"inertia":3.5,
-			"damageThresholdTemperature": 715,
+			"damageThresholdTemperature": 615,
 			"pressurePSI":[
 				//turbineRPM, pressure(PSI)
 				[0,         -5.9],
@@ -3224,6 +3485,45 @@
 		],
 
 	},
+	//requires powertrain system overhaul
+	/*
+	"heli_driveshaft_torqueConverter": {
+		"information":{
+			"authors":"ZdrytchX",
+			"name":"Variable-Speed Torque Convertor with J-Nutt",
+			"value":1100,
+		},
+
+		"slotType" : "heli_driveshaft",
+
+		"variables": [
+			["name", "type", "unit", "category", "default", "min", "max", "title", "description", "stepDis", "category"]
+			["$clutchEndRPM", "range", ":1", "Controls", 3900, 0, 5000, "Torque Converter Lockup RPM", "RPM at which torque converter additional clutch locks up", 100, "Transmission"],
+			["$DriveShaftRatio", "range", ":1", "Controls", 8, 4, 16, "Rotor Drive Shaft Ratio", "8:1 is standard. Does not affect tail rotor speed.", 0.1, "Transmission"],
+			["$DiffRatio", "range", "x", "Controls", 1.0, 0.5, 2, "Drive Shaft Ratio", "Final Gear Ratio that affects both main and tail rotors. Higher tail rotor speed doesn't necessarily give you more tail authority due to the way torque is modelled.", 0.01, "Transmission"],
+		],
+		
+		"powertrain": [
+			["type", "name", "inputName", "inputIndex"],
+			["torqueConverter", "clutch", "mainEngine", 1],
+			["shaft", "main_rotor", "heli_diff", 1, {"connectedWheel":"main_rotor1", "breakTriggerBeam":"main_rotor", "electricsName":"main_rotor", "gearRatio":"$DriveShaftRatio", "friction":9.5}],
+			["differential", "heli_diff", "clutch", 1, {"diffType":["locked"], "lockTorque":400, "lockSpring":2000, "gearRatio":"$DiffRatio", "friction":2}],
+		],
+		"torqueConverter": {
+			"uiName":"Torque Converter",
+			"converterDiameter": 0.195,
+			"converterStiffness":3,
+			"couplingAVRatio":0.85,
+			"stallTorqueRatio":1.75,
+			"additionalEngineInertia":0.08,
+			"lockupClutchTorque":10,
+		},
+		"vehicleController": {
+        	"torqueConverterLockupRPM": "$clutchEndRPM",
+		},
+
+	},
+	*/
 	"heli_driveshaft_locked": {
 		"information":{
 			"authors":"ZdrytchX",
@@ -3272,8 +3572,8 @@
 		},
 		
 		"mainEngine": {
-			"maxTorqueRating":118,//-1
-			"maxOverTorqueDamage":300,//1000
+			"$*maxTorqueRating":0.9,//-1
+			"$*maxOverTorqueDamage":0.8,//1000
 		},
 
 	},
@@ -3283,7 +3583,7 @@
 		"information":{
 			"authors":"ZdrytchX",
 			"name":"Direct Drive Transmission",
-			"value":0,
+			"value":50,
 		},
 		"slotType" : "heli_transmission",
 	},

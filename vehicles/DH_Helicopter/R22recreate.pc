@@ -64,8 +64,8 @@
     "heli_transmission":"heli_transmission"
   },
   "vars":{
-    "$CyclicRangeLowerLimit":0.85,
-    "$CyclicRangeUpperLimit":1.15,
+    "$CyclicRangeLowerLimit":0.87,
+    "$CyclicRangeUpperLimit":1.13,
     "$CyclicRollRateExcess":1,
     "$SkidFriction":0.8,
     "$SkidSlide":0.7,
@@ -74,11 +74,12 @@
     "$clutchEngage":1000,
     "$clutchRPM":2000,
     "$fuel":15,
+    "$headMastSupportDamp":150,
     "$swashStrengthForce":3510000,
     "$tailHorizontalPlaneAngle":-3,
     "$tailPlaneAngle":-3,
-    "$tailrotorangle":0.076,
-    "$torsionPreCompressionAngle":0,
+    "$tailrotorangle":0.079,
+    "$torsionPreCompressionAngle":0.32,
     "$yawLeftLimit":1.07,
     "$yawRateLimit":1.9,
     "$yawRightLimit":0.935

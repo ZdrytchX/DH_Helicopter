@@ -43,6 +43,7 @@
 			{"beamSpring":930,"beamDamp":50},
 			["pilot", 0.0, -0.46, 1.20, 90, "flowl6","flowr7","flowl4","flowr5","flowl2","flowr3"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":11}],
 			["driver", 0.0, -0.46, 1.20, 90, "flowl6","flowr7","flowl4","flowr5","flowl2","flowr3"{"beamDeform":5000,"beamStrength":"FLT_MAX","order":12}],
+			["rotorCamera", 0.0, -0, 1.92, 90, "helimid5","rotor16","rotor8","rotor16","rotor15","rotor24"{"beamDeform":5000,"beamSpring":15000,"beamStrength":1500,"order":12,"collision":false}],
 		],
 		
 		"controller": [

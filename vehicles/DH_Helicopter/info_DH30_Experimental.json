@@ -1,0 +1,38 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"HR-TwinBlade (DH30 100hp WEP Experimental) (Decomissioned)",
+    "Transmission":"Belt Drive",
+    "Description":"This experimental light hauling helicopter was fitted with short time limited overboost up to 2.5 Bar manifold pressure, guaranteeing in excess of 95hp for two minutes and a half.
+    For maximum continuous operation, set throttle to 55% or less to prevent engine damage (Manifold Pressure should be in the 1.5-1.7 Bar / 22-24.5 psi range)
+    
+    Running full power in excess of 3 minutes is prohibited.
+    Maximum Cruise power at 1.7 Bar / 24.5 psi, producing 70hp.
+    
+    When a certain third world military ran out of DH65 motor supply and quad-blade rotors, they resorted to repurposing existing HR-Twinblades with DH30 engines, reinforcing criticial components and tuned it to operate with a military grade turbocharger. Despite the drawbacks, this conversion kit turned out to be popular for southern nations and enthusiasts due to the relatively cheap cost for the performance achieved after the war.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+	"Years":{"min":1960, "max":1975},
+    "Value":12150,
+    "Performance Class":"Continuous Power: 110 mph (50% Throttle) - Emergency Power: 130 mph (3 minutes)",
+    "Top Speed":58,
+	"Torque":169,
+	"TorquePeakRPM":"3600",
+	"Power":98,
+	"PowerPeakRPM":"3850",
+	"Max RPM":"3850",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":5500
+}

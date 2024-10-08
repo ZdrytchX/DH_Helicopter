@@ -20,7 +20,7 @@
   "Years":{"min":1960, "max":2022},
   "Off-Road Score":1,
   "Performance Class":"Payload 200kg, Speed 130mph",
-  "Population":50000,
+  "Population":500,
   "Power":66,
   "PowerPeakRPM":3750,
   "Propulsion":"ICE",

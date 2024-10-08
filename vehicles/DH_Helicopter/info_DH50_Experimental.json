@@ -1,0 +1,35 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      3.29,
+      1.5
+    ]
+  ],
+    "Configuration":"HR-TwinBlade (DH50 140hp WEP Experimental)",
+    "Transmission":"Torque Convertor",
+    "Description":"When a certain third world military ran out of DH65 supply and quad-blade rotors, they resorted to repurposing HR-Twinblades with DH50 engines, reinforcing few criticial components and tuned it to operate with a military grade turbocharger, with a step-up gearbox boosting the rotors to a dangerously high 4500 RPM. The doctorine was in that using surplus lower revving DH50 engine allows for a more responsive power delivery with the military grade turbocharger.
+    Unfortunately the engine improvements only allows 110hp for 5 minutes, but can run under full load in excess of 2.2 Bar generating in excess of 140hp in emergencies for about a minute and a half.
+    
+    Continuous flight mode at 1.6 Bar / 23 psi producing 94hp",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+	"Years":{"min":1960, "max":1975},
+    "Value":20150,
+    "Performance Class":"Payload 400kg, Speed 85mph",
+    "Top Speed":38,
+	"Torque":300,
+	"TorquePeakRPM":"3600",
+	"Power":145,
+	"PowerPeakRPM":"3850",
+	"Max RPM":"3850",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":850
+}

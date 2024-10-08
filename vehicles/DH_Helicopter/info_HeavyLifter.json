@@ -22,7 +22,7 @@
   "Years":{"min":1975, "max":2025},
   "Population":9500,
   "Power":166,
-  "PowerPeakRPM":3700,
+  "PowerPeakRPM":370,
   "Propulsion":"ICE",
   "Top Speed":71,
   "Torque":330,

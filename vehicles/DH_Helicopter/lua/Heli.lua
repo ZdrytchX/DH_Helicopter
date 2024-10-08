@@ -6,6 +6,7 @@ local function init()
     electrics.values.throttle_change = 0
 	electrics.values.heli_throttle = 0--to display on gui
 	electrics.values.heli_throttleToEngine = 0--actually goes to engine
+	electrics.values.heli_regenThrottle = 0--required for regen to work
 	electrics.values.heli_fuelwarn = 0
 	electrics.values.heli_engwarn = 0
 	electrics.values.collective = 0
@@ -166,7 +167,7 @@ local function updateGFX(dt)
 	electrics.values.brake = (electrics.values.rudder + 1) / 2 -- fix that annoying negative value error spat out by the pedals GUI
 
 	electrics.values.throttle = electrics.values.heli_throttle
-	electrics.values.regenThrottle = parkingbrake
+	electrics.values.heli_regenThrottle = (1 - electrics.values.throttle) --parkingbrake
 	--electrics.values.regenStrength = 1
 	electrics.values.heli_throttleToEngine = electrics.values.throttle
 

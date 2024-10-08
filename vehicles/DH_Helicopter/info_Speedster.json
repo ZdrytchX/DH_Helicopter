@@ -6,7 +6,7 @@
     "Fuel Type":"Gasoline",
     "Years":{"min":1990, "max":1993},
 	"Propulsion":"ICE",
-	"Population":1530,
+	"Population":153,
     "Value":42500,
     "Performance Class":"Payload 500kg, Speed 200 mph",
 	"Torque":255,
