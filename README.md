@@ -7,4 +7,4 @@ Hi, ZdrytchX here.
 
 This is an unofficial mod release. The original creator, Darren9 has now given me permission, even to release on repo, but I likely won't until this mod is more stable, and I would also like to implement the remaining unused assets and solve a bunch of jbeam related issues.
 
-/u/ZdrytchX || youtube.com/zdrytchx?
+/u/ZdrytchX || [youtube.com/zdrytchx](youtube.com/zdrytchx)
