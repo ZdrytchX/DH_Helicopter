@@ -1159,7 +1159,7 @@
 		"information":{
 			"authors":"Darren9, ZdrytchX",
 			"name":"HC CL-175 CD-42 Tuneable Tail Rotor",
-			"value":250,
+			"value":450,
 		},
 
 		"slotType" : "heli_tailrotor1",
@@ -1341,7 +1341,7 @@
 		"information":{
 			"authors":"Darren9, ZdrytchX",
 			"name":"HD CL-512 CD-498 Tuneable Tail Rotor",
-			"value":250,
+			"value":750,
 		},
 
 		"slotType" : "heli_tailrotor1",
@@ -2792,7 +2792,7 @@
 		"information":{
 			"authors":"Darren9, ZdrytchX",
 			"name":"HC CL-162 CD-30 Tuneable Tail Rotor",
-			"value":250,
+			"value":400,
 		},
 
 		"slotType" : "heli_tailrotor1",
@@ -3429,7 +3429,7 @@
 		"information":{
 			"authors":"Darren9, ZdrytchX",
 			"name":"HR CL-512 CD-122 Tuneable Tail Rotor",
-			"value":250,
+			"value":450,
 		},
 
 		"slotType" : "heli_tailrotor1",

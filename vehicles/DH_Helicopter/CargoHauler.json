@@ -1,0 +1,35 @@
+{
+  "BoundingBox":[
+    [
+      -1.988,
+      -1.988,
+      -0.812
+    ],
+    [
+      1.988,
+      12.29,
+      1.5
+    ]
+  ],
+    "Configuration":"Heavy Duty Hauler",
+    "Transmission":"Belt Drive",
+    "Description":"This experimental heavy duty hauling military grade helicopter was fitted with short time limited overboost up to 2.5 Bar manifold pressure, guaranteeing in excess of 95hp for two minutes and a half. It comes with a highly manouvrable and durable rigid rotor for situations in which it needs to defend itself.
+    The helicopter comes with a specialised turbocharger using experimental secretive manufacturing techniques and seals which extracts a little more power, but is more prone to overheating.
+    
+    Running full power in excess of 1.5 minutes is prohibited.",
+    "Drivetrain":"Shaft",
+    "Fuel Type":"Gasoline",
+	"Propulsion":"ICE",
+	"Years":{"min":1990, "max":2005},
+    "Value":65000,
+    "Performance Class":"Short Haul Power: 280 mph (1.5 minutes)",
+    "Top Speed":125,
+	"Torque":400,//double check
+	"TorquePeakRPM":"4500",
+	"Power":250,//double check
+	"PowerPeakRPM":"4750",
+	"Max RPM":"5200",
+	"Weight":350,
+    "Config Type":"Custom",
+	"Population":800
+}

@@ -35,7 +35,7 @@
         ["rbc3", -0.5, 10.41, 1],
         ["rbc4", 0.0, 10.41, 1.5],
         ["rbc5", 0.0, 10.41, 1],
-        ["rbc6", 0.0, 11.0, 1, {"group":"","nodeWeight":"$=1+$rbcweight","selfCollision":false, "collision":false}],
+        ["rbc6", 0.0, 11.0, 1, {"group":"","nodeWeight":"$=1+$rbcweight","nodeWeightFunction":"=1+($volume)","selfCollision":false, "collision":false,"cargoGroup":"roofBarCargoBoxA"}],
         ["rbc7", 0.0, 11.59, 1.5],
         ["rbc8", 0.0, 11.0, 1.5],//centre top
         ["rbc9", -0.5, 11.59, 1.5, {"tag":"tow_bobsUrUncle9","couplerStrength":201000,"forceAutoCoupling":true,"couplerStartRadius":1}],
@@ -310,7 +310,7 @@
         ["rbc3", -0.5, -21.59, 0.5],
         ["rbc4", 0.0, -21.59, 1.0],
         ["rbc5", 0.0, -21.59, 0.5],
-        ["rbc6", 0.0, 22.0, 0.5, {"group":"","nodeWeight":"$=1+$rbcweight","selfCollision":false, "collision":false}],
+        ["rbc6", 0.0, 22.0, 0.5, {"group":"","nodeWeight":"$=1+$rbcweight","nodeWeightFunction":"=1+($volume)","selfCollision":false, "collision":false,"cargoGroup":"roofBarCargoBoxA"}],
         ["rbc7", 0.0, 22.59, 1.0],
         ["rbc8", 0.0, 22.0, 1.0],
         ["rbc9", -0.5, 22.59, 1.0],
